@@ -9,6 +9,10 @@ abstract class DioProvider {
   Dio dioProvider() {
     final Dio dio = Dio(
       BaseOptions(
+        headers: <String, dynamic>{
+          'Content-Type': 'application/json',
+          "Authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkcml2ZXIiOiI2NzhhNTlmYTNjMzc5NzQ5Mjc0N2M4ZDQiLCJpYXQiOjE3MzcxMjAyNTB9.f-A1rvElymvDhEQM9bjqGl56O4c5Z8mhh7MkevnpqVQ"
+        },
         connectTimeout: const Duration(seconds: 60),
         sendTimeout: const Duration(seconds: 60),
         receiveTimeout: const Duration(seconds: 60),

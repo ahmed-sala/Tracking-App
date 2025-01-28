@@ -1,0 +1,83 @@
+import 'dart:ui';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+class CustomInfoCard extends StatelessWidget {
+  final String title;
+  final String subtitle;
+  final String imageUrl;
+  final IconData icon;
+  final Color backgroundColor;
+  final Color titleColor;
+  final Color subtitleColor;
+
+  const CustomInfoCard({
+    super.key,
+    required this.title,
+    required this.subtitle,
+    required this.imageUrl,
+    required this.icon,
+    this.backgroundColor = Colors.white,
+    this.titleColor = Colors.black,
+    this.subtitleColor = Colors.grey,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: backgroundColor,
+        boxShadow: const [
+          BoxShadow(
+            color: Color(0x53535340),
+            spreadRadius: 0,
+            blurRadius: 4,
+            offset: Offset(0, 0),
+          ),
+        ],
+        borderRadius: BorderRadius.circular(10.r),
+      ),
+      child: ListTile(
+        contentPadding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
+        leading: CircleAvatar(
+          radius: 30.r,
+          backgroundImage: NetworkImage(imageUrl),
+        ),
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              title,
+              style: TextStyle(
+                fontSize: 13.sp,
+                fontWeight: FontWeight.w400,
+                color: titleColor,
+              ),
+            ),
+            Row(
+              children: [
+                Icon(
+                  icon,
+                  size: 16.sp,
+                  color: titleColor,
+                ),
+                SizedBox(width: 4.w),
+                Flexible(
+                  child: Text(
+                    subtitle,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      fontSize: 13.sp,
+                      fontWeight: FontWeight.w400,
+                      color: subtitleColor,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

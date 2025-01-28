@@ -11,4 +11,5 @@ class ApiEndPoints {
   static const String vehicles = "vehicles";
   static const String logout = "drivers/logout";
   static const String changePassword = "drivers/change-password";
+  static const String pendingOrder = "orders/pending-orders";
 }
