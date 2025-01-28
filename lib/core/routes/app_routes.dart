@@ -33,7 +33,7 @@ class AppRoutes {
             widget: ApplyScreen(), settings: settings);
       case PageRoutesName.editMyInfo:
         return _handelMaterialPageRoute(
-            settings: settings, widget: const EditMyInfo());
+            settings: settings, widget:  EditMyInfo());
       default:
         return _handelMaterialPageRoute(
             settings: settings, widget: const Scaffold());
