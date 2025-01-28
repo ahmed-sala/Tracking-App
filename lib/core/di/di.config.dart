@@ -8,6 +8,7 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:cloud_firestore/cloud_firestore.dart' as _i974;
 import 'package:dio/dio.dart' as _i361;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i558;
 import 'package:get_it/get_it.dart' as _i174;
@@ -29,15 +30,21 @@ import '../../src/data/data_sources/online_data_source/auth/auth_online_data_sou
     as _i154;
 import '../../src/data/data_sources/online_data_source/auth/auth_online_data_source_impl.dart'
     as _i956;
+import '../../src/data/data_sources/online_data_source/order/order_online_data_source.dart'
+    as _i351;
+import '../../src/data/data_sources/online_data_source/order/order_online_data_source_impl.dart'
+    as _i654;
 import '../../src/data/data_sources/online_data_source/vehicles/vehicles_online_data_source.dart'
     as _i633;
 import '../../src/data/data_sources/online_data_source/vehicles/vehicles_online_data_source_impl.dart'
     as _i523;
 import '../../src/data/repositories/auth/auth_repository_impl.dart' as _i188;
 import '../../src/data/repositories/country/country_repo_impl.dart' as _i668;
+import '../../src/data/repositories/order/order_repo_impl.dart' as _i794;
 import '../../src/data/repositories/vehicles/vehicles_repo_impl.dart' as _i732;
 import '../../src/domain/repositories/auth/auth_repository.dart' as _i701;
 import '../../src/domain/repositories/country/country_repo.dart' as _i597;
+import '../../src/domain/repositories/order/order_repo.dart' as _i420;
 import '../../src/domain/repositories/vehicles/vehciles_repo.dart' as _i557;
 import '../../src/domain/use_cases/change_password.dart' as _i982;
 import '../../src/domain/use_cases/country/country_use_case.dart' as _i176;
@@ -60,9 +67,12 @@ import '../../src/presentation/managers/Auth/forget_password/forget_password_scr
 import '../../src/presentation/managers/login/login_cubit.dart' as _i84;
 import '../../src/presentation/managers/on_boarding/on_boarding_view_model.dart'
     as _i850;
+import '../../src/presentation/managers/order/order_viewmodel.dart' as _i828;
 import '../../src/presentation/managers/profile/profile_cubit.dart' as _i34;
 import '../../src/presentation/managers/section/section_screen_viewmodel.dart'
     as _i265;
+import '../helpers/firestore/firebase_module.dart' as _i991;
+import '../helpers/firestore/firestore_services.dart' as _i769;
 import '../helpers/shared_pref/shared_pref_moduel.dart' as _i802;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -77,6 +87,7 @@ extension GetItInjectableX on _i174.GetIt {
       environmentFilter,
     );
     final sharedPrefModule = _$SharedPrefModule();
+    final firebaseModule = _$FirebaseModule();
     final dioProvider = _$DioProvider();
     await gh.factoryAsync<_i460.SharedPreferences>(
       () => sharedPrefModule.sharedPreferences,
@@ -87,6 +98,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i850.OnBoardingViewModel>(() => _i850.OnBoardingViewModel());
     gh.factory<_i265.SectionScreenViewmodel>(
         () => _i265.SectionScreenViewmodel());
+    gh.lazySingleton<_i974.FirebaseFirestore>(
+        () => firebaseModule.firebaseFirestore);
     gh.lazySingleton<_i558.FlutterSecureStorage>(
         () => sharedPrefModule.secureStorage);
     gh.lazySingleton<_i361.Dio>(() => dioProvider.dioProvider());
@@ -96,6 +109,10 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i318.ApiServices>(() => _i318.ApiServices(gh<_i361.Dio>()));
     gh.factory<_i472.CountryOfflineDataSource>(
         () => _i532.CountryOfflineDataSourceImpl());
+    gh.factory<_i769.FirestoreService>(
+        () => _i769.FirestoreService(gh<_i974.FirebaseFirestore>()));
+    gh.factory<_i351.OrderOnlineDataSource>(
+        () => _i654.AuthOnlineDataSourceImpl(gh<_i769.FirestoreService>()));
     gh.factory<_i633.VehiclesOnlineDataSource>(
         () => _i523.VehiclesOnlineDataSourceImpl(gh<_i318.ApiServices>()));
     gh.factory<_i597.CountryRepo>(
@@ -104,12 +121,16 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i956.AuthOnlineDataSourceImpl(gh<_i318.ApiServices>()));
     gh.factory<_i176.CountryUseCase>(
         () => _i176.CountryUseCase(gh<_i597.CountryRepo>()));
+    gh.factory<_i420.OrderRepo>(
+        () => _i794.OrderRepoImpl(gh<_i351.OrderOnlineDataSource>()));
     gh.factory<_i701.AuthRepository>(() => _i188.AuthRepositoryImpl(
           gh<_i154.AuthOnlineDataSource>(),
           gh<_i252.AuthOfflineDataSource>(),
         ));
     gh.factory<_i557.VehiclesRepo>(
         () => _i732.VehicleRepoImpl(gh<_i633.VehiclesOnlineDataSource>()));
+    gh.factory<_i828.OrderViewModel>(
+        () => _i828.OrderViewModel(gh<_i420.OrderRepo>()));
     gh.factory<_i982.ChangePasswordUseCase>(
         () => _i982.ChangePasswordUseCase(gh<_i701.AuthRepository>()));
     gh.factory<_i235.AuthUseCases>(
@@ -140,5 +161,7 @@ extension GetItInjectableX on _i174.GetIt {
 }
 
 class _$SharedPrefModule extends _i802.SharedPrefModule {}
+
+class _$FirebaseModule extends _i991.FirebaseModule {}
 
 class _$DioProvider extends _i801.DioProvider {}
