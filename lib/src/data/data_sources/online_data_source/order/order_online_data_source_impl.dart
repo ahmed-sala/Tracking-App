@@ -1,16 +1,16 @@
 import 'package:injectable/injectable.dart';
 import 'package:tracking_app/core/helpers/firestore/firestore_services.dart';
+import 'package:tracking_app/src/data/api/api_services.dart';
 
+import '../../../api/core/api_response_models/order/pending_orders_response_model.dart';
 import 'order_online_data_source.dart';
 
 @Injectable(as: OrderOnlineDataSource)
-class AuthOnlineDataSourceImpl implements OrderOnlineDataSource {
-  final FirestoreService _firestoreService;
-  AuthOnlineDataSourceImpl(this._firestoreService);
-
+class OrderOnlineDataSourceImpl implements OrderOnlineDataSource {
+  final ApiServices _apiServices;
+  OrderOnlineDataSourceImpl(this._apiServices);
   @override
-  Future<void> putData() {
-    var data = {'name': 'John Doe', 'email': ''};
-    return _firestoreService.addDocument('users', data);
+  Future<PendingOrdersResponseModel> getAllPendingOrders() async {
+    return await _apiServices.getAllPendingOrders();
   }
 }
