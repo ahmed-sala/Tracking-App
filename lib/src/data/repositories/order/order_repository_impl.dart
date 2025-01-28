@@ -1,4 +1,5 @@
 import 'package:injectable/injectable.dart';
+
 import '../../../../core/common/apis/api_executer.dart';
 import '../../../../core/common/apis/api_result.dart';
 import '../../../domain/entities/order/pending_order_entity.dart';
@@ -24,5 +25,16 @@ class OrderRepositoryImpl implements OrderRepository {
         return pendingOrder;
       },
     );
+  }
+
+  @override
+  Future<void> storeOrder(PendingOrderEntity pendingOrderEntity) {
+    try {
+      return _orderOnlineDataSource.storeOrder(
+        pendingOrderEntity.toModel(),
+      );
+    } catch (e) {
+      throw e;
+    }
   }
 }
