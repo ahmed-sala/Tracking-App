@@ -82,11 +82,11 @@ extension GetItInjectableX on _i174.GetIt {
       () => sharedPrefModule.sharedPreferences,
       preResolve: true,
     );
+    gh.factory<_i265.SectionScreenViewmodel>(
+        () => _i265.SectionScreenViewmodel());
     gh.factory<_i94.ControllerManager>(() => _i94.ControllerManager());
     gh.factory<_i195.ValidatorManager>(() => _i195.ValidatorManager());
     gh.factory<_i850.OnBoardingViewModel>(() => _i850.OnBoardingViewModel());
-    gh.factory<_i265.SectionScreenViewmodel>(
-        () => _i265.SectionScreenViewmodel());
     gh.lazySingleton<_i558.FlutterSecureStorage>(
         () => sharedPrefModule.secureStorage);
     gh.lazySingleton<_i361.Dio>(() => dioProvider.dioProvider());
@@ -110,14 +110,14 @@ extension GetItInjectableX on _i174.GetIt {
         ));
     gh.factory<_i557.VehiclesRepo>(
         () => _i732.VehicleRepoImpl(gh<_i633.VehiclesOnlineDataSource>()));
-    gh.factory<_i982.ChangePasswordUseCase>(
-        () => _i982.ChangePasswordUseCase(gh<_i701.AuthRepository>()));
     gh.factory<_i235.AuthUseCases>(
         () => _i235.AuthUseCases(gh<_i701.AuthRepository>()));
-    gh.factory<_i379.LoginUseCase>(
-        () => _i379.LoginUseCase(gh<_i701.AuthRepository>()));
     gh.factory<_i333.LogOutUseCase>(
         () => _i333.LogOutUseCase(gh<_i701.AuthRepository>()));
+    gh.factory<_i379.LoginUseCase>(
+        () => _i379.LoginUseCase(gh<_i701.AuthRepository>()));
+    gh.factory<_i982.ChangePasswordUseCase>(
+        () => _i982.ChangePasswordUseCase(gh<_i701.AuthRepository>()));
     gh.factory<_i986.GetProfileDataUseCase>(() => _i986.GetProfileDataUseCase(
         authRepository: gh<_i701.AuthRepository>()));
     gh.factory<_i684.VehiclesUseCases>(
