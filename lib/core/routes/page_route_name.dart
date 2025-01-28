@@ -10,4 +10,5 @@ class PageRoutesName{
   static const String onBoarding = 'onBoarding';
   static const String changePassword = 'ChangePassword';
   static const String applicationApprovedView = 'ApplicationApprovedView';
+  static const String editMyInfo = 'EditMyInfo';
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tracking_app/core/routes/page_route_name.dart';
 import 'package:tracking_app/src/presentation/pages/Auth/apply/apply_screen.dart';
 import 'package:tracking_app/src/presentation/pages/Auth/forget_password/forget_password_screen.dart';
+import 'package:tracking_app/src/presentation/pages/edit_my_info/edit_my_info.dart';
 import 'package:tracking_app/src/presentation/pages/login/view/login_view.dart';
 import 'package:tracking_app/src/presentation/pages/profile/view/profile_view.dart';
 import 'package:tracking_app/src/presentation/pages/section_app/section_screen.dart';
@@ -30,7 +31,9 @@ class AppRoutes {
       case PageRoutesName.apply:
         return _handelMaterialPageRoute(
             widget: ApplyScreen(), settings: settings);
-
+      case PageRoutesName.editMyInfo:
+        return _handelMaterialPageRoute(
+            settings: settings, widget: const EditMyInfo());
       default:
         return _handelMaterialPageRoute(
             settings: settings, widget: const Scaffold());
