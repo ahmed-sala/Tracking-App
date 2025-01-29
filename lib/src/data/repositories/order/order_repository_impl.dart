@@ -28,9 +28,9 @@ class OrderRepositoryImpl implements OrderRepository {
   }
 
   @override
-  Future<void> storeOrder(PendingOrderEntity pendingOrderEntity) {
+  Future<void> storeOrder(PendingOrderEntity pendingOrderEntity) async {
     try {
-      return _orderOnlineDataSource.storeOrder(
+      return await _orderOnlineDataSource.storeOrder(
         pendingOrderEntity.toModel(),
       );
     } catch (e) {
