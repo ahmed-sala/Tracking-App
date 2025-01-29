@@ -43,7 +43,7 @@ dependencies:
   dio:
   retrofit:
   logger:
-  json_annotation: ^4.9.0
+  json_annotation:
   get_it:
   injectable:
   hive_flutter:
@@ -59,6 +59,7 @@ dependencies:
   flutter_lints: ^3.0.0
   bloc: ^8.1.4
   lottie: ^3.2.0
+  flutter_svg: ^2.0.17
   json_serializable:
 
 
@@ -71,6 +72,8 @@ dev_dependencies:
   injectable_generator:
   build_runner:
   retrofit_generator:
+  json_serializable:
+
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
