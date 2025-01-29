@@ -157,5 +157,7 @@
   "continueKey": "Continue",
   "welcomeTo": "Welcome to",
   "floweryRiderApp": "Flowery Rider App",
-  "applyNow": "Apply Now"
+  "applyNow": "Apply Now",
+  "editeMyInfo": "Edit My Info",
+  "change" : "Change"
 }

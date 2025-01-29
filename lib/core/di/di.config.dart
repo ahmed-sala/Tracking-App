@@ -57,6 +57,8 @@ import '../../src/presentation/managers/Auth/change_password/change_password_vie
     as _i895;
 import '../../src/presentation/managers/Auth/forget_password/forget_password_screen_view_model.dart'
     as _i762;
+import '../../src/presentation/managers/edit_my_info/edite_my_info_controller_manager.dart'
+    as _i408;
 import '../../src/presentation/managers/edit_my_info/edite_my_info_view_model.dart'
     as _i296;
 import '../../src/presentation/managers/login/login_cubit.dart' as _i84;
@@ -89,11 +91,14 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i94.ControllerManager>(() => _i94.ControllerManager());
     gh.factory<_i195.ValidatorManager>(() => _i195.ValidatorManager());
     gh.factory<_i850.OnBoardingViewModel>(() => _i850.OnBoardingViewModel());
-    gh.factory<_i296.EditeMyInfoViewModel>(() => _i296.EditeMyInfoViewModel());
+    gh.factory<_i408.EditeMyInfoControllerManager>(
+        () => _i408.EditeMyInfoControllerManager());
     gh.lazySingleton<_i558.FlutterSecureStorage>(
         () => sharedPrefModule.secureStorage);
     gh.lazySingleton<_i361.Dio>(() => dioProvider.dioProvider());
     gh.lazySingleton<_i528.PrettyDioLogger>(() => dioProvider.providePretty());
+    gh.factory<_i296.EditeMyInfoViewModel>(() =>
+        _i296.EditeMyInfoViewModel(gh<_i408.EditeMyInfoControllerManager>()));
     gh.factory<_i252.AuthOfflineDataSource>(
         () => _i523.AuthOfflineDataSourceImpl());
     gh.singleton<_i318.ApiServices>(() => _i318.ApiServices(gh<_i361.Dio>()));
