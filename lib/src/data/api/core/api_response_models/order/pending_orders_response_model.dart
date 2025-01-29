@@ -105,6 +105,23 @@ class Orders {
     return _$OrdersToJson(this);
   }
 
+  Map<String, dynamic> toJsonFire() {
+    return {
+      "id": Id,
+      "user": user?.toJson(),
+      "orderItems": orderItems?.map((e) => e.toJsonFire()).toList(),
+      "totalPrice": totalPrice,
+      "paymentType": paymentType,
+      "isPaid": isPaid,
+      "isDelivered": isDelivered,
+      "state": state,
+      "createdAt": createdAt,
+      "updatedAt": updatedAt,
+      "orderNumber": orderNumber,
+      "store": store?.toJson(),
+    };
+  }
+
   PendingOrderEntity toDomain() {
     return PendingOrderEntity(
       id: Id,
@@ -205,6 +222,14 @@ class OrderItems {
 
   Map<String, dynamic> toJson() {
     return _$OrderItemsToJson(this);
+  }
+
+  Map<String, dynamic> toJsonFire() {
+    return {
+      "product": product?.toJson(),
+      "price": price,
+      "quantity": quantity,
+    };
   }
 
   OrderItemsEntity toDomain() {
