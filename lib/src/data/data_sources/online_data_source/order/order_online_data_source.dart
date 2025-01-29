@@ -2,6 +2,7 @@ import '../../../api/core/api_response_models/order/pending_orders_response_mode
 
 abstract interface class OrderOnlineDataSource {
   Future<PendingOrdersResponseModel> getAllPendingOrders();
-  Future<void> storeOrder(
-      PendingOrdersResponseModel pendingOrdersResponseModel);
+  Future<void> storeOrder(Orders orders);
+
+  Future<Orders> getPendingOrderById(String id);
 }

@@ -16,9 +16,17 @@ class OrderOnlineDataSourceImpl implements OrderOnlineDataSource {
   }
 
   @override
-  Future<void> storeOrder(
-      PendingOrdersResponseModel pendingOrdersResponseModel) async {
-    await _firestoreServices.addDocument(
-        'accepted_order', pendingOrdersResponseModel.toJson());
+  Future<void> storeOrder(Orders orders) async {
+    print(orders.toJsonFire());
+    return await _firestoreServices.addDocument(
+        'accepted_order', orders.toJsonFire());
+  }
+
+  @override
+  Future<Orders> getPendingOrderById(String id) async {
+    var data =
+        await _firestoreServices.getDocumentByField('accepted_order', 'id', id);
+
+    return Orders.fromJson(data!);
   }
 }
