@@ -35,6 +35,7 @@ import '../../src/data/data_sources/online_data_source/vehicles/vehicles_online_
     as _i523;
 import '../../src/data/repositories/auth/auth_repository_impl.dart' as _i188;
 import '../../src/data/repositories/country/country_repo_impl.dart' as _i668;
+import '../../src/data/repositories/order/order_repository_impl.dart' as _i395;
 import '../../src/data/repositories/vehicles/vehicles_repo_impl.dart' as _i732;
 import '../../src/domain/repositories/auth/auth_repository.dart' as _i701;
 import '../../src/domain/repositories/country/country_repo.dart' as _i597;
@@ -57,10 +58,6 @@ import '../../src/presentation/managers/Auth/change_password/change_password_vie
     as _i895;
 import '../../src/presentation/managers/Auth/forget_password/forget_password_screen_view_model.dart'
     as _i762;
-import '../../src/presentation/managers/edit_my_info/edite_my_info_controller_manager.dart'
-    as _i408;
-import '../../src/presentation/managers/edit_my_info/edite_my_info_view_model.dart'
-    as _i296;
 import '../../src/presentation/managers/login/login_cubit.dart' as _i84;
 import '../../src/presentation/managers/on_boarding/on_boarding_view_model.dart'
     as _i850;
@@ -86,13 +83,11 @@ extension GetItInjectableX on _i174.GetIt {
       () => sharedPrefModule.sharedPreferences,
       preResolve: true,
     );
-    gh.factory<_i265.SectionScreenViewmodel>(
-        () => _i265.SectionScreenViewmodel());
     gh.factory<_i94.ControllerManager>(() => _i94.ControllerManager());
     gh.factory<_i195.ValidatorManager>(() => _i195.ValidatorManager());
     gh.factory<_i850.OnBoardingViewModel>(() => _i850.OnBoardingViewModel());
-    gh.factory<_i408.EditeMyInfoControllerManager>(
-        () => _i408.EditeMyInfoControllerManager());
+    gh.factory<_i265.SectionScreenViewmodel>(
+        () => _i265.SectionScreenViewmodel());
     gh.lazySingleton<_i558.FlutterSecureStorage>(
         () => sharedPrefModule.secureStorage);
     gh.lazySingleton<_i361.Dio>(() => dioProvider.dioProvider());
@@ -116,14 +111,14 @@ extension GetItInjectableX on _i174.GetIt {
         ));
     gh.factory<_i557.VehiclesRepo>(
         () => _i732.VehicleRepoImpl(gh<_i633.VehiclesOnlineDataSource>()));
-    gh.factory<_i235.AuthUseCases>(
-        () => _i235.AuthUseCases(gh<_i701.AuthRepository>()));
-    gh.factory<_i333.LogOutUseCase>(
-        () => _i333.LogOutUseCase(gh<_i701.AuthRepository>()));
-    gh.factory<_i379.LoginUseCase>(
-        () => _i379.LoginUseCase(gh<_i701.AuthRepository>()));
     gh.factory<_i982.ChangePasswordUseCase>(
         () => _i982.ChangePasswordUseCase(gh<_i701.AuthRepository>()));
+    gh.factory<_i235.AuthUseCases>(
+        () => _i235.AuthUseCases(gh<_i701.AuthRepository>()));
+    gh.factory<_i379.LoginUseCase>(
+        () => _i379.LoginUseCase(gh<_i701.AuthRepository>()));
+    gh.factory<_i333.LogOutUseCase>(
+        () => _i333.LogOutUseCase(gh<_i701.AuthRepository>()));
     gh.factory<_i986.GetProfileDataUseCase>(() => _i986.GetProfileDataUseCase(
         authRepository: gh<_i701.AuthRepository>()));
     gh.factory<_i684.VehiclesUseCases>(
@@ -132,10 +127,6 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i762.ForgetPasswordScreenViewModel(gh<_i235.AuthUseCases>()));
     gh.factory<_i84.LoginCubit>(
         () => _i84.LoginCubit(gh<_i379.LoginUseCase>()));
-    gh.factory<_i296.EditeMyInfoViewModel>(() => _i296.EditeMyInfoViewModel(
-          gh<_i408.EditeMyInfoControllerManager>(),
-          gh<_i986.GetProfileDataUseCase>(),
-        ));
     gh.factory<_i895.ChangePasswordViewModel>(
         () => _i895.ChangePasswordViewModel(gh<_i982.ChangePasswordUseCase>()));
     gh.factory<_i675.ApplyScreenViewModel>(() => _i675.ApplyScreenViewModel(

@@ -158,6 +158,15 @@
   "welcomeTo": "Welcome to",
   "floweryRiderApp": "Flowery Rider App",
   "applyNow": "Apply Now",
+  "userAddress": "User Address",
+  "pickupAddress": "Pickup Address",
+  "flowerOrder": "Flower Order",
+  "accept": "Accept",
+  "reject": "Reject",
+  "floweryRider": "Flowery rider"
+
+
+  "applyNow": "Apply Now",
   "editeMyInfo": "Edit My Info",
   "change" : "Change"
 }

@@ -131,6 +131,7 @@
   "thankYouMessage": "شكرًا على تقديم طلبك، سنقوم بمراجعة طلبك وسنعود إليك قريبًا.",
   "submittedMessage": "تم تقديم طلبك!",
   "languages": "اللعة ",
+
   "continues": "دخول",
   "resetPasswordInstruction": "كلمة السر يجب ان لا تكون فارغة ويجب ان تحتوي علي 6 احرف وحرف كبير ورقم واحد علي الاقل",
   "apply": "تطبيق",
@@ -156,6 +157,13 @@
   "continueKey": "متابعة",
   "welcomeTo": "مرحبا بك في",
   "floweryRiderApp": "تطبيق Flowery Rider",
+  "applyNow": "قدم الآن",
+  "userAddress": "عنوان المستخدم",
+  "pickupAddress": "عنوان الاستلام",
+  "flowerOrder": "طلب الورد",
+  "accept": "قبول",
+  "reject": "رفض",
+  "floweryRider": "سائق Flowery"
   "applyNow": "قدم الآن",
   "editeMyInfo": "تعديل معلوماتي",
   "change" : "تغيير"
