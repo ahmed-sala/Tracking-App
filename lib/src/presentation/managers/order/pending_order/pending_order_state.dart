@@ -1,5 +1,9 @@
 part of 'pending_order_cubit.dart';
 
+<<<<<<< HEAD
+=======
+@immutable
+>>>>>>> origin/feature_pending_order
 sealed class PendingOrderState {}
 
 final class PendingOrderInitial extends PendingOrderState {}
