@@ -34,6 +34,7 @@ class EditeMyInfoViewModel extends Cubit<EditeMyInfoStates>{
     setController(EditeMyInfoFormFields.lastName, _appUserEntity.lastName??"" );
     setController(EditeMyInfoFormFields.email, _appUserEntity.email??"");
     setController(EditeMyInfoFormFields.phone, _appUserEntity.phone??"");
+    selectedGender =_appUserEntity.gender!.length == 4? Gender.male : Gender.female;
   }
 
   _LoadDriverInfo()async{

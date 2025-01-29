@@ -113,7 +113,7 @@ class AuthRepositoryImpl implements AuthRepository {
       apiCall: () async {
         var token = await _authOfflineDataSource.getToken();
         var appUserModel =
-            await _authOnlineDataSource.getProfileData(token: token!);
+            await _authOnlineDataSource.getProfileData(token: token??"");
         return appUserModel.driver!.toDomain();
       },
     );
