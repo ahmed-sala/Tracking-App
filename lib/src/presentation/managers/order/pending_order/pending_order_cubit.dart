@@ -41,4 +41,7 @@ class PendingOrderCubit extends Cubit<PendingOrderState> {
     _pendingOrder.removeWhere((element) => element.id == orderId);
     emit(RejectOrderSuccessState());
   }
+
+
+
 }

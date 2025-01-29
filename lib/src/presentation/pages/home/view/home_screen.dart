@@ -8,6 +8,7 @@ import '../../../../../core/di/di.dart';
 import '../../../../../core/utilities/style/app_colors.dart';
 import '../../../managers/order/pending_order/pending_order_cubit.dart';
 import '../../../managers/order/pending_order/pending_order_event.dart';
+import '../../../managers/order/start_order/start_order_cubit.dart';
 import '../widget/pending_order_body_widget.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -22,31 +23,39 @@ class _HomeScreenState extends State<HomeScreen> {
     pendingViewModel.doAction(GetAllPendingOrderEvent());
     super.initState();
   }
+
   @override
   var pendingViewModel = getIt.get<PendingOrderCubit>();
+  var startViewModel = getIt.get<StartOrderCubit>();
+
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-        create: (context) => pendingViewModel,
-        child: Scaffold(
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => pendingViewModel,
+        ),
+        BlocProvider(
+          create: (context) => startViewModel,
+        ),
+      ],
+      child: Scaffold(
+          backgroundColor: AppColors.kWhiteBase,
+          appBar: AppBar(
             backgroundColor: AppColors.kWhiteBase,
-            appBar: AppBar(
-              backgroundColor: AppColors.kWhiteBase,
-              title: Text(
-                context.localizations.floweryRider,
-                style: AppFonts.font20KMainWeight400Font,
-              ),
+            title: Text(
+              context.localizations.floweryRider,
+              style: AppFonts.font20KMainWeight400Font,
             ),
-            body: BlocBuilder<PendingOrderCubit, PendingOrderState>(
-                builder: (context, state) {
-              return _handleBlocBuilderState(
-                  state, context, pendingViewModel.pendingOrder);
-            })));
+          ),
+          body: BlocBuilder<PendingOrderCubit, PendingOrderState>(
+              builder: (context, state) {
+            return _handleBlocBuilderState(
+                state, context, pendingViewModel.pendingOrder);
+          })),
+    );
   }
 }
-
-
-
 
 Widget _handleBlocBuilderState(PendingOrderState state, BuildContext context,
     List<PendingOrderEntity> pendingOrder) {
@@ -74,12 +83,15 @@ Widget _buildSuccessState(List<PendingOrderEntity> pendingOrder) {
 Widget _buildErrorState(Exception exceptions, BuildContext context) {
   return Center(
       child: GestureDetector(
-     onTap: () => context.read<PendingOrderCubit>().doAction(GetAllPendingOrderEvent()),
-        child: Text(
-            ErrorHandler.fromException(exceptions, context.localizations).errorMassage,
-            style: AppFonts.font20KMainWeight400Font,
-          ),
-      ));
+    onTap: () =>
+        context.read<PendingOrderCubit>().doAction(GetAllPendingOrderEvent()),
+    child: Text(
+      ErrorHandler.fromException(exceptions, context.localizations)
+          .errorMassage,
+      style: AppFonts.font20KMainWeight400Font,
+      textAlign: TextAlign.center,
+    ),
+  ));
 }
 
 Widget _buildLoadingState() {

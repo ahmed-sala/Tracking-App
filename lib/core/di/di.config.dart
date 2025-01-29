@@ -26,6 +26,10 @@ import '../../src/data/data_sources/offline_data_source/country/counrty_offline_
     as _i532;
 import '../../src/data/data_sources/offline_data_source/country/country_offline_data_source.dart'
     as _i472;
+import '../../src/data/data_sources/offline_data_source/order/order_offline_datasource.dart'
+    as _i839;
+import '../../src/data/data_sources/offline_data_source/order/order_offline_datasource_impl.dart'
+    as _i130;
 import '../../src/data/data_sources/online_data_source/auth/auth_online_data_source.dart'
     as _i154;
 import '../../src/data/data_sources/online_data_source/auth/auth_online_data_source_impl.dart'
@@ -55,6 +59,9 @@ import '../../src/domain/use_cases/log_out_use_case.dart' as _i333;
 import '../../src/domain/use_cases/login_use_case.dart' as _i379;
 import '../../src/domain/use_cases/order/get_all_pending_order_use_case.dart'
     as _i587;
+import '../../src/domain/use_cases/order/order_details_usecase.dart' as _i150;
+import '../../src/domain/use_cases/order/start_order_use_case.dart' as _i844;
+import '../../src/domain/use_cases/order/store_order_use_case.dart' as _i353;
 import '../../src/domain/use_cases/vehicles/vehicles_use_cases.dart' as _i684;
 import '../../src/presentation/managers/Auth/apply/apply_screen_view_model.dart'
     as _i675;
@@ -69,8 +76,12 @@ import '../../src/presentation/managers/Auth/forget_password/forget_password_scr
 import '../../src/presentation/managers/login/login_cubit.dart' as _i84;
 import '../../src/presentation/managers/on_boarding/on_boarding_view_model.dart'
     as _i850;
+import '../../src/presentation/managers/order/order_details/order_details_viewmodel.dart'
+    as _i274;
 import '../../src/presentation/managers/order/pending_order/pending_order_cubit.dart'
     as _i908;
+import '../../src/presentation/managers/order/start_order/start_order_cubit.dart'
+    as _i641;
 import '../../src/presentation/managers/profile/profile_cubit.dart' as _i34;
 import '../../src/presentation/managers/section/section_screen_viewmodel.dart'
     as _i265;
@@ -90,8 +101,8 @@ extension GetItInjectableX on _i174.GetIt {
       environmentFilter,
     );
     final sharedPrefModule = _$SharedPrefModule();
-    final dioProvider = _$DioProvider();
     final firebaseModule = _$FirebaseModule();
+    final dioProvider = _$DioProvider();
     await gh.factoryAsync<_i460.SharedPreferences>(
       () => sharedPrefModule.sharedPreferences,
       preResolve: true,
@@ -101,17 +112,19 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i850.OnBoardingViewModel>(() => _i850.OnBoardingViewModel());
     gh.factory<_i265.SectionScreenViewmodel>(
         () => _i265.SectionScreenViewmodel());
+    gh.lazySingleton<_i974.FirebaseFirestore>(
+        () => firebaseModule.firebaseFirestore);
     gh.lazySingleton<_i558.FlutterSecureStorage>(
         () => sharedPrefModule.secureStorage);
     gh.lazySingleton<_i361.Dio>(() => dioProvider.dioProvider());
     gh.lazySingleton<_i528.PrettyDioLogger>(() => dioProvider.providePretty());
-    gh.lazySingleton<_i974.FirebaseFirestore>(
-        () => firebaseModule.firebaseFirestore);
     gh.factory<_i252.AuthOfflineDataSource>(
         () => _i523.AuthOfflineDataSourceImpl());
     gh.singleton<_i318.ApiServices>(() => _i318.ApiServices(gh<_i361.Dio>()));
     gh.factory<_i472.CountryOfflineDataSource>(
         () => _i532.CountryOfflineDataSourceImpl());
+    gh.factory<_i839.OrderOfflineDatasource>(
+        () => _i130.OrderOfflineDatasourceImpl(gh<_i460.SharedPreferences>()));
     gh.factory<_i769.FirestoreService>(
         () => _i769.FirestoreService(gh<_i974.FirebaseFirestore>()));
     gh.factory<_i633.VehiclesOnlineDataSource>(
@@ -127,14 +140,16 @@ extension GetItInjectableX on _i174.GetIt {
               gh<_i318.ApiServices>(),
               gh<_i769.FirestoreService>(),
             ));
-    gh.factory<_i176.OrderRepository>(
-        () => _i395.OrderRepositoryImpl(gh<_i351.OrderOnlineDataSource>()));
     gh.factory<_i701.AuthRepository>(() => _i188.AuthRepositoryImpl(
           gh<_i154.AuthOnlineDataSource>(),
           gh<_i252.AuthOfflineDataSource>(),
         ));
     gh.factory<_i557.VehiclesRepo>(
         () => _i732.VehicleRepoImpl(gh<_i633.VehiclesOnlineDataSource>()));
+    gh.factory<_i176.OrderRepository>(() => _i395.OrderRepositoryImpl(
+          gh<_i351.OrderOnlineDataSource>(),
+          gh<_i839.OrderOfflineDatasource>(),
+        ));
     gh.factory<_i587.GetAllPendingOrderUseCase>(() =>
         _i587.GetAllPendingOrderUseCase(
             orderRepository: gh<_i176.OrderRepository>()));
@@ -150,10 +165,22 @@ extension GetItInjectableX on _i174.GetIt {
         authRepository: gh<_i701.AuthRepository>()));
     gh.factory<_i684.VehiclesUseCases>(
         () => _i684.VehiclesUseCases(gh<_i557.VehiclesRepo>()));
+    gh.factory<_i150.OrderDetailsUsecase>(
+        () => _i150.OrderDetailsUsecase(gh<_i176.OrderRepository>()));
+    gh.factory<_i844.StartOrderUseCase>(
+        () => _i844.StartOrderUseCase(gh<_i176.OrderRepository>()));
+    gh.factory<_i353.StoreOrderUseCase>(
+        () => _i353.StoreOrderUseCase(gh<_i176.OrderRepository>()));
     gh.factory<_i762.ForgetPasswordScreenViewModel>(
         () => _i762.ForgetPasswordScreenViewModel(gh<_i235.AuthUseCases>()));
     gh.factory<_i908.PendingOrderCubit>(
         () => _i908.PendingOrderCubit(gh<_i587.GetAllPendingOrderUseCase>()));
+    gh.factory<_i274.OrderDetailsViewmodel>(
+        () => _i274.OrderDetailsViewmodel(gh<_i150.OrderDetailsUsecase>()));
+    gh.factory<_i641.StartOrderCubit>(() => _i641.StartOrderCubit(
+          gh<_i844.StartOrderUseCase>(),
+          gh<_i353.StoreOrderUseCase>(),
+        ));
     gh.factory<_i84.LoginCubit>(
         () => _i84.LoginCubit(gh<_i379.LoginUseCase>()));
     gh.factory<_i895.ChangePasswordViewModel>(
@@ -171,6 +198,6 @@ extension GetItInjectableX on _i174.GetIt {
 
 class _$SharedPrefModule extends _i802.SharedPrefModule {}
 
-class _$DioProvider extends _i801.DioProvider {}
-
 class _$FirebaseModule extends _i991.FirebaseModule {}
+
+class _$DioProvider extends _i801.DioProvider {}
