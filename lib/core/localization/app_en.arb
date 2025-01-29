@@ -125,14 +125,6 @@
   "didnotReceiveCode": "Did not receive the code?",
   "enterEmail": "Enter Your Email",
   "enterPassword": "Enter Your  Password",
-
-  "profile": "profile",
-  "editProfile": "Edit Profile",
-  "readyForDelivery": "Ready for delivery",
-  "logoOut": "LogoOut",
-  "thankYouMessage": "Thank you for providing your application, we will review your application and will get back to you soon.",
-  "submittedMessage": "Your application has been submitted!",
-  "languages": "Languages ",
    "continues": "Continue",
   "resetPasswordInstruction": "Password must not be empty and must contain 6 characters with upper case letter and one number at least",
   "apply": "Apply",
@@ -159,12 +151,6 @@
   "welcomeTo" : "Welcome to",
   "floweryRiderApp": "Flowery Rider App",
   "applyNow": "Apply Now",
-  "userAddress": "User Address",
-  "pickupAddress": "Pickup Address",
-  "flowerOrder": "Flower Order",
-  "accept": "Accept",
-  "reject": "Reject",
-  "floweryRider": "Flowery rider"
-
-
+  "applicationSuccess": "Your application has been submitted!",
+  "applicationSuccessMessage" : "Thank you for providing your application, we will review your application and will get back to you soon."
 }
