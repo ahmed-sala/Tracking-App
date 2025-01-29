@@ -125,14 +125,7 @@
   "didnotReceiveCode": "Did not receive the code?",
   "enterEmail": "Enter Your Email",
   "enterPassword": "Enter Your  Password",
-  "profile": "profile",
-  "editProfile": "Edit Profile",
-  "readyForDelivery": "Ready for delivery",
-  "logoOut": "LogoOut",
-  "thankYouMessage": "Thank you for providing your application, we will review your application and will get back to you soon.",
-  "submittedMessage": "Your application has been submitted!",
-  "languages": "Languages ",
-  "continues": "Continue",
+   "continues": "Continue",
   "resetPasswordInstruction": "Password must not be empty and must contain 6 characters with upper case letter and one number at least",
   "apply": "Apply",
   "joinOurTeam": "You want to be a delivery man?\nJoin our team",
@@ -155,18 +148,9 @@
   "uploadIdImage": "Upload ID Image",
   "welcome": "Welcome!!",
   "continueKey": "Continue",
-  "welcomeTo": "Welcome to",
+  "welcomeTo" : "Welcome to",
   "floweryRiderApp": "Flowery Rider App",
   "applyNow": "Apply Now",
-  "userAddress": "User Address",
-  "pickupAddress": "Pickup Address",
-  "flowerOrder": "Flower Order",
-  "accept": "Accept",
-  "reject": "Reject",
-  "floweryRider": "Flowery rider"
-
-
-  "applyNow": "Apply Now",
-  "editeMyInfo": "Edit My Info",
-  "change" : "Change"
+  "applicationSuccess": "Your application has been submitted!",
+  "applicationSuccessMessage" : "Thank you for providing your application, we will review your application and will get back to you soon."
 }

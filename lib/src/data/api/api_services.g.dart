@@ -38,7 +38,7 @@ class _ApiServices implements ApiServices {
     )
         .compose(
           _dio.options,
-          'forgotPassword',
+          'drivers/forgotPassword',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -73,7 +73,7 @@ class _ApiServices implements ApiServices {
     )
         .compose(
           _dio.options,
-          'verifyResetCode',
+          'drivers/verifyResetCode',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -163,50 +163,90 @@ class _ApiServices implements ApiServices {
   }
 
   @override
-  Future<AppUserResponseModel> profileData({required String token}) async {
-    final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Authorization': token};
-    _headers.removeWhere((k, v) => v == null);
-    const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<AppUserResponseModel>(Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
-        .compose(
-          _dio.options,
-          'drivers/profile-data',
-          queryParameters: queryParameters,
-          data: _data,
-        )
-        .copyWith(
-            baseUrl: _combineBaseUrls(
-          _dio.options.baseUrl,
-          baseUrl,
-        )));
-    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late AppUserResponseModel _value;
-    try {
-      _value = AppUserResponseModel.fromJson(_result.data!);
-    } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
-      rethrow;
-    }
-    return _value;
-  }
-
-  @override
-  Future<ApplyResponseModel> apply(ApplyRequestModel applyRequestModel) async {
+  Future<ApplyResponseModel> apply(
+    String country,
+    String firstName,
+    String lastName,
+    String vehicleType,
+    String vehicleNumber,
+    File vehicleLicense,
+    String NID,
+    File NIDImg,
+    String email,
+    String password,
+    String rePassword,
+    String gender,
+    String phone,
+  ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(applyRequestModel.toJson());
+    final _data = FormData();
+    _data.fields.add(MapEntry(
+      'country',
+      country,
+    ));
+    _data.fields.add(MapEntry(
+      'firstName',
+      firstName,
+    ));
+    _data.fields.add(MapEntry(
+      'lastName',
+      lastName,
+    ));
+    _data.fields.add(MapEntry(
+      'vehicleType',
+      vehicleType,
+    ));
+    _data.fields.add(MapEntry(
+      'vehicleNumber',
+      vehicleNumber,
+    ));
+    _data.files.add(MapEntry(
+      'vehicleLicense',
+      MultipartFile.fromFileSync(
+        vehicleLicense.path,
+        filename: vehicleLicense.path.split(Platform.pathSeparator).last,
+        contentType: MediaType.parse('image/jpg'),
+      ),
+    ));
+    _data.fields.add(MapEntry(
+      'NID',
+      NID,
+    ));
+    _data.files.add(MapEntry(
+      'NIDImg',
+      MultipartFile.fromFileSync(
+        NIDImg.path,
+        filename: NIDImg.path.split(Platform.pathSeparator).last,
+        contentType: MediaType.parse('image/jpg'),
+      ),
+    ));
+    _data.fields.add(MapEntry(
+      'email',
+      email,
+    ));
+    _data.fields.add(MapEntry(
+      'password',
+      password,
+    ));
+    _data.fields.add(MapEntry(
+      'rePassword',
+      rePassword,
+    ));
+    _data.fields.add(MapEntry(
+      'gender',
+      gender,
+    ));
+    _data.fields.add(MapEntry(
+      'phone',
+      phone,
+    ));
     final _options = _setStreamType<ApplyResponseModel>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
+      contentType: 'multipart/form-data',
     )
         .compose(
           _dio.options,
@@ -328,39 +368,6 @@ class _ApiServices implements ApiServices {
     late ChangePasswordResponesModel _value;
     try {
       _value = ChangePasswordResponesModel.fromJson(_result.data!);
-    } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
-      rethrow;
-    }
-    return _value;
-  }
-
-  @override
-  Future<PendingOrdersResponseModel> getAllPendingOrders() async {
-    final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<PendingOrdersResponseModel>(Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
-        .compose(
-          _dio.options,
-          'orders/pending-orders',
-          queryParameters: queryParameters,
-          data: _data,
-        )
-        .copyWith(
-            baseUrl: _combineBaseUrls(
-          _dio.options.baseUrl,
-          baseUrl,
-        )));
-    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late PendingOrdersResponseModel _value;
-    try {
-      _value = PendingOrdersResponseModel.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

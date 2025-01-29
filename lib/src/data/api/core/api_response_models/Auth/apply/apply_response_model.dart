@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:json_annotation/json_annotation.dart';
+import 'package:tracking_app/src/domain/entities/auth/apply_response_entity.dart';
 
 part 'apply_response_model.g.dart';
 
@@ -24,6 +27,12 @@ class ApplyResponseModel {
   Map<String, dynamic> toJson() {
     return _$ApplyResponseModelToJson(this);
   }
+  ApplyResponseEntity toDomainDto() {
+    return ApplyResponseEntity(
+      message: message,
+      driver: driver?.toDomain(),
+    );
+  }
 }
 
 @JsonSerializable()
@@ -38,12 +47,8 @@ class Driver {
   final String? vehicleType;
   @JsonKey(name: "vehicleNumber")
   final String? vehicleNumber;
-  @JsonKey(name: "vehicleLicense")
-  final String? vehicleLicense;
   @JsonKey(name: "NID")
   final String? NID;
-  @JsonKey(name: "NIDImg")
-  final String? NIDImg;
   @JsonKey(name: "email")
   final String? email;
   @JsonKey(name: "gender")
@@ -63,9 +68,7 @@ class Driver {
     this.lastName,
     this.vehicleType,
     this.vehicleNumber,
-    this.vehicleLicense,
     this.NID,
-    this.NIDImg,
     this.email,
     this.gender,
     this.phone,
@@ -80,6 +83,17 @@ class Driver {
 
   Map<String, dynamic> toJson() {
     return _$DriverToJson(this);
+  }
+  DriveEntity toDomain() {
+    return DriveEntity(
+      country: country,
+      firstName: firstName,
+      lastName: lastName,
+      vehicleType: vehicleType,
+      vehicleNumber: vehicleNumber,
+      NID: NID,
+      email: email,
+    );
   }
 }
 

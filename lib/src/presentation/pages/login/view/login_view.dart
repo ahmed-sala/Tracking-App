@@ -8,7 +8,6 @@ import 'package:tracking_app/src/data/api/core/errors/error_handler.dart';
 import '../../../../../core/di/di.dart';
 import '../../../../../core/utilities/dialogs/awesome_dialoge.dart';
 import '../../../../../core/utilities/dialogs/loading_dialog.dart';
-import '../../../managers/login/login_action.dart';
 import '../../../managers/login/login_cubit.dart';
 import '../widget/login_body_widget.dart';
 
@@ -56,7 +55,6 @@ class _LoginViewState extends State<LoginView> {
         dialogType: DialogType.error,
       );
     } else if (state is LoginSuccessState) {
-      loginViewModel.doAction(NavigateToBaseScreenAction());
     } else if (state is NavigateToForgetPasswordScreenState) {
       LoadingDialog.hide(context);
       _navigateToForgetPasswordScreen();
@@ -66,13 +64,7 @@ class _LoginViewState extends State<LoginView> {
     }
   }
 
-  void _navigateToBaseScreen() {
-    Navigator.pushNamedAndRemoveUntil(
-      context,
-      PageRoutesName.section,
-      (route) => false,
-    );
-  }
+  void _navigateToBaseScreen() {}
 
   void _navigateToForgetPasswordScreen() {
     Navigator.pushNamed(context, PageRoutesName.forgetPassword);
