@@ -1,4 +1,7 @@
-import 'package:dio/dio.dart';
+import 'dart:io';
+
+import 'package:dio/dio.dart' hide DioMediaType;
+import 'package:http_parser/http_parser.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/error_logger.dart';
 import 'package:retrofit/http.dart';
@@ -15,6 +18,7 @@ import 'package:tracking_app/src/data/api/core/api_response_models/Auth/logout_r
 import 'package:tracking_app/src/data/api/core/api_response_models/app_user_response/app_user_response_model.dart';
 import 'package:tracking_app/src/data/api/core/api_response_models/change_password/change_password_response_model.dart';
 import 'package:tracking_app/src/data/api/core/api_response_models/login_response_model/login_response_model.dart';
+import 'package:tracking_app/src/data/api/core/api_response_models/upload_photo_response_model.dart';
 import 'package:tracking_app/src/data/api/core/api_response_models/vehicles/vehicles_response_model.dart';
 import 'package:tracking_app/src/data/api/core/constants/api_end_points.dart';
 import 'package:tracking_app/src/data/api/core/constants/api_keys.dart';
@@ -45,6 +49,7 @@ abstract interface class ApiServices {
 
   @POST(ApiEndPoints.login)
   Future<LoginResponseModel> login(@Body() LoginRequest loginRequestModel);
+
   @GET(ApiEndPoints.profileData)
   Future<AppUserResponseModel> profileData({
     @Header(ApiKey.authorization) required String token,
@@ -64,4 +69,10 @@ abstract interface class ApiServices {
   Future<ChangePasswordResponesModel> changePassword(
       @Header(ApiKey.authorization) String token,
       @Body() ChangePasswordRequestModel changePasswordRequestModel);
+
+  @PUT(ApiEndPoints.uploadPhoto)
+  @MultiPart()
+  Future<UploadPhotoResponseModel> uploadPhoto(
+      @Header(ApiKey.authorization) String token,
+      @Part(name: "photo",contentType: "jpg") File? photo);
 }

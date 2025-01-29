@@ -19,3 +19,9 @@ class ErrorFormValidateState extends EditeMyInfoStates{
 }
 
 class ChangePasswordState extends EditeMyInfoStates{}
+class UploadPhotoSuccessState extends EditeMyInfoStates{}
+class UploadPhotoLoadingState extends EditeMyInfoStates{}
+class UploadPhotoErrorState extends EditeMyInfoStates{
+  Exception? exception;
+  UploadPhotoErrorState({this.exception});
+}

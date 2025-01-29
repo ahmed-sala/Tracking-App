@@ -1,9 +1,13 @@
 
+import 'dart:io';
+
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:injectable/injectable.dart';
 import 'package:tracking_app/core/common/apis/api_result.dart';
 import 'package:tracking_app/src/domain/entities/app_user_entity.dart';
+import 'package:tracking_app/src/domain/entities/edite_my_info/upload_photo_entity.dart';
+import 'package:tracking_app/src/domain/use_cases/upload_photo_use_case.dart';
 import 'package:tracking_app/src/presentation/managers/edit_my_info/edit_my_info_actions.dart';
 import 'package:tracking_app/src/presentation/managers/edit_my_info/edite_my_info_states.dart';
 
@@ -16,7 +20,8 @@ class EditeMyInfoViewModel extends Cubit<EditeMyInfoStates>{
 
   final EditeMyInfoControllerManager _controllerManager;
   final GetProfileDataUseCase _getProfileDataUseCase;
-  EditeMyInfoViewModel(this._controllerManager,this._getProfileDataUseCase) : super(EditeMyInfoScreenInitialState());
+  final UploadPhotoUseCase _uploadPhotoUseCase;
+  EditeMyInfoViewModel(this._controllerManager,this._getProfileDataUseCase,this._uploadPhotoUseCase) : super(EditeMyInfoScreenInitialState());
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   Gender selectedGender = Gender.male;
   AppUserEntity _appUserEntity = AppUserEntity();
@@ -52,6 +57,20 @@ class EditeMyInfoViewModel extends Cubit<EditeMyInfoStates>{
     }
 
   }
+
+
+  _uploadPhoto(File image) async{
+    emit(UploadPhotoLoadingState());
+    var result = await _uploadPhotoUseCase.uploadPhoto(image: image);
+    switch (result) {
+      case Success<UploadPhotoEntity>():
+        emit(UploadPhotoSuccessState());
+        break;
+      case Failures<UploadPhotoEntity>():
+        emit(UploadPhotoErrorState(exception: result.exception));
+        break;
+    }
+  }
   void doAction(EditeMyInfoActions action){
     switch (action) {
       case LoadDriverInfoAction():
@@ -59,6 +78,9 @@ class EditeMyInfoViewModel extends Cubit<EditeMyInfoStates>{
         break;
       case ChangePasswordAction():
         emit(ChangePasswordState());
+        break;
+      case UploadPhotoAction():
+        _uploadPhoto(action.image);
         break;
     }
   }
