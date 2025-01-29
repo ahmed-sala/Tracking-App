@@ -6,7 +6,11 @@ class OrderScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: Center(child: Text("Ahamd Slahe  OrderScreen ",style: TextStyle(fontSize: 40),)),
+      body: Center(
+          child: Text(
+        "Ahamd Slahe  OrderScreen ",
+        style: TextStyle(fontSize: 40),
+      )),
     );
   }
 }
