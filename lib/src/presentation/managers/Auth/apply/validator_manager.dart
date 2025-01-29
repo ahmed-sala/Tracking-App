@@ -1,10 +1,11 @@
 import 'dart:io';
 
-import 'package:flutter/cupertino.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mime/mime.dart';
 import 'package:tracking_app/core/helpers/app_Regex.dart';
-import 'package:tracking_app/src/presentation/managers/Auth/apply/apply_screen_view_model.dart';
+
+import '../../../../../core/common/common_imports.dart';
+import 'apply_screen_view_model.dart';
 
 @injectable
 @singleton
@@ -48,20 +49,26 @@ class ValidatorManager {
   }
 
   String? _validateImages(File? image) {
-    String imageName = File(image?.path??"").toString();
+    String imageName = File(image?.path ?? "").toString();
     if (imageName.isEmpty || image == null) {
       return "This field is required";
     }
     final mimeType = lookupMimeType(image.path);
-    final validMimeTypes = ["image/jpeg", "image/jpg",];
+    final validMimeTypes = [
+      "image/jpeg",
+      "image/jpg",
+    ];
     if (!validMimeTypes.contains(mimeType)) {
       return "Invalid file type. Only JPG and JPEG are allowed.";
     }
     return null;
   }
 
-  String? validateField(ApplyScreenFormFields field,
-      TextEditingController controller, TextEditingController? password,File? image) {
+  String? validateField(
+      ApplyScreenFormFields field,
+      TextEditingController controller,
+      TextEditingController? password,
+      File? image) {
     switch (field) {
       case ApplyScreenFormFields.firstLegalName:
         return _validateFieldInput(controller.text);

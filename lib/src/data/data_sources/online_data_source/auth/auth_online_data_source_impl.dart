@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:injectable/injectable.dart';
 import 'package:tracking_app/src/data/api/api_services.dart';
 import 'package:tracking_app/src/data/api/core/api_request_models/Auth/apply/apply_request_model.dart';
@@ -9,75 +7,81 @@ import 'package:tracking_app/src/data/api/core/api_request_models/Auth/forget_pa
 import 'package:tracking_app/src/data/api/core/api_request_models/change_password/change_password_request_model.dart';
 import 'package:tracking_app/src/data/api/core/api_request_models/login_request/login_request.dart';
 import 'package:tracking_app/src/data/api/core/api_response_models/Auth/apply/apply_response_model.dart';
+import 'package:tracking_app/src/data/api/core/api_response_models/Auth/forget_password/confirm_otp_response_model.dart';
 import 'package:tracking_app/src/data/api/core/api_response_models/Auth/forget_password/get_otp_response_model.dart';
 import 'package:tracking_app/src/data/api/core/api_response_models/Auth/forget_password/reset_password_response_model.dart';
+import 'package:tracking_app/src/data/api/core/api_response_models/Auth/logout_response_model.dart';
 import 'package:tracking_app/src/data/api/core/api_response_models/change_password/change_password_response_model.dart';
 import 'package:tracking_app/src/data/api/core/api_response_models/login_response_model/login_response_model.dart';
-import 'package:tracking_app/src/data/api/core/api_response_models/login_response_model/login_response_model.dart';
-import 'package:tracking_app/src/data/api/core/api_response_models/Auth/logout_response_model.dart';
 import 'package:tracking_app/src/data/data_sources/online_data_source/auth/auth_online_data_source.dart';
+
+import '../../../api/core/api_response_models/app_user_response/app_user_response_model.dart';
+
 @Injectable(as: AuthOnlineDataSource)
-class AuthOnlineDataSourceImpl implements AuthOnlineDataSource{
+class AuthOnlineDataSourceImpl implements AuthOnlineDataSource {
   final ApiServices _apiServices;
+
   AuthOnlineDataSourceImpl(this._apiServices);
+
   @override
-  Future<GetOtpResponseModel> getOtp(GetOtpRequestModel getOtpRequestModel) async{
+  Future<GetOtpResponseModel> getOtp(
+      GetOtpRequestModel getOtpRequestModel) async {
     return await _apiServices.getOtp(getOtpRequestModel);
   }
 
   @override
-  confirmOtp(ConfirmOtpRequestModel confirmOtpRequestModel) async {
-    return await _apiServices.confirmOtp(confirmOtpRequestModel);
-  }
-
-  @override
-  Future<ResetPasswordResponseModel> resetPassword(ResetPasswordRequestModel resetPasswordRequestModel)async {
+  Future<ResetPasswordResponseModel> resetPassword(
+      ResetPasswordRequestModel resetPasswordRequestModel) async {
     return await _apiServices.resetPassword(resetPasswordRequestModel);
   }
+
   @override
-  Future<LoginResponseModel> login({required LoginRequest loginRequest}) {
-    return  _apiServices.login(loginRequest);
+  Future<LoginResponseModel> login({required LoginRequest loginRequest}) async {
+    return await _apiServices.login(loginRequest);
   }
 
   @override
-  Future<LogOutResponseModel> logOut({required String token}) async{
+  Future<LogOutResponseModel> logOut({required String token}) async {
     return await _apiServices.logout("Bearer $token");
   }
 
   @override
-  Future<ChangePasswordResponesModel> changePassword({required String token, required ChangePasswordRequestModel changePasswordRequestModel}) async{
-    return await _apiServices.changePassword("Bearer $token", changePasswordRequestModel);
+  Future<ChangePasswordResponesModel> changePassword({
+    required String token,
+    required ChangePasswordRequestModel changePasswordRequestModel,
+  }) async {
+    return await _apiServices.changePassword(
+        "Bearer $token", changePasswordRequestModel);
   }
 
   @override
-  Future<ApplyResponseModel> apply({required ApplyRequestModel applyRequestModel}) async{
-    String country = applyRequestModel.country!;
-    String firstName = applyRequestModel.firstName!;
-    String lastName = applyRequestModel.lastName!;
-    String vehicleType = applyRequestModel.vehicleType!;
-    String vehicleNumber = applyRequestModel.vehicleNumber!;
-    File vehicleLicense = applyRequestModel.vehicleLicenseImage!;
-    String NID = applyRequestModel.NID!;
-    File NIDImg = applyRequestModel.idImage!;
-    String email = applyRequestModel.email!;
-    String password = applyRequestModel.password!;
-    String rePassword = applyRequestModel.rePassword!;
-    String gender = applyRequestModel.gender!;
-    String phone = applyRequestModel.phone!;
+  Future<ApplyResponseModel> apply(
+      {required ApplyRequestModel applyRequestModel}) async {
     return await _apiServices.apply(
-      country,
-      firstName,
-      lastName,
-      vehicleType,
-      vehicleNumber,
-      vehicleLicense,
-      NID,
-      NIDImg,
-      email,
-      password,
-      rePassword,
-      gender,
-      phone
+      applyRequestModel.country!,
+      applyRequestModel.firstName!,
+      applyRequestModel.lastName!,
+      applyRequestModel.vehicleType!,
+      applyRequestModel.vehicleNumber!,
+      applyRequestModel.vehicleLicenseImage!,
+      applyRequestModel.NID!,
+      applyRequestModel.idImage!,
+      applyRequestModel.email!,
+      applyRequestModel.password!,
+      applyRequestModel.rePassword!,
+      applyRequestModel.gender!,
+      applyRequestModel.phone!,
     );
+  }
+
+  @override
+  Future<AppUserResponseModel> getProfileData({required String token}) async {
+    return await _apiServices.profileData(token: token);
+  }
+
+  @override
+  Future<ConfirmOtpResponseModel> confirmOtp(
+      ConfirmOtpRequestModel confirmOtpRequestModel) async {
+    return await _apiServices.confirmOtp(confirmOtpRequestModel);
   }
 }

@@ -3,10 +3,10 @@ import 'package:tracking_app/core/common/common_imports.dart';
 import 'package:tracking_app/core/extensions/extensions.dart';
 import 'package:tracking_app/core/utilities/style/app_text_styles.dart';
 import 'package:tracking_app/core/utilities/style/spacing.dart';
-import 'package:tracking_app/src/presentation/managers/Auth/apply/apply_screen_actions.dart';
 import 'package:tracking_app/src/presentation/managers/Auth/apply/apply_screen_view_model.dart';
 
 import '../../../../../core/utilities/style/app_colors.dart';
+import '../../../managers/Auth/apply/apply_screen_actions.dart';
 import 'apply_form.dart';
 import 'gender_radio_button_row.dart';
 

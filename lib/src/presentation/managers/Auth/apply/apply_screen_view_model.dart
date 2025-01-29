@@ -130,6 +130,12 @@ class ApplyScreenViewModel extends Cubit<ApplyScreenStates> {
 
   void doAction(ApplyScreenActions action) {
     switch (action) {
+      case GetAllVehiclesAction():
+        _getAllVehicles();
+        break;
+      case GetCountriesAction():
+        _getCountries();
+        break;
       case ApplyNewUserAction():
         _applyNewUser();
         break;

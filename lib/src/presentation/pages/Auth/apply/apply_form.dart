@@ -3,15 +3,16 @@ import 'dart:io';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:tracking_app/core/extensions/extensions.dart';
 import 'package:tracking_app/core/utilities/style/spacing.dart';
 import 'package:tracking_app/src/domain/entities/country/country_entity.dart';
 import 'package:tracking_app/src/presentation/managers/Auth/apply/apply_screen_view_model.dart';
+
 import '../../../../../core/common/common_imports.dart';
 import '../../../../../core/utilities/style/app_colors.dart';
 import '../../../../../core/utilities/style/app_text_styles.dart';
 import '../../../../domain/entities/vehciles/vehicles_entity.dart';
-import 'package:image_picker/image_picker.dart';
 
 class ApplyForm extends StatefulWidget {
   const ApplyForm({super.key});
@@ -76,8 +77,8 @@ class _ApplyFormState extends State<ApplyForm> {
             ),
             verticalSpace(24),
             TextFormField(
-              controller: viewModel
-                  .getController(ApplyScreenFormFields.firstLegalName),
+              controller:
+                  viewModel.getController(ApplyScreenFormFields.firstLegalName),
               decoration: InputDecoration(
                 label: Text(
                   context.localization.firstLegalName,

@@ -1,4 +1,4 @@
-class AppRegex{
+class AppRegex {
   AppRegex._();
   static bool isNameValid(String name) {
     return RegExp(r"^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$").hasMatch(name);

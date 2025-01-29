@@ -6,41 +6,53 @@ import 'package:tracking_app/src/presentation/pages/Auth/forget_password/forget_
 import 'package:tracking_app/src/presentation/pages/change_password/change_password_screen.dart';
 import 'package:tracking_app/src/presentation/pages/login/view/login_view.dart';
 import 'package:tracking_app/src/presentation/pages/on_boarding/on_boarding.dart';
+import 'package:tracking_app/src/presentation/pages/profile/view/profile_view.dart';
+import 'package:tracking_app/src/presentation/pages/section_app/section_screen.dart';
+
 import '../../src/presentation/splash_screen.dart';
 
-class AppRoutes{
+class AppRoutes {
   AppRoutes._();
+
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
       case PageRoutesName.splash:
-        return _handelMaterialPageRoute(
+        return _handleMaterialPageRoute(
             settings: settings, widget: const SplashScreen());
       case PageRoutesName.forgetPassword:
-        return _handelMaterialPageRoute(widget: ForgetPasswordScreen(), settings: settings);
+        return _handleMaterialPageRoute(
+            widget: ForgetPasswordScreen(), settings: settings);
       case PageRoutesName.login:
-        return _handelMaterialPageRoute(widget: LoginView(), settings: settings);
+        return _handleMaterialPageRoute(
+            widget: LoginView(), settings: settings);
       case PageRoutesName.apply:
-        return _handelMaterialPageRoute(widget:  ApplyScreen(), settings: settings);
+        return _handleMaterialPageRoute(
+            widget: ApplyScreen(), settings: settings);
       case PageRoutesName.onBoarding:
-        return _handelMaterialPageRoute(
-            settings: settings, widget:  OnBoarding());
+        return _handleMaterialPageRoute(
+            settings: settings, widget: OnBoarding());
       case PageRoutesName.changePassword:
-        return _handelMaterialPageRoute(widget: ChangePasswordScreen(), settings: settings);
+        return _handleMaterialPageRoute(
+            widget: ChangePasswordScreen(), settings: settings);
       case PageRoutesName.successApply:
-        return _handelMaterialPageRoute(widget: const SuccessAuthApply(), settings: settings);
+        return _handleMaterialPageRoute(
+            widget: const SuccessAuthApply(), settings: settings);
+      case PageRoutesName.profile:
+        return _handleMaterialPageRoute(
+            widget: ProfileView(), settings: settings);
+      case PageRoutesName.section:
+        return _handleMaterialPageRoute(
+            widget: const SectionScreen(), settings: settings);
       default:
-        return _handelMaterialPageRoute(
+        return _handleMaterialPageRoute(
             settings: settings, widget: const Scaffold());
     }
   }
 
-
-
-
-
-
-  static MaterialPageRoute<dynamic> _handelMaterialPageRoute(
-      {required Widget widget, required RouteSettings settings}) {
+  static MaterialPageRoute<dynamic> _handleMaterialPageRoute({
+    required Widget widget,
+    required RouteSettings settings,
+  }) {
     return MaterialPageRoute(builder: (context) => widget, settings: settings);
   }
 }

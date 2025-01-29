@@ -22,7 +22,7 @@ class CountryModel {
   @JsonKey(name: "timezones")
   final List<Timezones>? timezones;
 
-  CountryModel ({
+  CountryModel({
     this.isoCode,
     this.name,
     this.phoneCode,
@@ -40,7 +40,8 @@ class CountryModel {
   Map<String, dynamic> toJson() {
     return _$CountryModelToJson(this);
   }
-  CountryEntity toDomain(){
+
+  CountryEntity toDomain() {
     return CountryEntity(
       isoCode: isoCode,
       name: name,
@@ -67,7 +68,7 @@ class Timezones {
   @JsonKey(name: "tzName")
   final String? tzName;
 
-  Timezones ({
+  Timezones({
     this.zoneName,
     this.gmtOffset,
     this.gmtOffsetName,
@@ -82,6 +83,7 @@ class Timezones {
   Map<String, dynamic> toJson() {
     return _$TimezonesToJson(this);
   }
+
   TimezonesEntity toDomain() {
     return TimezonesEntity(
       zoneName: zoneName,
@@ -92,5 +94,3 @@ class Timezones {
     );
   }
 }
-
-
