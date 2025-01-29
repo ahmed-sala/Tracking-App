@@ -159,5 +159,6 @@
   "floweryRiderApp": "Flowery Rider App",
   "applyNow": "Apply Now",
   "editeMyInfo": "Edit My Info",
-  "change" : "Change"
+  "change" : "Change",
+  "photoUploadSuccess": "Photo uploaded successfully"
 }

@@ -26,6 +26,7 @@ class EditeMyInfoViewModel extends Cubit<EditeMyInfoStates>{
   Gender selectedGender = Gender.male;
   AppUserEntity _appUserEntity = AppUserEntity();
   AppUserEntity get appUserEntity => _appUserEntity;
+  String? driverImage;
   TextEditingController getController(EditeMyInfoFormFields form){
     return _controllerManager.getController(form);
   }
@@ -40,6 +41,7 @@ class EditeMyInfoViewModel extends Cubit<EditeMyInfoStates>{
     setController(EditeMyInfoFormFields.email, _appUserEntity.email??"");
     setController(EditeMyInfoFormFields.phone, _appUserEntity.phone??"");
     selectedGender =_appUserEntity.gender!.length == 4? Gender.male : Gender.female;
+    driverImage = _appUserEntity.photo;
   }
 
   _LoadDriverInfo()async{
@@ -64,6 +66,7 @@ class EditeMyInfoViewModel extends Cubit<EditeMyInfoStates>{
     var result = await _uploadPhotoUseCase.uploadPhoto(image: image);
     switch (result) {
       case Success<UploadPhotoEntity>():
+        driverImage = image.path;
         emit(UploadPhotoSuccessState());
         break;
       case Failures<UploadPhotoEntity>():

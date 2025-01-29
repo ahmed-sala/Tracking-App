@@ -61,9 +61,9 @@ dependencies:
   lottie: ^3.2.0
   flutter_svg: ^2.0.17
   json_serializable:
-
-
+  image_picker:
   flutter_icon_snackbar: ^1.2.1
+  elegant_notification:
 
 dev_dependencies:
   flutter_test:

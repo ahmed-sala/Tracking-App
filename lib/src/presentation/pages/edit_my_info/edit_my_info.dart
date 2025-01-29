@@ -1,5 +1,8 @@
 import 'dart:math';
 
+import 'package:elegant_notification/elegant_notification.dart';
+import 'package:elegant_notification/resources/arrays.dart';
+import 'package:elegant_notification/resources/stacked_options.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tracking_app/core/di/di.dart';
 import 'package:tracking_app/core/extensions/extensions.dart';
@@ -55,6 +58,22 @@ class EditMyInfo extends StatelessWidget {
         }, listener: (context, state) {
           if (state is ChangePasswordState) {
             navKey.currentState!.pushNamed(PageRoutesName.changePassword);
+          }
+          if(state is  UploadPhotoSuccessState){
+            ElegantNotification.success(
+              width: 320.w,
+              height: 200.h,
+              stackedOptions: StackedOptions(
+                key: 'topleft',
+                type: StackedType.same,
+                itemOffset: const Offset(0, 5),
+              ),
+              position: Alignment.topRight,
+              animation: AnimationType.fromTop,
+              title: Text(context.localization.success,style: AppTextStyles.font18Medium,),
+              description: Text(context.localization.uploadIdImage),
+              onDismiss: () {},
+            ).show(context);
           }
         }),
       ),

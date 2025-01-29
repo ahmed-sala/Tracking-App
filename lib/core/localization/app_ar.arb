@@ -158,5 +158,6 @@
   "floweryRiderApp": "تطبيق Flowery Rider",
   "applyNow": "قدم الآن",
   "editeMyInfo": "تعديل معلوماتي",
-  "change" : "تغيير"
+  "change" : "تغيير",
+  "photoUploadSuccess": "تم تحميل الصورة بنجاح"
 }

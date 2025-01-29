@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:tracking_app/core/extensions/extensions.dart';
 import 'package:tracking_app/core/utilities/style/app_colors.dart';
 import 'package:tracking_app/core/utilities/style/app_text_styles.dart';
@@ -23,21 +26,30 @@ class EditeMyProfileBody extends StatelessWidget {
         child: Column(
           children: [
             InkWell(
-              onTap: (){
-
+              onTap: () async {
+                var image = await ImagePicker.platform
+                    .getImageFromSource(source: ImageSource.gallery);
+                File newImage = File(image?.path ?? "");
+                _viewModel.doAction(UploadPhotoAction(image: newImage));
               },
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(100),
-                child: Container(
-                  height: 100.h,
-                  width: 100.w,
-                  color: AppColors.kGray,
-                  child: const Icon(
-                    Icons.camera_alt,
-                    size: 40,
+              child: BlocBuilder(builder: (context, state) {
+                if (_viewModel.driverImage != null) {
+                  Image.file(_viewModel.driverImage,
+                      height: 100.h, width: 100.w, fit: BoxFit.cover);
+                }
+                return ClipRRect(
+                  borderRadius: BorderRadius.circular(100),
+                  child: Container(
+                    height: 100.h,
+                    width: 100.w,
+                    color: AppColors.kGray,
+                    child: const Icon(
+                      Icons.camera_alt,
+                      size: 40,
+                    ),
                   ),
-                ),
-              ),
+                );
+              }),
             ),
             Form(
               key: _viewModel.formKey,
@@ -53,8 +65,8 @@ class EditeMyProfileBody extends StatelessWidget {
                           decoration: InputDecoration(
                             labelText: context.localization.firstName,
                           ),
-                          validator: (value){},
-                          onChanged: (value){},
+                          validator: (value) {},
+                          onChanged: (value) {},
                         ),
                       ),
                       horizontalSpace(10),
@@ -136,10 +148,9 @@ class EditeMyProfileBody extends StatelessWidget {
                   SizedBox(
                     width: context.width,
                     child: ElevatedButton(
-                       style: ElevatedButton.styleFrom(
-                         disabledBackgroundColor: AppColors.kGray
-                       ),
-                        onPressed: ()=> null,
+                        style: ElevatedButton.styleFrom(
+                            disabledBackgroundColor: AppColors.kGray),
+                        onPressed: () => null,
                         child: Padding(
                           padding: const EdgeInsets.symmetric(vertical: 14),
                           child: Text(
