@@ -74,4 +74,5 @@ enum EditeMyInfoFormFields{
   lastName,
   email,
   phone,
+  password
 }

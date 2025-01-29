@@ -10,6 +10,9 @@ class EditeMyInfoControllerManager {
   TextEditingController _lastNameController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
   TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _passwordController  =  TextEditingController(
+    text: "*****"
+  );
 
   void dispose() {
     _firstNameController.dispose();
@@ -28,6 +31,8 @@ class EditeMyInfoControllerManager {
         return _emailController;
       case EditeMyInfoFormFields.phone:
         return _phoneController;
+      case EditeMyInfoFormFields.password:
+        return _passwordController;
     }
   }
 
@@ -45,7 +50,8 @@ class EditeMyInfoControllerManager {
       case EditeMyInfoFormFields.phone:
         _phoneController.text = value;
         break;
-
+      case EditeMyInfoFormFields.password:
+        break;
     }
   }
 }

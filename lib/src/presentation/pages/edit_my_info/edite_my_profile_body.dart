@@ -85,6 +85,8 @@ class EditeMyProfileBody extends StatelessWidget {
                   ),
                   verticalSpace(24),
                   TextFormField(
+                    controller: _viewModel
+                        .getController(EditeMyInfoFormFields.password),
                     readOnly: true,
                     decoration: InputDecoration(
                         labelText: context.localization.password,
