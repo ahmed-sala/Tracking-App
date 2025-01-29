@@ -10,6 +10,6 @@ class GetProfileDataUseCase {
   GetProfileDataUseCase({required this.authRepository});
 
   Future<ApiResult<AppUserEntity>> invoke() async {
-    return authRepository.getProfileData();
+    return await authRepository.getProfileData();
   }
 }

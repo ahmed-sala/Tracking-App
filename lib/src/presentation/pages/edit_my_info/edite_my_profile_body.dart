@@ -3,6 +3,7 @@ import 'package:tracking_app/core/extensions/extensions.dart';
 import 'package:tracking_app/core/utilities/style/app_colors.dart';
 import 'package:tracking_app/core/utilities/style/app_text_styles.dart';
 import 'package:tracking_app/core/utilities/style/spacing.dart';
+import 'package:tracking_app/src/domain/entities/app_user_entity.dart';
 import 'package:tracking_app/src/presentation/managers/edit_my_info/edit_my_info_actions.dart';
 import 'package:tracking_app/src/presentation/managers/edit_my_info/edite_my_info_view_model.dart';
 
@@ -14,6 +15,7 @@ class EditeMyProfileBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _viewModel = context.read<EditeMyInfoViewModel>();
+    AppUserEntity appUser = _viewModel.appUserEntity;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
       child: SizedBox(
@@ -51,9 +53,11 @@ class EditeMyProfileBody extends StatelessWidget {
                           decoration: InputDecoration(
                             labelText: context.localization.firstName,
                           ),
+                          validator: (value){},
+                          onChanged: (value){},
                         ),
                       ),
-                      const SizedBox(width: 10),
+                      horizontalSpace(10),
                       Expanded(
                         child: TextFormField(
                           controller: _viewModel
@@ -130,7 +134,10 @@ class EditeMyProfileBody extends StatelessWidget {
                   SizedBox(
                     width: context.width,
                     child: ElevatedButton(
-                        onPressed: () {},
+                       style: ElevatedButton.styleFrom(
+                         disabledBackgroundColor: AppColors.kGray
+                       ),
+                        onPressed: ()=> null,
                         child: Padding(
                           padding: const EdgeInsets.symmetric(vertical: 14),
                           child: Text(

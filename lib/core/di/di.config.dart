@@ -97,8 +97,6 @@ extension GetItInjectableX on _i174.GetIt {
         () => sharedPrefModule.secureStorage);
     gh.lazySingleton<_i361.Dio>(() => dioProvider.dioProvider());
     gh.lazySingleton<_i528.PrettyDioLogger>(() => dioProvider.providePretty());
-    gh.factory<_i296.EditeMyInfoViewModel>(() =>
-        _i296.EditeMyInfoViewModel(gh<_i408.EditeMyInfoControllerManager>()));
     gh.factory<_i252.AuthOfflineDataSource>(
         () => _i523.AuthOfflineDataSourceImpl());
     gh.singleton<_i318.ApiServices>(() => _i318.ApiServices(gh<_i361.Dio>()));
@@ -134,6 +132,10 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i762.ForgetPasswordScreenViewModel(gh<_i235.AuthUseCases>()));
     gh.factory<_i84.LoginCubit>(
         () => _i84.LoginCubit(gh<_i379.LoginUseCase>()));
+    gh.factory<_i296.EditeMyInfoViewModel>(() => _i296.EditeMyInfoViewModel(
+          gh<_i408.EditeMyInfoControllerManager>(),
+          gh<_i986.GetProfileDataUseCase>(),
+        ));
     gh.factory<_i895.ChangePasswordViewModel>(
         () => _i895.ChangePasswordViewModel(gh<_i982.ChangePasswordUseCase>()));
     gh.factory<_i675.ApplyScreenViewModel>(() => _i675.ApplyScreenViewModel(

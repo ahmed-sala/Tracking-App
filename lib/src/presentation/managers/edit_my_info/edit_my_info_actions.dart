@@ -1,3 +1,3 @@
 sealed class EditeMyInfoActions{}
-class LoadDriverInfo extends EditeMyInfoActions{}
+class LoadDriverInfoAction extends EditeMyInfoActions{}
 class ChangePasswordAction extends EditeMyInfoActions{}
