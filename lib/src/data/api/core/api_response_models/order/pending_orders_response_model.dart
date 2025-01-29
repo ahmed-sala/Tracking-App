@@ -13,7 +13,7 @@ class PendingOrdersResponseModel {
   @JsonKey(name: "orders")
   final List<Orders>? orders;
 
-  PendingOrdersResponseModel ({
+  PendingOrdersResponseModel({
     this.message,
     this.metadata,
     this.orders,
@@ -26,7 +26,6 @@ class PendingOrdersResponseModel {
   Map<String, dynamic> toJson() {
     return _$PendingOrdersResponseModelToJson(this);
   }
-
 }
 
 @JsonSerializable()
@@ -40,7 +39,7 @@ class Metadata {
   @JsonKey(name: "limit")
   final int? limit;
 
-  Metadata ({
+  Metadata({
     this.currentPage,
     this.totalPages,
     this.totalItems,
@@ -83,7 +82,7 @@ class Orders {
   @JsonKey(name: "store")
   final Store? store;
 
-  Orders ({
+  Orders({
     this.Id,
     this.user,
     this.orderItems,
@@ -106,12 +105,12 @@ class Orders {
     return _$OrdersToJson(this);
   }
 
-  PendingOrderEntity toDomain(){
+  PendingOrderEntity toDomain() {
     return PendingOrderEntity(
       id: Id,
       userOrderEntity: user?.toDomain(),
       orderItems: orderItems?.map((e) => e.toDomain()).toList(),
-      totalPrice: totalPrice?.toDouble(),
+      totalPrice: totalPrice,
       paymentType: paymentType,
       isPaid: isPaid,
       isDelivered: isDelivered,
@@ -149,7 +148,7 @@ class User {
   @JsonKey(name: "passwordChangedAt")
   final String? passwordChangedAt;
 
-  User ({
+  User({
     this.Id,
     this.firstName,
     this.lastName,
@@ -169,7 +168,8 @@ class User {
   Map<String, dynamic> toJson() {
     return _$UserToJson(this);
   }
-  UserOrderEntity toDomain(){
+
+  UserOrderEntity toDomain() {
     return UserOrderEntity(
       id: Id,
       firstName: firstName,
@@ -192,7 +192,7 @@ class OrderItems {
   @JsonKey(name: "_id")
   final String? Id;
 
-  OrderItems ({
+  OrderItems({
     this.product,
     this.price,
     this.quantity,
@@ -207,7 +207,7 @@ class OrderItems {
     return _$OrderItemsToJson(this);
   }
 
-  OrderItemsEntity toDomain(){
+  OrderItemsEntity toDomain() {
     return OrderItemsEntity(
       product: product?.toDomain(),
       price: price,
@@ -250,7 +250,7 @@ class Product {
   @JsonKey(name: "discount")
   final int? discount;
 
-  Product ({
+  Product({
     this.Id,
     this.title,
     this.slug,
@@ -276,7 +276,7 @@ class Product {
     return _$ProductToJson(this);
   }
 
-  ProductEntity toDomain(){
+  ProductEntity toDomain() {
     return ProductEntity(
       id: Id,
       title: title,
@@ -310,7 +310,7 @@ class Store {
   @JsonKey(name: "latLong")
   final String? latLong;
 
-  Store ({
+  Store({
     this.name,
     this.image,
     this.address,
@@ -325,7 +325,8 @@ class Store {
   Map<String, dynamic> toJson() {
     return _$StoreToJson(this);
   }
-  StoreOrderEntity _toDomain(){
+
+  StoreOrderEntity _toDomain() {
     return StoreOrderEntity(
       name: name,
       image: image,
@@ -335,5 +336,3 @@ class Store {
     );
   }
 }
-
-

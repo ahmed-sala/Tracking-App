@@ -8,6 +8,7 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:cloud_firestore/cloud_firestore.dart' as _i974;
 import 'package:dio/dio.dart' as _i361;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i558;
 import 'package:get_it/get_it.dart' as _i174;
@@ -73,6 +74,8 @@ import '../../src/presentation/managers/order/pending_order/pending_order_cubit.
 import '../../src/presentation/managers/profile/profile_cubit.dart' as _i34;
 import '../../src/presentation/managers/section/section_screen_viewmodel.dart'
     as _i265;
+import '../helpers/firestore/firebase_module.dart' as _i991;
+import '../helpers/firestore/firestore_services.dart' as _i769;
 import '../helpers/shared_pref/shared_pref_moduel.dart' as _i802;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -88,6 +91,7 @@ extension GetItInjectableX on _i174.GetIt {
     );
     final sharedPrefModule = _$SharedPrefModule();
     final dioProvider = _$DioProvider();
+    final firebaseModule = _$FirebaseModule();
     await gh.factoryAsync<_i460.SharedPreferences>(
       () => sharedPrefModule.sharedPreferences,
       preResolve: true,
@@ -101,13 +105,15 @@ extension GetItInjectableX on _i174.GetIt {
         () => sharedPrefModule.secureStorage);
     gh.lazySingleton<_i361.Dio>(() => dioProvider.dioProvider());
     gh.lazySingleton<_i528.PrettyDioLogger>(() => dioProvider.providePretty());
+    gh.lazySingleton<_i974.FirebaseFirestore>(
+        () => firebaseModule.firebaseFirestore);
     gh.factory<_i252.AuthOfflineDataSource>(
         () => _i523.AuthOfflineDataSourceImpl());
     gh.singleton<_i318.ApiServices>(() => _i318.ApiServices(gh<_i361.Dio>()));
     gh.factory<_i472.CountryOfflineDataSource>(
         () => _i532.CountryOfflineDataSourceImpl());
-    gh.factory<_i351.OrderOnlineDataSource>(
-        () => _i654.OrderOnlineDataSourceImpl(gh<_i318.ApiServices>()));
+    gh.factory<_i769.FirestoreService>(
+        () => _i769.FirestoreService(gh<_i974.FirebaseFirestore>()));
     gh.factory<_i633.VehiclesOnlineDataSource>(
         () => _i523.VehiclesOnlineDataSourceImpl(gh<_i318.ApiServices>()));
     gh.factory<_i597.CountryRepo>(
@@ -116,6 +122,11 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i956.AuthOnlineDataSourceImpl(gh<_i318.ApiServices>()));
     gh.factory<_i176.CountryUseCase>(
         () => _i176.CountryUseCase(gh<_i597.CountryRepo>()));
+    gh.factory<_i351.OrderOnlineDataSource>(
+        () => _i654.OrderOnlineDataSourceImpl(
+              gh<_i318.ApiServices>(),
+              gh<_i769.FirestoreService>(),
+            ));
     gh.factory<_i176.OrderRepository>(
         () => _i395.OrderRepositoryImpl(gh<_i351.OrderOnlineDataSource>()));
     gh.factory<_i701.AuthRepository>(() => _i188.AuthRepositoryImpl(
@@ -161,3 +172,5 @@ extension GetItInjectableX on _i174.GetIt {
 class _$SharedPrefModule extends _i802.SharedPrefModule {}
 
 class _$DioProvider extends _i801.DioProvider {}
+
+class _$FirebaseModule extends _i991.FirebaseModule {}

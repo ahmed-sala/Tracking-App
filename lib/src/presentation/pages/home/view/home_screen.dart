@@ -22,7 +22,6 @@ class _HomeScreenState extends State<HomeScreen> {
     pendingViewModel.doAction(GetAllPendingOrderEvent());
     super.initState();
   }
-
   @override
   var pendingViewModel = getIt.get<PendingOrderCubit>();
   @override
