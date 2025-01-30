@@ -26,7 +26,10 @@ class OrderOnlineDataSourceImpl implements OrderOnlineDataSource {
   Future<Orders> getPendingOrderById(String id) async {
     var data =
         await _firestoreServices.getDocumentByField('accepted_order', 'id', id);
-
-    return Orders.fromJson(data!);
+    print('from fire object ${Orders.fromFire(data!).user?.lastName}');
+    print('from fire object ${Orders.fromFire(data!).user?.firstName}');
+    print('from fire object ${Orders.fromFire(data!).user?.photo}');
+    print('from fire object ${Orders.fromFire(data!).user?.phone}');
+    return Orders.fromFire(data!);
   }
 }

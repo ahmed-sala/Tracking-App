@@ -1,3 +1,5 @@
+import '../../../../domain/entities/order/pending_order_entity.dart';
+
 sealed class OrderDetailsState {
   const OrderDetailsState();
 }
@@ -11,9 +13,9 @@ class OrderDetailsInitial extends OrderDetailsState {
 }
 
 class OrderDetailsLoaded extends OrderDetailsState {
-  // final PendingOrderEntity order;
+  final PendingOrderEntity order;
 
-  const OrderDetailsLoaded();
+  const OrderDetailsLoaded(this.order);
 }
 
 class OrderDetailsError extends OrderDetailsState {

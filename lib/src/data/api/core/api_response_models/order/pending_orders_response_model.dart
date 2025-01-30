@@ -105,6 +105,24 @@ class Orders {
     return _$OrdersToJson(this);
   }
 
+  factory Orders.fromFire(Map<String, dynamic> json) {
+    return Orders(
+      Id: json['id'],
+      user: User.fromJson(json['user']),
+      orderItems: (json['orderItems'] as List)
+          .map((e) => OrderItems.fromJson(e))
+          .toList(),
+      totalPrice: json['totalPrice'],
+      paymentType: json['paymentType'],
+      isPaid: json['isPaid'],
+      isDelivered: json['isDelivered'],
+      state: json['state'],
+      createdAt: json['createdAt'],
+      updatedAt: json['updatedAt'],
+      orderNumber: json['orderNumber'],
+      store: Store.fromJson(json['store']),
+    );
+  }
   Map<String, dynamic> toJsonFire() {
     return {
       "id": Id,
