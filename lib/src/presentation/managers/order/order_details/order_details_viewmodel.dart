@@ -5,6 +5,7 @@ import 'package:tracking_app/src/domain/use_cases/order/order_details_usecase.da
 import 'package:tracking_app/src/presentation/managers/order/order_details/order_details_state.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../../../core/common/common_imports.dart';
 import '../../../../../core/utilities/functions/button_list.dart';
 
 @injectable
@@ -14,20 +15,25 @@ class OrderDetailsViewmodel extends Cubit<OrderDetailsState> {
       : super(OrderDetailsLoading());
   int _counter = 0;
   get counter => _counter;
-  late PendingOrderEntity _orderDetails;
+
+  String? stateOrder;
+
   bool _colorButton = false;
   get colorButton => _colorButton;
 
   void getOrderDetails() async {
     try {
-      _orderDetails = await _orderDetailsUsecase.getOrderDetails();
-      if (_orderDetails.storeOrderEntity == null ||
-          _orderDetails.userOrderEntity == null) {
-        throw Exception("Order details are incomplete");
-      }
-      emit(OrderDetailsLoaded(_orderDetails));
+      emit(OrderDetailsLoading());
+      PendingOrderEntity orderDetails =
+          await _orderDetailsUsecase.getOrderDetails();
+      print("order state from get is: ${orderDetails.state}");
+      _counter = stateList.indexOf(orderDetails.state!);
+
+      emit(OrderDetailsLoaded(orderDetails));
     } catch (e) {
-      emit(OrderDetailsError(e.toString()));
+      debugPrint("Error fetching order details: $e");
+      emit(
+          OrderDetailsError("Failed to load order details. Please try again."));
     }
   }
 
@@ -45,22 +51,31 @@ class OrderDetailsViewmodel extends Cubit<OrderDetailsState> {
     }
   }
 
-  void updateState(String id, String state) async {
+  void updateState(PendingOrderEntity orderDetail) async {
     try {
-      _counter++;
-      _counter = 0;
-      if (_counter >= buttonsList.length) {
-        _colorButton = true;
+      emit(OrderDetailsLoading());
+
+      String? currentState = orderDetail.state;
+      _counter = stateList.indexOf(currentState!);
+
+      if (_counter < stateList.length - 1) {
+        String nextState = stateList[_counter + 1];
+
+        print('Order id: ${orderDetail.id}');
+        print('Order state before update: $currentState');
+        print('Order state after update: $nextState');
+
+        await _orderDetailsUsecase.updateState(orderDetail.id, nextState);
+
+        PendingOrderEntity updatedNow =
+            await _orderDetailsUsecase.getOrderDetails();
+        print("State updated successfully");
+
+        emit(StateUpdated(updatedNow)); // Emits a new state instance
       }
-
-      // Emit state update before calling API to update UI immediately
-      emit(StateUpdated(buttonsList[_counter], _orderDetails));
-
-      await _orderDetailsUsecase.updateState(id, state);
-
-      // Fetch the latest order details after updating the state
-      getOrderDetails();
-    } catch (e) {
+    } catch (e, stackTrace) {
+      debugPrint("Error updating state: $e");
+      debugPrint(stackTrace.toString());
       emit(OrderDetailsError(e.toString()));
     }
   }

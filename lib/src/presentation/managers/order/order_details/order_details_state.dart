@@ -25,8 +25,7 @@ class OrderDetailsError extends OrderDetailsState {
 }
 
 class StateUpdated extends OrderDetailsState {
-  final String message;
   final PendingOrderEntity order;
 
-  const StateUpdated(this.message, this.order);
+  const StateUpdated(this.order);
 }

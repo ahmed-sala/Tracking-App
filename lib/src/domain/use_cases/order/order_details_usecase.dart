@@ -11,14 +11,10 @@ class OrderDetailsUsecase {
 
   Future<PendingOrderEntity> getOrderDetails() async {
     var orderDetails = await _orderRepository.getPendingOrderById();
-    print('repo object ${orderDetails.userOrderEntity?.lastName}');
-    print('repo object ${orderDetails.userOrderEntity?.firstName}');
-    print('repo object ${orderDetails.userOrderEntity?.photo}');
-    print('repo object ${orderDetails.userOrderEntity?.phone}');
     return orderDetails;
   }
 
-  Future<void> updateState(String id, String state) async {
-    await _orderRepository.updateState(id, state);
+  Future<void> updateState(String? id, String state) async {
+    await _orderRepository.updateState(id!, state);
   }
 }

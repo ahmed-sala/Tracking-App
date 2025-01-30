@@ -34,9 +34,6 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
           title: const Text('Order Details'),
         ),
         body: BlocBuilder<OrderDetailsViewmodel, OrderDetailsState>(
-          buildWhen: (previous, current) {
-            return current is StateUpdated || current is OrderDetailsLoaded;
-          },
           builder: (context, state) {
             if (state is OrderDetailsLoading) {
               return const Center(
@@ -66,7 +63,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                       children: [
                         const StatusRowWidget(),
                         verticalSpace(24),
-                        StatusInfoWidget(order: state.order),
+                        StatusInfoWidget(), // This will reflect the updated state
                         verticalSpace(16),
                         _buildSectionTitle('Pickup Address'),
                         verticalSpace(16),
@@ -134,25 +131,26 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
           },
         ),
         bottomSheet: _isBottomSheetVisible
-            ? Container(
-                width: double.infinity,
-                padding:
-                    const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.1),
-                      blurRadius: 10,
-                      spreadRadius: 2,
-                      offset: const Offset(2, 4),
-                    ),
-                  ],
-                ),
-                child: BlocBuilder<OrderDetailsViewmodel, OrderDetailsState>(
-                  builder: (context, state) {
-                    if (state is StateUpdated || state is OrderDetailsLoaded) {
-                      return ElevatedButton(
+            ? BlocBuilder<OrderDetailsViewmodel, OrderDetailsState>(
+                buildWhen: (previous, current) => true,
+                builder: (context, state) {
+                  if (state is OrderDetailsLoaded) {
+                    return Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 24, horizontal: 16),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.1),
+                            blurRadius: 10,
+                            spreadRadius: 2,
+                            offset: const Offset(2, 4),
+                          ),
+                        ],
+                      ),
+                      child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(vertical: 16),
                           shape: RoundedRectangleBorder(
@@ -160,34 +158,28 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                           ),
                         ),
                         onPressed: () {
-                          if (state is StateUpdated ||
-                              state is OrderDetailsLoaded) {
-                            var id = state is StateUpdated
-                                ? state.order.id
-                                : (state as OrderDetailsLoaded).order.id;
-
-                            // Call updateState which now updates UI instantly
-                            orderDetailsViewmodel.updateState(
-                                id!, stateList[orderDetailsViewmodel.counter]);
-                          }
+                          print('counter: ${orderDetailsViewmodel.counter}');
+                          orderDetailsViewmodel.updateState(state.order);
+                          orderDetailsViewmodel.getOrderDetails();
                         },
                         child: Text(
-                          state is StateUpdated
-                              ? state.message // Instantly updated state message
-                              : state is OrderDetailsLoaded
-                                  ? stateList[orderDetailsViewmodel.counter]
-                                  : '',
+                          buttonsList[orderDetailsViewmodel.counter],
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 18,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-                      );
-                    }
-                    return const SizedBox();
-                  },
-                ),
+                      ),
+                    );
+                  } else if (state is StateUpdated) {
+                    orderDetailsViewmodel.getOrderDetails();
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                  return const SizedBox();
+                },
               )
             : null,
       ),
