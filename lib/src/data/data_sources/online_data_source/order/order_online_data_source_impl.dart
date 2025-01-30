@@ -32,4 +32,29 @@ class OrderOnlineDataSourceImpl implements OrderOnlineDataSource {
     print('from fire object ${Orders.fromFire(data!).user?.phone}');
     return Orders.fromFire(data!);
   }
+
+  @override
+  Future<void> updateState(String orderId, String state) async {
+    try {
+      // Search for the document where the field 'id' matches orderId
+      var docData = await _firestoreServices.getDocumentByField(
+          'accepted_order', 'id', orderId);
+
+      if (docData == null) {
+        print('Error: No document found with id: $orderId');
+        return;
+      }
+
+      // Extract Firestore document ID from the query result
+      String firestoreDocId = docData[
+          'firestore_doc_id']; // Update this if Firestore doesn't store its own ID
+
+      // Update the document state
+      await _firestoreServices
+          .updateDocument('accepted_order', firestoreDocId, {'state': state});
+      print('Document updated successfully');
+    } catch (e) {
+      print('Error updating document: $e');
+    }
+  }
 }

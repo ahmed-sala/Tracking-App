@@ -17,4 +17,8 @@ class OrderDetailsUsecase {
     print('repo object ${orderDetails.userOrderEntity?.phone}');
     return orderDetails;
   }
+
+  Future<void> updateState(String id, String state) async {
+    await _orderRepository.updateState(id, state);
+  }
 }

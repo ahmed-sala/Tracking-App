@@ -5,29 +5,28 @@ import 'package:tracking_app/src/domain/use_cases/order/order_details_usecase.da
 import 'package:tracking_app/src/presentation/managers/order/order_details/order_details_state.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../../../core/utilities/functions/button_list.dart';
+
 @injectable
 class OrderDetailsViewmodel extends Cubit<OrderDetailsState> {
   OrderDetailsUsecase _orderDetailsUsecase;
   OrderDetailsViewmodel(this._orderDetailsUsecase)
       : super(OrderDetailsLoading());
+  int _counter = 0;
+  get counter => _counter;
+  late PendingOrderEntity _orderDetails;
+  bool _colorButton = false;
+  get colorButton => _colorButton;
 
   void getOrderDetails() async {
     try {
-      print('1');
-      PendingOrderEntity orderDetails =
-          await _orderDetailsUsecase.getOrderDetails();
-      print('length of order ${orderDetails.orderItems?.length}');
-      print('2');
-      if (orderDetails.storeOrderEntity == null ||
-          orderDetails.userOrderEntity == null) {
-        print('3');
+      _orderDetails = await _orderDetailsUsecase.getOrderDetails();
+      if (_orderDetails.storeOrderEntity == null ||
+          _orderDetails.userOrderEntity == null) {
         throw Exception("Order details are incomplete");
       }
-      print('4');
-      emit(OrderDetailsLoaded(orderDetails));
-      print('5');
+      emit(OrderDetailsLoaded(_orderDetails));
     } catch (e) {
-      print('Error fetching order details: $e');
       emit(OrderDetailsError(e.toString()));
     }
   }
@@ -43,6 +42,26 @@ class OrderDetailsViewmodel extends Cubit<OrderDetailsState> {
     final Uri url = Uri.parse('https://wa.me/$phoneNumber');
     if (!await launchUrl(url, mode: LaunchMode.inAppWebView)) {
       throw 'Could not launch $url';
+    }
+  }
+
+  void updateState(String id, String state) async {
+    try {
+      _counter++;
+      _counter = 0;
+      if (_counter >= buttonsList.length) {
+        _colorButton = true;
+      }
+
+      // Emit state update before calling API to update UI immediately
+      emit(StateUpdated(buttonsList[_counter], _orderDetails));
+
+      await _orderDetailsUsecase.updateState(id, state);
+
+      // Fetch the latest order details after updating the state
+      getOrderDetails();
+    } catch (e) {
+      emit(OrderDetailsError(e.toString()));
     }
   }
 }

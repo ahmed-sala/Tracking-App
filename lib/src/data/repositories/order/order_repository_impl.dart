@@ -53,4 +53,14 @@ class OrderRepositoryImpl implements OrderRepository {
       throw Exception("Failed to fetch pending order: $e");
     }
   }
+
+  @override
+  Future<void> updateState(String id, String state) async {
+    String id = await _orderOfflineDatasource.getOrderId();
+    try {
+      await _orderOnlineDataSource.updateState('123', state);
+    } catch (e) {
+      throw Exception("Failed to update order state: $e");
+    }
+  }
 }
