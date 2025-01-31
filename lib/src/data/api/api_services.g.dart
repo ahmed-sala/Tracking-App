@@ -336,32 +336,19 @@ class _ApiServices implements ApiServices {
   }
 
   @override
-  Future<UploadPhotoResponseModel> uploadPhoto(
-    String token,
-    File photo,
-  ) async {
+  Future<PendingOrdersResponseModel> getAllPendingOrders() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Authorization': token};
-    _headers.removeWhere((k, v) => v == null);
-    final _data = FormData();
-    _data.files.add(MapEntry(
-      'photo',
-      MultipartFile.fromFileSync(
-        photo.path,
-        filename: photo.path.split(Platform.pathSeparator).last,
-        contentType: MediaType.parse('image/jpg'),
-      ),
-    ));
-    final _options = _setStreamType<UploadPhotoResponseModel>(Options(
-      method: 'PUT',
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<PendingOrdersResponseModel>(Options(
+      method: 'GET',
       headers: _headers,
       extra: _extra,
-      contentType: 'multipart/form-data',
     )
         .compose(
           _dio.options,
-          'drivers/upload-photo',
+          'orders/pending-orders',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -371,9 +358,9 @@ class _ApiServices implements ApiServices {
           baseUrl,
         )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late UploadPhotoResponseModel _value;
+    late PendingOrdersResponseModel _value;
     try {
-      _value = UploadPhotoResponseModel.fromJson(_result.data!);
+      _value = PendingOrdersResponseModel.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

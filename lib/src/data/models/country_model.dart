@@ -1,8 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:tracking_app/src/domain/entities/country/country_entity.dart';
 
-part 'country_model.g.dart';
-
 @JsonSerializable()
 class CountryModel {
   @JsonKey(name: "isoCode")
@@ -22,7 +20,7 @@ class CountryModel {
   @JsonKey(name: "timezones")
   final List<Timezones>? timezones;
 
-  CountryModel ({
+  CountryModel({
     this.isoCode,
     this.name,
     this.phoneCode,
@@ -33,14 +31,34 @@ class CountryModel {
     this.timezones,
   });
 
-  factory CountryModel.fromJson(Map<String, dynamic> json) {
-    return _$CountryModelFromJson(json);
-  }
+  CountryModel.fromJson(Map<String, dynamic> json)
+      : this.isoCode = json['isoCode'],
+        this.name = json['name'],
+        this.phoneCode = json['phoneCode'],
+        this.flag = json['flag'],
+        this.currency = json['currency'],
+        this.latitude = json['latitude'],
+        this.longitude = json['longitude'],
+        this.timezones = json['timezones'] != null
+            ? (json['timezones'] as List)
+                .map((i) => Timezones.fromJson(i))
+                .toList()
+            : null;
 
   Map<String, dynamic> toJson() {
-    return _$CountryModelToJson(this);
+    return {
+      'isoCode': isoCode,
+      'name': name,
+      'phoneCode': phoneCode,
+      'flag': flag,
+      'currency': currency,
+      'latitude': latitude,
+      'longitude': longitude,
+      'timezones': timezones?.map((e) => e.toJson()).toList(),
+    };
   }
-  CountryEntity toDomain(){
+
+  CountryEntity toDomain() {
     return CountryEntity(
       isoCode: isoCode,
       name: name,
@@ -67,7 +85,7 @@ class Timezones {
   @JsonKey(name: "tzName")
   final String? tzName;
 
-  Timezones ({
+  Timezones({
     this.zoneName,
     this.gmtOffset,
     this.gmtOffsetName,
@@ -75,13 +93,23 @@ class Timezones {
     this.tzName,
   });
 
-  factory Timezones.fromJson(Map<String, dynamic> json) {
-    return _$TimezonesFromJson(json);
-  }
+  Timezones.fromJson(Map<String, dynamic> json)
+      : this.zoneName = json['zoneName'],
+        this.gmtOffset = json['gmtOffset'],
+        this.gmtOffsetName = json['gmtOffsetName'],
+        this.abbreviation = json['abbreviation'],
+        this.tzName = json['tzName'];
 
   Map<String, dynamic> toJson() {
-    return _$TimezonesToJson(this);
+    return {
+      'zoneName': zoneName,
+      'gmtOffset': gmtOffset,
+      'gmtOffsetName': gmtOffsetName,
+      'abbreviation': abbreviation,
+      'tzName': tzName,
+    };
   }
+
   TimezonesEntity toDomain() {
     return TimezonesEntity(
       zoneName: zoneName,
@@ -92,5 +120,3 @@ class Timezones {
     );
   }
 }
-
-

@@ -156,6 +156,12 @@
   "continueKey": "متابعة",
   "welcomeTo": "مرحبا بك في",
   "floweryRiderApp": "تطبيق Flowery Rider",
+  "userAddress": "عنوان المستخدم",
+  "pickupAddress": "عنوان الاستلام",
+  "flowerOrder": "طلب الورد",
+  "accept": "قبول",
+  "reject": "رفض",
+  "floweryRider": "سائق Flowery"
   "applyNow": "قدم الآن",
   "editeMyInfo": "تعديل معلوماتي",
   "change" : "تغيير",
