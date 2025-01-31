@@ -11,4 +11,5 @@ class PageRoutesName {
   static const String changePassword = 'ChangePassword';
   static const String applicationApprovedView = 'ApplicationApprovedView';
   static const String orderDetailsScreen = 'OrderDetailsScreen';
+  static const String editeMyInfo = "editeMyInfo";
 }
