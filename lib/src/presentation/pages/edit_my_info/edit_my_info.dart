@@ -4,6 +4,7 @@ import 'package:elegant_notification/elegant_notification.dart';
 import 'package:elegant_notification/resources/arrays.dart';
 import 'package:elegant_notification/resources/stacked_options.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_icon_snackbar/flutter_icon_snackbar.dart';
 import 'package:tracking_app/core/di/di.dart';
 import 'package:tracking_app/core/extensions/extensions.dart';
 import 'package:tracking_app/core/routes/page_route_name.dart';
@@ -60,20 +61,20 @@ class EditMyInfo extends StatelessWidget {
             navKey.currentState!.pushNamed(PageRoutesName.changePassword);
           }
           if(state is  UploadPhotoSuccessState){
-            ElegantNotification.success(
-              width: 320.w,
-              height: 200.h,
-              stackedOptions: StackedOptions(
-                key: 'topleft',
-                type: StackedType.same,
-                itemOffset: const Offset(0, 5),
-              ),
-              position: Alignment.topRight,
-              animation: AnimationType.fromTop,
-              title: Text(context.localization.success,style: AppTextStyles.font18Medium,),
-              description: Text(context.localization.uploadIdImage),
-              onDismiss: () {},
-            ).show(context);
+            IconSnackBar.show(
+              context,
+              label: context.localization.photoUploadSuccess,
+              snackBarType: SnackBarType.success,
+            );
+            viewModel.doAction(LoadDriverInfoAction());
+          }
+          if(state is UploadPhotoErrorState){
+            IconSnackBar.show(
+              context,
+              label: ErrorHandler.fromException(
+                  state.exception!, AppLocalizations.of(context)!).errorMassage,
+              snackBarType: SnackBarType.fail,
+            );
           }
         }),
       ),

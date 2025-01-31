@@ -79,7 +79,7 @@ class EditeMyInfoViewModel extends Cubit<EditeMyInfoStates>{
       case LoadDriverInfoAction():
         _LoadDriverInfo();
         break;
-      case ChangePasswordAction():
+      case NavToChangePasswordAction():
         emit(ChangePasswordState());
         break;
       case UploadPhotoAction():
