@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tracking_app/core/extensions/extensions.dart';
@@ -19,6 +20,7 @@ class EditeMyProfileBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final _viewModel = context.read<EditeMyInfoViewModel>();
     AppUserEntity appUser = _viewModel.appUserEntity;
+    File? profileImage = File("${appUser.photo}" ?? "");
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
       child: SizedBox(
@@ -31,25 +33,40 @@ class EditeMyProfileBody extends StatelessWidget {
                     .getImageFromSource(source: ImageSource.gallery);
                 File newImage = File(image?.path ?? "");
                 _viewModel.doAction(UploadPhotoAction(image: newImage));
+                profileImage = newImage;
               },
-              child: BlocBuilder(builder: (context, state) {
-                if (_viewModel.driverImage != null) {
-                  Image.file(_viewModel.driverImage,
-                      height: 100.h, width: 100.w, fit: BoxFit.cover);
-                }
-                return ClipRRect(
-                  borderRadius: BorderRadius.circular(100),
-                  child: Container(
-                    height: 100.h,
-                    width: 100.w,
-                    color: AppColors.kGray,
-                    child: const Icon(
-                      Icons.camera_alt,
-                      size: 40,
+              child: profileImage != null
+                  ? Stack(
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(100),
+                          child: Container(
+                            width: 100.w,
+                            height: 100.h,
+                            child: CachedNetworkImage(
+                              imageUrl: '${appUser.photo}',
+                            ),
+                          ),
+                        ),
+                        const Positioned(
+                          right: 0,
+                          bottom: 0,
+                          child: Icon(Icons.camera_alt),
+                        )
+                      ],
+                    )
+                  : ClipRRect(
+                      borderRadius: BorderRadius.circular(100),
+                      child: Container(
+                        height: 100.h,
+                        width: 100.w,
+                        color: AppColors.kGray,
+                        child: const Icon(
+                          Icons.camera_alt,
+                          size: 40,
+                        ),
+                      ),
                     ),
-                  ),
-                );
-              }),
             ),
             Form(
               key: _viewModel.formKey,

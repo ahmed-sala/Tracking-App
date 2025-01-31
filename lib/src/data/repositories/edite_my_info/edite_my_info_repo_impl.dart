@@ -17,9 +17,10 @@ class EditeMyInfoRepoImpl implements EditeMyInfoRepo{
   EditeMyInfoRepoImpl(this._editeMyInfoOnlineDataSource,this._offlineDataSource);
   @override
   Future<ApiResult<UploadPhotoEntity>> uploadPhoto({required File image})async {
-    String token = await _offlineDataSource.getToken()??"";
+    // String token = await _offlineDataSource.getToken()??"";
+    String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkcml2ZXIiOiI2NzZkMWRkZTlmMzg4NGIzNDA1YzMwZGMiLCJpYXQiOjE3MzgxNjk5OTB9.KV2wvniwAVbUg6VxBQmijnYpVrLRGDkdkLuJVi24hCQ";
     return await executeApi<UploadPhotoEntity>(apiCall: ()async{
-      var response = await _editeMyInfoOnlineDataSource.uploadPhoto(token: token, image: image);
+      var response = await _editeMyInfoOnlineDataSource.uploadPhoto(token: "Bearer $token", image: image);
       return response.toDomain();
     });
   }

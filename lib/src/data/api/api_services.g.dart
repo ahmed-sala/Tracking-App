@@ -338,24 +338,21 @@ class _ApiServices implements ApiServices {
   @override
   Future<UploadPhotoResponseModel> uploadPhoto(
     String token,
-    File? photo,
+    File photo,
   ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
     final _data = FormData();
-    if (photo != null) {
-      _data.files.add(MapEntry(
-        'photo',
-        MultipartFile.fromFileSync(
-          photo.path,
-          filename: photo.path.split(Platform.pathSeparator).last,
-          contentType: MediaType.parse('jpg'),
-        ),
-      ));
-    }
+    _data.files.add(MapEntry(
+      'photo',
+      MultipartFile.fromFileSync(
+        photo.path,
+        filename: photo.path.split(Platform.pathSeparator).last,
+        contentType: MediaType.parse('jpg'),
+      ),
+    ));
     final _options = _setStreamType<UploadPhotoResponseModel>(Options(
       method: 'PUT',
       headers: _headers,
