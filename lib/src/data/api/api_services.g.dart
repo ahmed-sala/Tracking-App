@@ -350,7 +350,7 @@ class _ApiServices implements ApiServices {
       MultipartFile.fromFileSync(
         photo.path,
         filename: photo.path.split(Platform.pathSeparator).last,
-        contentType: MediaType.parse('jpg'),
+        contentType: MediaType.parse('image/jpg'),
       ),
     ));
     final _options = _setStreamType<UploadPhotoResponseModel>(Options(

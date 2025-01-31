@@ -74,5 +74,5 @@ abstract interface class ApiServices {
   @MultiPart()
   Future<UploadPhotoResponseModel> uploadPhoto(
       @Header(ApiKey.authorization) String token,
-      @Part(name: "photo",contentType: "jpg") File photo);
+      @Part(name: "photo",contentType: "image/jpg") File photo);
 }
