@@ -19,11 +19,11 @@ class OrderRepositoryImpl implements OrderRepository {
     return await executeApi<List<PendingOrderEntity>>(
       apiCall: () async {
         PendingOrdersResponseModel pendingOrders =
-            await _orderOnlineDataSource.getAllPendingOrders();
+        await _orderOnlineDataSource.getAllPendingOrders();
         List<PendingOrderEntity> pendingOrder = pendingOrders.orders!
             .map(
               (e) => e.toDomain(),
-            )
+        )
             .toList();
         return pendingOrder;
       },
@@ -32,11 +32,11 @@ class OrderRepositoryImpl implements OrderRepository {
 
   @override
   Future<ApiResult<bool>> storeOrder(
-    PendingOrderEntity pendingOrderEntity,
-  ) async {
+      PendingOrderEntity pendingOrderEntity,
+      ) async {
     try {
       final model = pendingOrderEntity.toModel();
-      model.state = "Pending";
+      model.state = "Accepted";
       await _orderOnlineDataSource.storeOrder(model);
       return Success(data: true);
     } catch (e) {
@@ -68,7 +68,7 @@ class OrderRepositoryImpl implements OrderRepository {
     return executeApi<bool>(
       apiCall: () async {
         var response =
-            await _orderOnlineDataSource.startOrder(orderId: orderId);
+        await _orderOnlineDataSource.startOrder(orderId: orderId);
         await _orderOnlineDataSource.updateState(orderId, "Accepted");
         await _orderOfflineDatasource.setOrderId(orderId: orderId);
         return true;

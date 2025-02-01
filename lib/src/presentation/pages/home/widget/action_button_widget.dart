@@ -19,7 +19,9 @@ class ActionButtonWidget extends StatelessWidget {
         onPressed:onPressed,
         style: ElevatedButton.styleFrom(
             backgroundColor: backGroundColor,
-            padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 24.w)),
+            padding: EdgeInsets.symmetric(
+                vertical: 10.h,
+                horizontal: 24.w)),
         child: Text(
           title,
           style: TextStyle(
