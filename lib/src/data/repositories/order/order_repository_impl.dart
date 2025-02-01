@@ -1,5 +1,6 @@
 import 'package:injectable/injectable.dart';
 import 'package:tracking_app/src/data/data_sources/offline_data_source/order/order_offline_datasource.dart';
+
 import '../../../../core/common/apis/api_executer.dart';
 import '../../../../core/common/apis/api_result.dart';
 import '../../../domain/entities/order/pending_order_entity.dart';
@@ -35,6 +36,7 @@ class OrderRepositoryImpl implements OrderRepository {
   ) async {
     try {
       final model = pendingOrderEntity.toModel();
+      model.state = "Pending";
       await _orderOnlineDataSource.storeOrder(model);
       return Success(data: true);
     } catch (e) {
@@ -67,7 +69,8 @@ class OrderRepositoryImpl implements OrderRepository {
       apiCall: () async {
         var response =
             await _orderOnlineDataSource.startOrder(orderId: orderId);
-        await _orderOfflineDatasource.setOrderId(orderId:  response.orders?.orderNumber);
+        await _orderOnlineDataSource.updateState(orderId, "Accepted");
+        await _orderOfflineDatasource.setOrderId(orderId: orderId);
         return true;
       },
     );

@@ -16,7 +16,7 @@ class OrderDetailsViewmodel extends Cubit<OrderDetailsState> {
   ) : super(OrderDetailsInitial());
 
   int counter = 0;
-  late String btnTxt;
+  String btnTxt = "Start Order";
   PendingOrderEntity orderDetails = PendingOrderEntity();
   void getOrderDetails() async {
     emit(GetOrderDetailsLoading());
@@ -28,7 +28,7 @@ class OrderDetailsViewmodel extends Cubit<OrderDetailsState> {
           int currentState = stateList.indexOf(orderDetails.state.toString());
 
           if (currentState == -1) {
-            throw Exception("Unexpected order state: ${orderDetails.state}");
+            currentState = 0;
           }
 
           btnTxt = buttonsList[currentState];

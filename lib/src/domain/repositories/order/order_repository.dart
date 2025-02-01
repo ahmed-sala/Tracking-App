@@ -5,8 +5,6 @@ abstract class OrderRepository {
   Future<ApiResult<List<PendingOrderEntity>>> getAllPendingOrders();
   Future<ApiResult<bool>> storeOrder(PendingOrderEntity pendingOrderEntity);
   Future<ApiResult<bool>> startOrder({required String orderId});
-  Future<PendingOrderEntity> getPendingOrderById();
-  Future<void> storeOrder(PendingOrderEntity pendingOrderEntity);
   Future<ApiResult<PendingOrderEntity>> getPendingOrderById();
   Future<ApiResult<void>> updateState(String id, String state);
 }

@@ -1,11 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tracking_app/core/extensions/extensions.dart';
 import 'package:tracking_app/core/routes/page_route_name.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:tracking_app/src/data/api/core/errors/error_handler.dart';
 
 import '../../../../../core/common/common_imports.dart';
-import '../../../../../core/di/di.dart';
 import '../../../../../core/utilities/dialogs/toast_dialoge.dart';
 import '../../../../../core/utilities/style/app_colors.dart';
 import '../../../../domain/entities/order/pending_order_entity.dart';
@@ -56,13 +54,13 @@ class _AcceptOrderIconState extends State<AcceptOrderButtonWidget> {
     } else if (state is StoreOrderErrorState) {
       ToastDialog.show(
           ErrorHandler.fromException(state.exception, context.localizations)
-              .errorMassage);
+              .errorMessage);
     } else if (state is StartOrderSuccessState) {
       return _goNextOrderDetails();
     } else if (state is StartOrderErrorState) {
       ToastDialog.show(
           ErrorHandler.fromException(state.exception, context.localizations)
-              .errorMassage);
+              .errorMessage);
     }
   }
 

@@ -25,7 +25,6 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
   }
 
-  @override
   var pendingViewModel = getIt.get<PendingOrderCubit>();
   var startViewModel = getIt.get<StartOrderCubit>();
 
@@ -88,7 +87,7 @@ Widget _buildErrorState(Exception exceptions, BuildContext context) {
         context.read<PendingOrderCubit>().doAction(GetAllPendingOrderEvent()),
     child: Text(
       ErrorHandler.fromException(exceptions, context.localizations)
-          .errorMassage,
+          .errorMessage,
       style: AppFonts.font20KMainWeight400Font,
       textAlign: TextAlign.center,
     ),
