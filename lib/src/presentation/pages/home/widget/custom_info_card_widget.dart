@@ -27,18 +27,19 @@ class CustomInfoCard extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: backgroundColor,
-        boxShadow: const [
+        boxShadow:  [
           BoxShadow(
-            color: Color(0x53535340),
+            color: Color(0x53535340).withOpacity(0.2),
             spreadRadius: 0,
             blurRadius: 4,
-            offset: Offset(0, 0),
+            offset: const Offset(0, 0),
           ),
         ],
         borderRadius: BorderRadius.circular(10.r),
       ),
       child: ListTile(
-        contentPadding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
+        contentPadding: EdgeInsets.symmetric(horizontal: 8.w,
+            vertical: 8.h),
        leading: Container(
          clipBehavior: Clip.antiAlias,
          decoration: BoxDecoration(
