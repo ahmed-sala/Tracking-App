@@ -1,4 +1,4 @@
-import '../../../../../core/common/common_imports.dart';
+import '../../../../../../core/common/common_imports.dart';
 
 class TextTypePriceWidget extends StatelessWidget {
   const TextTypePriceWidget(

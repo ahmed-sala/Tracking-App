@@ -164,7 +164,17 @@
   "flowerOrder": "Flower Order",
   "accept": "Accept",
   "reject": "Reject",
-  "floweryRider": "Flowery rider"
-
-
+  "floweryRider": "Flowery rider",
+  "orderDetails": "Order Details",
+  "noOrderDetailsAvailable": "No order details available",
+  "storeAddress": "Store Address",
+  "totalPrice": "Total Price",
+  "paymentType": "Payment Type",
+  "status": "Status",
+  "orderID": "Order ID",
+  "permissionDenied": "You do not have permission to access this resource.",
+  "serviceUnavailable": "The service is temporarily unavailable. Please try again later.",
+  "alreadyExists": "The resource already exists.",
+  "requestTimeout": "The request timed out. Please try again.",
+  "requestCancelled": "The request was cancelled."
 }

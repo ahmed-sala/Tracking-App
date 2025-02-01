@@ -29,10 +29,10 @@ class UpdateStateLoaded extends OrderDetailsState {
 }
 
 class UpdateStateError extends OrderDetailsState {
-  final String message;
+  final Exception exception;
 
   const UpdateStateError(
-    this.message,
+    this.exception,
   );
 }
 

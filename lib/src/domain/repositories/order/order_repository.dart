@@ -4,6 +4,6 @@ import '../../entities/order/pending_order_entity.dart';
 abstract class OrderRepository {
   Future<ApiResult<List<PendingOrderEntity>>> getAllPendingOrders();
   Future<void> storeOrder(PendingOrderEntity pendingOrderEntity);
-  Future<PendingOrderEntity> getPendingOrderById();
-  Future<void> updateState(String id, String state);
+  Future<ApiResult<PendingOrderEntity>> getPendingOrderById();
+  Future<ApiResult<void>> updateState(String id, String state);
 }

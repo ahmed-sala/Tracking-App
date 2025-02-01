@@ -43,24 +43,21 @@ class OrderRepositoryImpl implements OrderRepository {
   }
 
   @override
-  Future<PendingOrderEntity> getPendingOrderById() async {
-    try {
+  Future<ApiResult<PendingOrderEntity>> getPendingOrderById() async {
+    return await executeApi<PendingOrderEntity>(apiCall: () async {
       String id = await _orderOfflineDatasource.getOrderId();
-      Orders pendingOrdersResponseModel =
-          await _orderOnlineDataSource.getPendingOrderById('123');
-      return pendingOrdersResponseModel.toDomain();
-    } catch (e) {
-      throw Exception("Failed to fetch pending order: $e");
-    }
+      var order = await _orderOnlineDataSource.getPendingOrderById(id);
+      return order.toDomain();
+    });
   }
 
   @override
-  Future<void> updateState(String id, String state) async {
-    String id = await _orderOfflineDatasource.getOrderId();
-    try {
-      await _orderOnlineDataSource.updateState('123', state);
-    } catch (e) {
-      throw Exception("Failed to update order state: $e");
-    }
+  Future<ApiResult<void>> updateState(String id, String state) async {
+    return await executeApi<void>(
+      apiCall: () async {
+        String id = await _orderOfflineDatasource.getOrderId();
+        await _orderOnlineDataSource.updateState(id, state);
+      },
+    );
   }
 }

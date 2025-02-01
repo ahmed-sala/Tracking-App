@@ -1,5 +1,7 @@
-import '../../../../../core/common/common_imports.dart';
-import '../../../../../core/utilities/style/spacing.dart';
+import 'package:tracking_app/core/extensions/extensions.dart';
+
+import '../../../../../../core/common/common_imports.dart';
+import '../../../../../../core/utilities/style/spacing.dart';
 
 class StatusInfoWidget extends StatelessWidget {
   const StatusInfoWidget({
@@ -24,7 +26,7 @@ class StatusInfoWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Status : $status",
+            "${context.localization.status} : $status",
             style: TextStyle(
               color: Colors.green,
               fontSize: 16.sp,
@@ -33,7 +35,7 @@ class StatusInfoWidget extends StatelessWidget {
           ),
           verticalSpace(8),
           Text(
-            "Order ID : # $orderId",
+            "${context.localization.orderID} : # $orderId",
             style: TextStyle(
               color: Colors.black,
               fontSize: 16.sp,

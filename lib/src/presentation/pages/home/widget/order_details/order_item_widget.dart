@@ -1,5 +1,5 @@
-import '../../../../../core/common/common_imports.dart';
-import '../../../../../core/utilities/style/spacing.dart';
+import '../../../../../../core/common/common_imports.dart';
+import '../../../../../../core/utilities/style/spacing.dart';
 
 class OrderItemWidget extends StatelessWidget {
   const OrderItemWidget({

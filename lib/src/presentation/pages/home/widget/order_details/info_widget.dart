@@ -1,20 +1,20 @@
 import 'package:flutter_svg/svg.dart';
 
-import '../../../../../core/common/common_imports.dart';
-import '../../../../../core/utilities/style/app_icons.dart';
-import '../../../../../core/utilities/style/spacing.dart';
+import '../../../../../../core/common/common_imports.dart';
+import '../../../../../../core/utilities/style/app_icons.dart';
+import '../../../../../../core/utilities/style/spacing.dart';
 
-class StoreInfoWidget extends StatelessWidget {
-  const StoreInfoWidget(
+class InfoWidget extends StatelessWidget {
+  const InfoWidget(
       {super.key,
-      required this.storeImage,
-      required this.storeName,
-      required this.storeAddress,
+      required this.image,
+      required this.name,
+      required this.address,
       required this.onCall,
       required this.onWhatsApp});
-  final String? storeName;
-  final String storeAddress;
-  final String? storeImage;
+  final String? name;
+  final String address;
+  final String? image;
   final void Function()? onCall;
   final void Function()? onWhatsApp;
 
@@ -40,7 +40,7 @@ class StoreInfoWidget extends StatelessWidget {
           CircleAvatar(
             radius: 22,
             backgroundColor: Colors.purple[100],
-            backgroundImage: NetworkImage(storeImage!),
+            backgroundImage: NetworkImage(image!),
           ),
           horizontalSpace(8),
           Expanded(
@@ -49,7 +49,7 @@ class StoreInfoWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  storeName!,
+                  name!,
                   style: TextStyle(
                     fontSize: 14.sp,
                     fontWeight: FontWeight.w400,
@@ -81,7 +81,7 @@ class StoreInfoWidget extends StatelessWidget {
                     horizontalSpace(4),
                     Flexible(
                       child: Text(
-                        storeAddress,
+                        address,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
                         style: TextStyle(
