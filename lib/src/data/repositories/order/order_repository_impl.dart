@@ -69,7 +69,6 @@ class OrderRepositoryImpl implements OrderRepository {
       apiCall: () async {
         var response =
             await _orderOnlineDataSource.startOrder(orderId: orderId);
-        await _orderOnlineDataSource.updateState(orderId, "Accepted");
         await _orderOfflineDatasource.setOrderId(orderId: orderId);
         return true;
       },
