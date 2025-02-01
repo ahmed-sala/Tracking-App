@@ -42,7 +42,7 @@ class EditeMyInfoControllerManager {
         _firstNameController.text = value;
         break;
       case EditeMyInfoFormFields.lastName:
-        _firstNameController.text = value;
+        _lastNameController.text = value;
         break;
       case EditeMyInfoFormFields.email:
         _emailController.text = value;

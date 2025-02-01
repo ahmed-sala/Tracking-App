@@ -84,8 +84,17 @@ class EditMyInfo extends StatelessWidget {
           if (state is UpdateUserInfoSuccessState) {
             IconSnackBar.show(
               context,
-              label: context.localization.profileUpdated,
+              label: context.localization.updatedUserInfoSuccess,
               snackBarType: SnackBarType.success,
+            );
+          }
+          if(state is UpdatedUserInfoFailedState){
+            IconSnackBar.show(
+              context,
+              label: ErrorHandler.fromException(
+                      state.exception!, AppLocalizations.of(context)!)
+                  .errorMassage,
+              snackBarType: SnackBarType.fail,
             );
           }
         }),

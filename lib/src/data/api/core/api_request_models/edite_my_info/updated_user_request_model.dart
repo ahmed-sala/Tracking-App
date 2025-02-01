@@ -39,6 +39,8 @@ class UpdatedUserRequestModel {
         firstName: entity.firstName,
         lastName: entity.lastName,
         email: entity.email,
-        phone: entity.phone);
+        phone: entity.phone,
+        gender: entity.gender
+    );
   }
 }
