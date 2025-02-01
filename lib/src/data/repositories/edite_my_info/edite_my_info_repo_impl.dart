@@ -22,7 +22,8 @@ class EditeMyInfoRepoImpl implements EditeMyInfoRepo {
   @override
   Future<ApiResult<UploadPhotoEntity>> uploadPhoto(
       {required File image}) async {
-    String token = await _getToken();
+    String token ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkcml2ZXIiOiI2NzZkMWRkZTlmMzg4NGIzNDA1YzMwZGMiLCJpYXQiOjE3Mzg0MzA3NzN9.C8MdrTZ4pcaDpI85fCjUHJFbRKu_vKaUZa2ijL4gHc0";
+    // String token = await _getToken();
     return await executeApi<UploadPhotoEntity>(apiCall: () async {
       var response = await _editeMyInfoOnlineDataSource.uploadPhoto(
           token: "Bearer $token", image: image);

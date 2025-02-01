@@ -31,7 +31,7 @@ class EditMyInfoScreenForm extends StatelessWidget {
                     labelText: context.localization.firstName,
                   ),
                   validator: (value) {
-                    _viewModel.getValidator(EditeMyInfoFormFields.firstName);
+                    return _viewModel.getValidator(EditeMyInfoFormFields.firstName);
                   },
                 ),
               ),
@@ -44,7 +44,7 @@ class EditMyInfoScreenForm extends StatelessWidget {
                     labelText: context.localization.lastName,
                   ),
                   validator: (value) {
-                    _viewModel.getValidator(EditeMyInfoFormFields.lastName);
+                   return _viewModel.getValidator(EditeMyInfoFormFields.lastName);
                   },
                 ),
               ),
@@ -61,7 +61,7 @@ class EditMyInfoScreenForm extends StatelessWidget {
           verticalSpace(24),
           TextFormField(
             validator: (value) {
-              _viewModel.getValidator(EditeMyInfoFormFields.phone);
+             return _viewModel.getValidator(EditeMyInfoFormFields.phone);
             },
             controller: _viewModel.getController(EditeMyInfoFormFields.phone),
             decoration:

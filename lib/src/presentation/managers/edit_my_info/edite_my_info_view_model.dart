@@ -94,7 +94,6 @@ class EditeMyInfoViewModel extends Cubit<EditeMyInfoStates> {
       lastName: getController(EditeMyInfoFormFields.lastName).text,
       email: getController(EditeMyInfoFormFields.email).text,
       phone: getController(EditeMyInfoFormFields.phone).text,
-      gender: selectedGender.toString().split(".").last,
     );
   }
 

@@ -1,4 +1,6 @@
 
+import 'dart:developer';
+
 import 'package:injectable/injectable.dart';
 import 'package:tracking_app/core/helpers/app_Regex.dart';
 import 'package:tracking_app/src/presentation/managers/edit_my_info/edite_my_info_view_model.dart';
@@ -23,6 +25,7 @@ class EditeMyInfoValidatorManager{
   }
 
   String? _validatePhone(String phone){
+    log("Current phone $phone");
     if(phone.isEmpty || phone == null || !AppRegex.isPhoneNumberValid(phone)){
       return "Invalid phone number";
     }

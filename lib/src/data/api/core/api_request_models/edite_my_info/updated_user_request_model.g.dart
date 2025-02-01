@@ -13,7 +13,6 @@ UpdatedUserRequestModel _$UpdatedUserRequestModelFromJson(
       lastName: json['lastName'] as String?,
       phone: json['phone'] as String?,
       email: json['email'] as String?,
-      gender: json['gender'] as String?,
     );
 
 Map<String, dynamic> _$UpdatedUserRequestModelToJson(
@@ -23,5 +22,4 @@ Map<String, dynamic> _$UpdatedUserRequestModelToJson(
       'lastName': instance.lastName,
       'phone': instance.phone,
       'email': instance.email,
-      'gender': instance.gender,
     };

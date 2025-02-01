@@ -14,15 +14,12 @@ class UpdatedUserRequestModel {
   final String? phone;
   @JsonKey(name: "email")
   final String? email;
-  @JsonKey(name: "gender")
-  final String? gender;
 
   UpdatedUserRequestModel({
     this.firstName,
     this.lastName,
     this.phone,
     this.email,
-    this.gender,
   });
 
   factory UpdatedUserRequestModel.fromJson(Map<String, dynamic> json) {
@@ -40,7 +37,6 @@ class UpdatedUserRequestModel {
         lastName: entity.lastName,
         email: entity.email,
         phone: entity.phone,
-        gender: entity.gender
     );
   }
 }

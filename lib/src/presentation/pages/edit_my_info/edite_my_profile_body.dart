@@ -27,9 +27,6 @@ class _EditeMyProfileBodyState extends State<EditeMyProfileBody> {
     final _viewModel = context.watch<
         EditeMyInfoViewModel>(); // Use `watch` to rebuild on changes
     AppUserEntity appUser = _viewModel.appUserEntity;
-    Widget profileImage = appUser.photo != null
-        ? _networkImage(appUser.photo)
-        : _defaultImage();
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
       child: SizedBox(
@@ -49,7 +46,7 @@ class _EditeMyProfileBodyState extends State<EditeMyProfileBody> {
               child: appUser.photo != null
                   ? Stack(
                 children: [
-                  profileImage,
+                  _networkImage(appUser.photo),
                   const Positioned(
                     right: 0,
                     bottom: 0,
@@ -62,17 +59,6 @@ class _EditeMyProfileBodyState extends State<EditeMyProfileBody> {
             const EditMyInfoScreenForm(),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _fileImage(File newProfileImage) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(100),
-      child: SizedBox(
-        width: 100.w,
-        height: 100.h,
-        child: Image.file(newProfileImage),
       ),
     );
   }
