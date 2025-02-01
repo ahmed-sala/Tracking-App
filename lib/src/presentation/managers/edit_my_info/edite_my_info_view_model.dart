@@ -1,4 +1,3 @@
-
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
@@ -6,64 +5,76 @@ import 'package:flutter/cupertino.dart';
 import 'package:injectable/injectable.dart';
 import 'package:tracking_app/core/common/apis/api_result.dart';
 import 'package:tracking_app/src/domain/entities/app_user_entity.dart';
+import 'package:tracking_app/src/domain/entities/edite_my_info/updated_user_info_request_entity.dart';
 import 'package:tracking_app/src/domain/entities/edite_my_info/upload_photo_entity.dart';
 import 'package:tracking_app/src/domain/use_cases/upload_photo_use_case.dart';
+import 'package:tracking_app/src/presentation/managers/Auth/apply/validator_manager.dart';
 import 'package:tracking_app/src/presentation/managers/edit_my_info/edit_my_info_actions.dart';
 import 'package:tracking_app/src/presentation/managers/edit_my_info/edite_my_info_states.dart';
+import 'package:tracking_app/src/presentation/managers/edit_my_info/validator_manager.dart';
 
 import '../../../domain/use_cases/edite_my_profile/update_profile_use_case.dart';
 import '../../../domain/use_cases/get_profile_data_use_case.dart';
 import 'edite_my_info_controller_manager.dart';
 
-
 @injectable
-class EditeMyInfoViewModel extends Cubit<EditeMyInfoStates>{
-
+class EditeMyInfoViewModel extends Cubit<EditeMyInfoStates> {
   final EditeMyInfoControllerManager _controllerManager;
   final GetProfileDataUseCase _getProfileDataUseCase;
   final UploadPhotoUseCase _uploadPhotoUseCase;
   final UpdateProfileUseCase _updateProfileUseCase;
-  EditeMyInfoViewModel(this._controllerManager,this._getProfileDataUseCase,this._uploadPhotoUseCase,this._updateProfileUseCase) : super(EditeMyInfoScreenInitialState());
+  final EditeMyInfoValidatorManager _validatorManager;
+
+  EditeMyInfoViewModel(this._controllerManager, this._getProfileDataUseCase,
+      this._uploadPhotoUseCase, this._updateProfileUseCase,this._validatorManager)
+      : super(EditeMyInfoScreenInitialState());
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   Gender selectedGender = Gender.male;
   AppUserEntity _appUserEntity = AppUserEntity();
+
   AppUserEntity get appUserEntity => _appUserEntity;
   String? driverImage;
-  TextEditingController getController(EditeMyInfoFormFields form){
+
+  TextEditingController getController(EditeMyInfoFormFields form) {
     return _controllerManager.getController(form);
   }
 
-  void setController(EditeMyInfoFormFields form, String value){
+  String? getValidator(EditeMyInfoFormFields field) {
+    return _validatorManager.validFields(field, getController(field).text);
+  }
+
+  void setController(EditeMyInfoFormFields form, String value) {
     _controllerManager.setController(form, value);
   }
 
-  _setUserData(){
-    setController(EditeMyInfoFormFields.firstName, _appUserEntity.firstName??"");
-    setController(EditeMyInfoFormFields.lastName, _appUserEntity.lastName??"" );
-    setController(EditeMyInfoFormFields.email, _appUserEntity.email??"");
-    setController(EditeMyInfoFormFields.phone, _appUserEntity.phone??"");
-    selectedGender =_appUserEntity.gender!.length == 4? Gender.male : Gender.female;
+  _setUserData() {
+    setController(
+        EditeMyInfoFormFields.firstName, _appUserEntity.firstName ?? "");
+    setController(
+        EditeMyInfoFormFields.lastName, _appUserEntity.lastName ?? "");
+    setController(EditeMyInfoFormFields.email, _appUserEntity.email ?? "");
+    setController(EditeMyInfoFormFields.phone, _appUserEntity.phone ?? "");
+    selectedGender =
+        _appUserEntity.gender!.length == 4 ? Gender.male : Gender.female;
     driverImage = _appUserEntity.photo;
   }
 
-  _LoadDriverInfo()async{
+  _LoadDriverInfo() async {
     emit(LoadingDriverInfoState());
     var result = await _getProfileDataUseCase.invoke();
     switch (result) {
       case Success<AppUserEntity>():
-         _appUserEntity = result.data??AppUserEntity();
-         _setUserData();
+        _appUserEntity = result.data ?? AppUserEntity();
+        _setUserData();
         emit(LoadedDriverInfoState());
         break;
       case Failures<AppUserEntity>():
         emit(ErrorDriverInfoState(exception: result.exception));
         break;
     }
-
   }
 
-
-  _uploadPhoto(File image) async{
+  _uploadPhoto(File image) async {
     emit(UploadPhotoLoadingState());
     var result = await _uploadPhotoUseCase.uploadPhoto(image: image);
     switch (result) {
@@ -76,7 +87,35 @@ class EditeMyInfoViewModel extends Cubit<EditeMyInfoStates>{
         break;
     }
   }
-  void doAction(EditeMyInfoActions action){
+
+  UpdatedUserInfoRequestEntity _getUpdatedUserInfoRequestEntity() {
+    return UpdatedUserInfoRequestEntity(
+      firstName: getController(EditeMyInfoFormFields.firstName).text,
+      lastName: getController(EditeMyInfoFormFields.lastName).text,
+      email: getController(EditeMyInfoFormFields.email).text,
+      phone: getController(EditeMyInfoFormFields.phone).text,
+      gender: selectedGender.toString().split(".").last,
+    );
+  }
+
+  _updateProfile() async {
+    if(!formKey.currentState!.validate())return;
+    emit(LoadingDriverInfoState());
+    UpdatedUserInfoRequestEntity entity = _getUpdatedUserInfoRequestEntity();
+    var result = await _updateProfileUseCase.updateUserInfo(entity);
+    switch (result) {
+      case Success<AppUserEntity>():
+        _appUserEntity = result.data ?? AppUserEntity();
+        _setUserData();
+        emit(LoadedDriverInfoState());
+        break;
+      case Failures<AppUserEntity>():
+        emit(ErrorDriverInfoState(exception: result.exception));
+        break;
+    }
+  }
+
+  void doAction(EditeMyInfoActions action) {
     switch (action) {
       case LoadDriverInfoAction():
         _LoadDriverInfo();
@@ -87,19 +126,13 @@ class EditeMyInfoViewModel extends Cubit<EditeMyInfoStates>{
       case UploadPhotoAction():
         _uploadPhoto(action.image);
         break;
+      case UpdateMyInfoAction():
+        _updateProfile();
+        break;
     }
   }
 }
 
-enum Gender{
-  male,
-  female
-}
+enum Gender { male, female }
 
-enum EditeMyInfoFormFields{
-  firstName,
-  lastName,
-  email,
-  phone,
-  password
-}
+enum EditeMyInfoFormFields { firstName, lastName, email, phone, password }

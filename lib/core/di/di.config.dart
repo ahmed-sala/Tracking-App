@@ -194,17 +194,18 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i762.ForgetPasswordScreenViewModel(gh<_i235.AuthUseCases>()));
     gh.factory<_i908.PendingOrderCubit>(
         () => _i908.PendingOrderCubit(gh<_i587.GetAllPendingOrderUseCase>()));
+    gh.factory<_i296.EditeMyInfoViewModel>(() => _i296.EditeMyInfoViewModel(
+          gh<_i408.EditeMyInfoControllerManager>(),
+          gh<_i986.GetProfileDataUseCase>(),
+          gh<_i573.UploadPhotoUseCase>(),
+          gh<_i360.UpdateProfileUseCase>(),
+        ));
     gh.factory<_i274.OrderDetailsViewmodel>(
         () => _i274.OrderDetailsViewmodel(gh<_i150.OrderDetailsUsecase>()));
     gh.factory<_i84.LoginCubit>(
         () => _i84.LoginCubit(gh<_i379.LoginUseCase>()));
     gh.factory<_i895.ChangePasswordViewModel>(
         () => _i895.ChangePasswordViewModel(gh<_i982.ChangePasswordUseCase>()));
-    gh.factory<_i296.EditeMyInfoViewModel>(() => _i296.EditeMyInfoViewModel(
-          gh<_i408.EditeMyInfoControllerManager>(),
-          gh<_i986.GetProfileDataUseCase>(),
-          gh<_i573.UploadPhotoUseCase>(),
-        ));
     gh.factory<_i675.ApplyScreenViewModel>(() => _i675.ApplyScreenViewModel(
           gh<_i684.VehiclesUseCases>(),
           gh<_i94.ControllerManager>(),

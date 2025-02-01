@@ -25,45 +25,52 @@ class EditMyInfoScreenForm extends StatelessWidget {
             children: [
               Expanded(
                 child: TextFormField(
-                  controller: _viewModel
-                      .getController(EditeMyInfoFormFields.firstName),
+                  controller:
+                      _viewModel.getController(EditeMyInfoFormFields.firstName),
                   decoration: InputDecoration(
                     labelText: context.localization.firstName,
                   ),
-                  validator: (value) {},
-                  onChanged: (value) {},
+                  validator: (value) {
+                    _viewModel.getValidator(EditeMyInfoFormFields.firstName);
+                  },
                 ),
               ),
               horizontalSpace(10),
               Expanded(
                 child: TextFormField(
-                  controller: _viewModel
-                      .getController(EditeMyInfoFormFields.lastName),
+                  controller:
+                      _viewModel.getController(EditeMyInfoFormFields.lastName),
                   decoration: InputDecoration(
                     labelText: context.localization.lastName,
                   ),
+                  validator: (value) {
+                    _viewModel.getValidator(EditeMyInfoFormFields.lastName);
+                  },
                 ),
               ),
             ],
           ),
           verticalSpace(24),
           TextFormField(
-            controller:
-            _viewModel.getController(EditeMyInfoFormFields.email),
+            controller: _viewModel.getController(EditeMyInfoFormFields.email),
+            decoration: InputDecoration(labelText: context.localization.email),
+            validator: (value) {
+              _viewModel.getValidator(EditeMyInfoFormFields.email);
+            },
+          ),
+          verticalSpace(24),
+          TextFormField(
+            validator: (value) {
+              _viewModel.getValidator(EditeMyInfoFormFields.phone);
+            },
+            controller: _viewModel.getController(EditeMyInfoFormFields.phone),
             decoration:
-            InputDecoration(labelText: context.localization.email),
+                InputDecoration(labelText: context.localization.phoneNumber),
           ),
           verticalSpace(24),
           TextFormField(
             controller:
-            _viewModel.getController(EditeMyInfoFormFields.phone),
-            decoration: InputDecoration(
-                labelText: context.localization.phoneNumber),
-          ),
-          verticalSpace(24),
-          TextFormField(
-            controller: _viewModel
-                .getController(EditeMyInfoFormFields.password),
+                _viewModel.getController(EditeMyInfoFormFields.password),
             readOnly: true,
             decoration: InputDecoration(
                 labelText: context.localization.password,
@@ -79,8 +86,8 @@ class EditMyInfoScreenForm extends StatelessWidget {
             children: [
               Text(
                 context.localization.gender,
-                style: AppTextStyles.font18Medium
-                    .copyWith(color: AppColors.kGray),
+                style:
+                    AppTextStyles.font18Medium.copyWith(color: AppColors.kGray),
               ),
               horizontalSpace(40),
               Radio<Gender>(
@@ -113,16 +120,19 @@ class EditMyInfoScreenForm extends StatelessWidget {
           SizedBox(
             width: context.width,
             child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    disabledBackgroundColor: AppColors.kGray),
-                onPressed: () => null,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 14),
-                  child: Text(
-                    context.localization.update,
-                    style: AppTextStyles.font16Medium,
-                  ),
-                )),
+              style: ElevatedButton.styleFrom(
+                  disabledBackgroundColor: AppColors.kGray),
+              onPressed: () {
+                _viewModel.doAction(UpdateMyInfoAction());
+              },
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 14),
+                child: Text(
+                  context.localization.update,
+                  style: AppTextStyles.font16Medium,
+                ),
+              ),
+            ),
           )
         ],
       ),

@@ -8,3 +8,5 @@ class UploadPhotoAction extends EditeMyInfoActions{
 
   UploadPhotoAction({required this.image});
 }
+
+class UpdateMyInfoAction extends EditeMyInfoActions{}
