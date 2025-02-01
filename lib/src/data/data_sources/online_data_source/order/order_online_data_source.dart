@@ -5,4 +5,5 @@ abstract interface class OrderOnlineDataSource {
   Future<void> storeOrder(Orders orders);
 
   Future<Orders> getPendingOrderById(String id);
+  Future<void> updateState(String id, String state);
 }

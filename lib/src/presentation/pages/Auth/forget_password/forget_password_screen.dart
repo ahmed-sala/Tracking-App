@@ -50,7 +50,7 @@ class ForgetPasswordScreen extends StatelessWidget {
           listener: (context, state) {
             if (state is LoadingState) {
               ScaffoldMessenger.of(context).showSnackBar(
-                 SnackBar(
+                SnackBar(
                   content: Text(AppLocalizations.of(context)!.loading),
                 ),
               );
@@ -68,11 +68,13 @@ class ForgetPasswordScreen extends StatelessWidget {
                 ),
               );
             }
-            if(state is FailureState){
+            if (state is FailureState) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text(
-                    ErrorHandler.fromException(state.exception!, AppLocalizations.of(context)!).errorMassage,
+                    ErrorHandler.fromException(
+                            state.exception!, AppLocalizations.of(context)!)
+                        .errorMessage,
                     style: AppTextStyles.font14Regular.copyWith(
                       color: AppColors.kWhiteBase,
                     ),
@@ -82,7 +84,7 @@ class ForgetPasswordScreen extends StatelessWidget {
               );
             }
             if (state is GoToLoginScreenState) {
-                navKey.currentState!.pushNamed(PageRoutesName.login);
+              navKey.currentState!.pushNamed(PageRoutesName.login);
             }
           },
         ),

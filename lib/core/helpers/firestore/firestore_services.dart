@@ -62,10 +62,17 @@ class FirestoreService {
       final querySnapshot = await _firestore
           .collection(collectionPath)
           .where(field, isEqualTo: value)
+          .limit(1) // Limit to first match
           .get();
-      return querySnapshot.docs.isNotEmpty
-          ? querySnapshot.docs.first.data()
-          : null;
+
+      if (querySnapshot.docs.isNotEmpty) {
+        var doc = querySnapshot.docs.first;
+        var data = doc.data();
+        data['firestore_doc_id'] =
+            doc.id; // Store Firestore document ID in the result
+        return data;
+      }
+      return null;
     } catch (e) {
       throw Exception('Error fetching document by field: $e');
     }
