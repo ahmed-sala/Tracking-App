@@ -107,7 +107,7 @@ class EditeMyInfoViewModel extends Cubit<EditeMyInfoStates> {
       case Success<AppUserEntity>():
         _appUserEntity = result.data ?? AppUserEntity();
         _setUserData();
-        emit(LoadedDriverInfoState());
+        emit(UpdateUserInfoSuccessState());
         break;
       case Failures<AppUserEntity>():
         emit(ErrorDriverInfoState(exception: result.exception));

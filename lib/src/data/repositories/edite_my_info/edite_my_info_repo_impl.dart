@@ -38,7 +38,8 @@ class EditeMyInfoRepoImpl implements EditeMyInfoRepo {
   Future<ApiResult<AppUserEntity>> updateUserInfo(
       {required UpdatedUserInfoRequestEntity
           updatedUserInfoRequestEntity}) async {
-    String token = await _getToken();
+    // String token = await _getToken();
+    String token ="Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkcml2ZXIiOiI2NzZkMWRkZTlmMzg4NGIzNDA1YzMwZGMiLCJpYXQiOjE3Mzg0MzA3NzN9.C8MdrTZ4pcaDpI85fCjUHJFbRKu_vKaUZa2ijL4gHc0";
     return await executeApi<AppUserEntity>(apiCall: () async {
       var response = await _editeMyInfoOnlineDataSource.updateUserInfo(
           token: token,

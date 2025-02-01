@@ -165,5 +165,6 @@
   "applyNow": "قدم الآن",
   "editeMyInfo": "تعديل معلوماتي",
   "change" : "تغيير",
-  "photoUploadSuccess": "تم تحميل الصورة بنجاح"
+  "photoUploadSuccess": "تم تحميل الصورة بنجاح",
+  "updatedUserInfoSuccess": "تم تحديث معلوماتك بنجاح"
 }

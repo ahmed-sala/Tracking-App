@@ -86,6 +86,8 @@ import '../../src/presentation/managers/edit_my_info/edite_my_info_controller_ma
     as _i408;
 import '../../src/presentation/managers/edit_my_info/edite_my_info_view_model.dart'
     as _i296;
+import '../../src/presentation/managers/edit_my_info/validator_manager.dart'
+    as _i409;
 import '../../src/presentation/managers/login/login_cubit.dart' as _i84;
 import '../../src/presentation/managers/on_boarding/on_boarding_view_model.dart'
     as _i850;
@@ -125,6 +127,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i408.EditeMyInfoControllerManager>(
         () => _i408.EditeMyInfoControllerManager());
     gh.factory<_i850.OnBoardingViewModel>(() => _i850.OnBoardingViewModel());
+    gh.factory<_i409.EditeMyInfoValidatorManager>(
+        () => _i409.EditeMyInfoValidatorManager());
     gh.lazySingleton<_i558.FlutterSecureStorage>(
         () => sharedPrefModule.secureStorage);
     gh.lazySingleton<_i361.Dio>(() => dioProvider.dioProvider());
@@ -194,12 +198,6 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i762.ForgetPasswordScreenViewModel(gh<_i235.AuthUseCases>()));
     gh.factory<_i908.PendingOrderCubit>(
         () => _i908.PendingOrderCubit(gh<_i587.GetAllPendingOrderUseCase>()));
-    gh.factory<_i296.EditeMyInfoViewModel>(() => _i296.EditeMyInfoViewModel(
-          gh<_i408.EditeMyInfoControllerManager>(),
-          gh<_i986.GetProfileDataUseCase>(),
-          gh<_i573.UploadPhotoUseCase>(),
-          gh<_i360.UpdateProfileUseCase>(),
-        ));
     gh.factory<_i274.OrderDetailsViewmodel>(
         () => _i274.OrderDetailsViewmodel(gh<_i150.OrderDetailsUsecase>()));
     gh.factory<_i84.LoginCubit>(
@@ -210,6 +208,13 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i684.VehiclesUseCases>(),
           gh<_i94.ControllerManager>(),
           gh<_i176.CountryUseCase>(),
+        ));
+    gh.factory<_i296.EditeMyInfoViewModel>(() => _i296.EditeMyInfoViewModel(
+          gh<_i408.EditeMyInfoControllerManager>(),
+          gh<_i986.GetProfileDataUseCase>(),
+          gh<_i573.UploadPhotoUseCase>(),
+          gh<_i360.UpdateProfileUseCase>(),
+          gh<_i409.EditeMyInfoValidatorManager>(),
         ));
     gh.factory<_i34.ProfileCubit>(
         () => _i34.ProfileCubit(gh<_i986.GetProfileDataUseCase>()));

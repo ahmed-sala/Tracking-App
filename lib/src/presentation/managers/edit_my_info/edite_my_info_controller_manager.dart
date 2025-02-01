@@ -26,7 +26,7 @@ class EditeMyInfoControllerManager {
       case EditeMyInfoFormFields.firstName:
         return _firstNameController;
       case EditeMyInfoFormFields.lastName:
-        return _firstNameController;
+        return _lastNameController;
       case EditeMyInfoFormFields.email:
         return _emailController;
       case EditeMyInfoFormFields.phone:

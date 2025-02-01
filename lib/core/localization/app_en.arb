@@ -166,5 +166,6 @@
   "floweryRider": "Flowery rider",
   "editeMyInfo": "Edit My Info",
   "change": "Change",
-  "photoUploadSuccess": "Photo uploaded successfully"
+  "photoUploadSuccess": "Photo uploaded successfully",
+  "updatedUserInfoSuccess": "Updated user info successfully"
 }

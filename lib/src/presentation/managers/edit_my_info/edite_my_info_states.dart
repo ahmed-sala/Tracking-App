@@ -25,3 +25,5 @@ class UploadPhotoErrorState extends EditeMyInfoStates{
   Exception? exception;
   UploadPhotoErrorState({this.exception});
 }
+
+class UpdateUserInfoSuccessState extends EditeMyInfoStates {}

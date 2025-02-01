@@ -53,14 +53,18 @@ class EditMyInfo extends StatelessWidget {
             String errorMessage = ErrorHandler.fromException(
                     state.exception!, AppLocalizations.of(context)!)
                 .errorMassage;
-            return ErrorView(errorMessage: errorMessage,viewModel: viewModel,);
+            return ErrorView(
+              errorMessage: errorMessage,
+              viewModel: viewModel,
+              action: LoadDriverInfoAction(),
+            );
           }
           return const EditeMyProfileBody();
         }, listener: (context, state) {
           if (state is ChangePasswordState) {
             navKey.currentState!.pushNamed(PageRoutesName.changePassword);
           }
-          if(state is  UploadPhotoSuccessState){
+          if (state is UploadPhotoSuccessState) {
             IconSnackBar.show(
               context,
               label: context.localization.photoUploadSuccess,
@@ -68,12 +72,20 @@ class EditMyInfo extends StatelessWidget {
             );
             viewModel.doAction(LoadDriverInfoAction());
           }
-          if(state is UploadPhotoErrorState){
+          if (state is UploadPhotoErrorState) {
             IconSnackBar.show(
               context,
               label: ErrorHandler.fromException(
-                  state.exception!, AppLocalizations.of(context)!).errorMassage,
+                      state.exception!, AppLocalizations.of(context)!)
+                  .errorMassage,
               snackBarType: SnackBarType.fail,
+            );
+          }
+          if (state is UpdateUserInfoSuccessState) {
+            IconSnackBar.show(
+              context,
+              label: context.localization.profileUpdated,
+              snackBarType: SnackBarType.success,
             );
           }
         }),
