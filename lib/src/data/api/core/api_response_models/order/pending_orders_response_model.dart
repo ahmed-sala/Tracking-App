@@ -72,7 +72,7 @@ class Orders {
   @JsonKey(name: "isDelivered")
   final bool? isDelivered;
   @JsonKey(name: "state")
-  final String? state;
+  String? state;
   @JsonKey(name: "createdAt")
   final String? createdAt;
   @JsonKey(name: "updatedAt")

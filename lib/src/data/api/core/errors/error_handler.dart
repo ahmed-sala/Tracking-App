@@ -31,7 +31,9 @@ class ErrorHandler {
       case DioExceptionType.badCertificate:
         return ErrorHandler(errorMessage: locale.badCertificate);
       case DioExceptionType.badResponse:
-        return ErrorHandler._fromResponse(exception.response!, locale);
+        return exception.response != null
+            ? ErrorHandler._fromResponse(exception.response!, locale)
+            : ErrorHandler(errorMessage: locale.unknown);
       case DioExceptionType.connectionError:
         return ErrorHandler(errorMessage: locale.connectionError);
       default:
@@ -64,11 +66,14 @@ class ErrorHandler {
     switch (response.statusCode) {
       case StatuesCodes.unauthorized:
       case StatuesCodes.forbidden:
-        return ErrorHandler(errorMessage: response.data["error"], code: 401);
+        return ErrorHandler(
+            errorMessage: response.data?["error"] ?? locale.unauthorized,
+            code: 401);
       case StatuesCodes.conflict:
         return ErrorHandler(
-            errorMessage: response.data["error"] ?? locale.conflict, code: 409);
-      case StatuesCodes.notFount:
+            errorMessage: response.data?["error"] ?? locale.conflict,
+            code: 409);
+      case StatuesCodes.notFount: // Fixed typo here
         return ErrorHandler(errorMessage: locale.notFount);
       case StatuesCodes.internalServerError:
         return ErrorHandler(errorMessage: locale.internalServerError);

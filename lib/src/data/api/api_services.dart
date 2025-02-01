@@ -21,6 +21,7 @@ import 'package:tracking_app/src/data/api/core/constants/api_keys.dart';
 
 import 'core/api_request_models/change_password/change_password_request_model.dart';
 import 'core/api_response_models/order/pending_orders_response_model.dart';
+import 'core/api_response_models/order/start_order_response_model/start_order_response_model.dart';
 import 'core/constants/api_base_url.dart';
 
 part 'api_services.g.dart';
@@ -68,4 +69,9 @@ abstract interface class ApiServices {
 
   @GET(ApiEndPoints.pendingOrder)
   Future<PendingOrdersResponseModel>getAllPendingOrders();
+
+
+  @PUT("${ApiEndPoints.startOrder}/{orderId}")
+  Future<StartOrderResponseModel>startOrder({@Path()  required String orderId});
+
 }

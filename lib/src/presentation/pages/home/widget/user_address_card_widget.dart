@@ -23,7 +23,7 @@ class UserAddressCardWidget extends StatelessWidget {
           subtitle: userOrderEntity.phone ?? "",
           icon: Icons.phone,
           title: userOrderEntity.firstName ?? "",
-          imageUrl: "https://flower.elevateegy.com/uploads/${userOrderEntity.photo ?? ""}" ,
+          imageUrl: userOrderEntity.photo ?? "" ,
           backgroundColor:   AppColors.kWhiteBase,
           subtitleColor: AppColors.kBlackBase,
           titleColor: AppColors.kGray,

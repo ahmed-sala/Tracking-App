@@ -60,6 +60,8 @@ import '../../src/domain/use_cases/login_use_case.dart' as _i379;
 import '../../src/domain/use_cases/order/get_all_pending_order_use_case.dart'
     as _i587;
 import '../../src/domain/use_cases/order/order_details_usecase.dart' as _i150;
+import '../../src/domain/use_cases/order/start_order_use_case.dart' as _i844;
+import '../../src/domain/use_cases/order/store_order_use_case.dart' as _i353;
 import '../../src/domain/use_cases/vehicles/vehicles_use_cases.dart' as _i684;
 import '../../src/presentation/managers/Auth/apply/apply_screen_view_model.dart'
     as _i675;
@@ -78,6 +80,8 @@ import '../../src/presentation/managers/order/order_details/order_details_viewmo
     as _i274;
 import '../../src/presentation/managers/order/pending_order/pending_order_cubit.dart'
     as _i908;
+import '../../src/presentation/managers/order/start_order/start_order_cubit.dart'
+    as _i641;
 import '../../src/presentation/managers/profile/profile_cubit.dart' as _i34;
 import '../../src/presentation/managers/section/section_screen_viewmodel.dart'
     as _i265;
@@ -163,12 +167,20 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i684.VehiclesUseCases(gh<_i557.VehiclesRepo>()));
     gh.factory<_i150.OrderDetailsUsecase>(
         () => _i150.OrderDetailsUsecase(gh<_i176.OrderRepository>()));
+    gh.factory<_i844.StartOrderUseCase>(
+        () => _i844.StartOrderUseCase(gh<_i176.OrderRepository>()));
+    gh.factory<_i353.StoreOrderUseCase>(
+        () => _i353.StoreOrderUseCase(gh<_i176.OrderRepository>()));
     gh.factory<_i762.ForgetPasswordScreenViewModel>(
         () => _i762.ForgetPasswordScreenViewModel(gh<_i235.AuthUseCases>()));
     gh.factory<_i908.PendingOrderCubit>(
         () => _i908.PendingOrderCubit(gh<_i587.GetAllPendingOrderUseCase>()));
     gh.factory<_i274.OrderDetailsViewmodel>(
         () => _i274.OrderDetailsViewmodel(gh<_i150.OrderDetailsUsecase>()));
+    gh.factory<_i641.StartOrderCubit>(() => _i641.StartOrderCubit(
+          gh<_i844.StartOrderUseCase>(),
+          gh<_i353.StoreOrderUseCase>(),
+        ));
     gh.factory<_i84.LoginCubit>(
         () => _i84.LoginCubit(gh<_i379.LoginUseCase>()));
     gh.factory<_i895.ChangePasswordViewModel>(
