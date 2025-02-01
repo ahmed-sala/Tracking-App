@@ -7,6 +7,8 @@ abstract interface class OrderOnlineDataSource {
 
   Future<pending_orders_response_model.Orders> getPendingOrderById(String id);
 
+  Future<Orders> getPendingOrderById(String id);
+  Future<void> updateState(String id, String state);
   Future<start_order_response_model.StartOrderResponseModel> startOrder({required String orderId});
 
 }

@@ -1,23 +1,41 @@
+import '../../../../domain/entities/order/pending_order_entity.dart';
+
 sealed class OrderDetailsState {
   const OrderDetailsState();
 }
 
-class OrderDetailsLoading extends OrderDetailsState {
-  const OrderDetailsLoading();
+class GetOrderDetailsLoading extends OrderDetailsState {
+  const GetOrderDetailsLoading();
 }
 
 class OrderDetailsInitial extends OrderDetailsState {
   const OrderDetailsInitial();
 }
 
-class OrderDetailsLoaded extends OrderDetailsState {
-  // final PendingOrderEntity order;
+class GetOrderDetailsLoaded extends OrderDetailsState {
+  final PendingOrderEntity order;
 
-  const OrderDetailsLoaded();
+  const GetOrderDetailsLoaded(this.order);
 }
 
-class OrderDetailsError extends OrderDetailsState {
+class GetOrderDetailsError extends OrderDetailsState {
   final String message;
 
-  const OrderDetailsError(this.message);
+  const GetOrderDetailsError(this.message);
+}
+
+class UpdateStateLoaded extends OrderDetailsState {
+  const UpdateStateLoaded();
+}
+
+class UpdateStateError extends OrderDetailsState {
+  final Exception exception;
+
+  const UpdateStateError(
+    this.exception,
+  );
+}
+
+class UpdateStateLoading extends OrderDetailsState {
+  const UpdateStateLoading();
 }

@@ -28,6 +28,12 @@ class PendingOrderEntity {
     this.orderNumber,
     this.storeOrderEntity,
   });
+  PendingOrderEntity copyWith({String? id, String? state}) {
+    return PendingOrderEntity(
+      id: id ?? this.id,
+      state: state ?? this.state,
+    );
+  }
 
   Orders toModel() {
     return Orders(
