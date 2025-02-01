@@ -4,28 +4,38 @@ sealed class OrderDetailsState {
   const OrderDetailsState();
 }
 
-class OrderDetailsLoading extends OrderDetailsState {
-  const OrderDetailsLoading();
+class GetOrderDetailsLoading extends OrderDetailsState {
+  const GetOrderDetailsLoading();
 }
 
 class OrderDetailsInitial extends OrderDetailsState {
   const OrderDetailsInitial();
 }
 
-class OrderDetailsLoaded extends OrderDetailsState {
+class GetOrderDetailsLoaded extends OrderDetailsState {
   final PendingOrderEntity order;
 
-  const OrderDetailsLoaded(this.order);
+  const GetOrderDetailsLoaded(this.order);
 }
 
-class OrderDetailsError extends OrderDetailsState {
+class GetOrderDetailsError extends OrderDetailsState {
   final String message;
 
-  const OrderDetailsError(this.message);
+  const GetOrderDetailsError(this.message);
 }
 
-class StateUpdated extends OrderDetailsState {
-  final PendingOrderEntity order;
+class UpdateStateLoaded extends OrderDetailsState {
+  const UpdateStateLoaded();
+}
 
-  const StateUpdated(this.order);
+class UpdateStateError extends OrderDetailsState {
+  final String message;
+
+  const UpdateStateError(
+    this.message,
+  );
+}
+
+class UpdateStateLoading extends OrderDetailsState {
+  const UpdateStateLoading();
 }

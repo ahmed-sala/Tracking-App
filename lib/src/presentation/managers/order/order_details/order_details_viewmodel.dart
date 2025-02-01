@@ -1,39 +1,31 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:tracking_app/src/domain/entities/order/pending_order_entity.dart';
-import 'package:tracking_app/src/domain/use_cases/order/order_details_usecase.dart';
 import 'package:tracking_app/src/presentation/managers/order/order_details/order_details_state.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../../../../core/common/common_imports.dart';
 import '../../../../../core/utilities/functions/button_list.dart';
+import '../../../../domain/entities/order/pending_order_entity.dart';
+import '../../../../domain/use_cases/order/order_details_usecase.dart';
 
 @injectable
 class OrderDetailsViewmodel extends Cubit<OrderDetailsState> {
-  OrderDetailsUsecase _orderDetailsUsecase;
-  OrderDetailsViewmodel(this._orderDetailsUsecase)
-      : super(OrderDetailsLoading());
-  int _counter = 0;
-  get counter => _counter;
+  final OrderDetailsUsecase _orderDetailsUsecase;
+  OrderDetailsViewmodel(
+    this._orderDetailsUsecase,
+  ) : super(OrderDetailsInitial());
 
-  String? stateOrder;
-
-  bool _colorButton = false;
-  get colorButton => _colorButton;
-
+  int counter = 0;
+  String btnTxt = buttonsList[0];
+  PendingOrderEntity orderDetails = PendingOrderEntity();
   void getOrderDetails() async {
+    emit(GetOrderDetailsLoading());
     try {
-      emit(OrderDetailsLoading());
-      PendingOrderEntity orderDetails =
-          await _orderDetailsUsecase.getOrderDetails();
-      print("order state from get is: ${orderDetails.state}");
-      _counter = stateList.indexOf(orderDetails.state!);
+      orderDetails = await _orderDetailsUsecase.getOrderDetails();
 
-      emit(OrderDetailsLoaded(orderDetails));
+      emit(GetOrderDetailsLoaded(orderDetails));
     } catch (e) {
-      debugPrint("Error fetching order details: $e");
-      emit(
-          OrderDetailsError("Failed to load order details. Please try again."));
+      emit(GetOrderDetailsError(
+          "Failed to load order details. Please try again."));
     }
   }
 
@@ -52,31 +44,23 @@ class OrderDetailsViewmodel extends Cubit<OrderDetailsState> {
   }
 
   void updateState(PendingOrderEntity orderDetail) async {
+    emit(UpdateStateLoading());
     try {
-      emit(OrderDetailsLoading());
+      counter = stateList.indexOf(orderDetail.state.toString());
 
-      String? currentState = orderDetail.state;
-      _counter = stateList.indexOf(currentState!);
-
-      if (_counter < stateList.length - 1) {
-        String nextState = stateList[_counter + 1];
-
-        print('Order id: ${orderDetail.id}');
-        print('Order state before update: $currentState');
-        print('Order state after update: $nextState');
-
-        await _orderDetailsUsecase.updateState(orderDetail.id, nextState);
-
-        PendingOrderEntity updatedNow =
-            await _orderDetailsUsecase.getOrderDetails();
-        print("State updated successfully");
-
-        emit(StateUpdated(updatedNow)); // Emits a new state instance
-      }
+      String nextState = stateList[counter + 1];
+      await _orderDetailsUsecase.updateState(orderDetail.id, nextState);
+      updateText(counter + 1);
+      emit(UpdateStateLoaded()); // Emits a new state instance
     } catch (e, stackTrace) {
-      debugPrint("Error updating state: $e");
-      debugPrint(stackTrace.toString());
-      emit(OrderDetailsError(e.toString()));
+      emit(UpdateStateError(e.toString()));
     }
+  }
+
+  void updateText(int index) {
+    if (counter == stateList.length) {
+      counter = 0;
+    }
+    btnTxt = buttonsList[counter];
   }
 }

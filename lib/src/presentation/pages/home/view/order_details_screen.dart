@@ -1,45 +1,55 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tracking_app/core/di/di.dart';
-import 'package:tracking_app/core/utilities/functions/button_list.dart';
 import 'package:tracking_app/src/presentation/managers/order/order_details/order_details_state.dart';
-import 'package:tracking_app/src/presentation/managers/order/order_details/order_details_viewmodel.dart';
-import 'package:tracking_app/src/presentation/pages/home/widget/status_info_widget.dart';
-import 'package:tracking_app/src/presentation/pages/home/widget/status_row_widget.dart';
-import 'package:tracking_app/src/presentation/pages/home/widget/store_info_widget.dart';
-import 'package:tracking_app/src/presentation/pages/home/widget/text_type_price_widget.dart';
 
 import '../../../../../core/common/common_imports.dart';
+import '../../../../../core/di/di.dart';
 import '../../../../../core/utilities/style/spacing.dart';
+import '../../../managers/order/order_details/order_details_viewmodel.dart';
 import '../widget/order_item_widget.dart';
+import '../widget/status_info_widget.dart';
+import '../widget/status_row_widget.dart';
+import '../widget/store_info_widget.dart';
+import '../widget/text_type_price_widget.dart';
 
 class OrderDetailsScreen extends StatefulWidget {
-  const OrderDetailsScreen({super.key});
+  OrderDetailsScreen({super.key});
 
   @override
-  _OrderDetailsScreenState createState() => _OrderDetailsScreenState();
+  State<OrderDetailsScreen> createState() => _OrderDetailsScreenState();
 }
 
 class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
+  var viewModel = getIt.get<OrderDetailsViewmodel>();
   bool _isBottomSheetVisible = true;
 
   @override
-  Widget build(BuildContext context) {
-    OrderDetailsViewmodel orderDetailsViewmodel =
-        getIt<OrderDetailsViewmodel>();
+  void initState() {
+    viewModel.getOrderDetails();
+    super.initState();
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => orderDetailsViewmodel..getOrderDetails(),
+      create: (context) => viewModel,
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Order Details'),
         ),
-        body: BlocBuilder<OrderDetailsViewmodel, OrderDetailsState>(
+        body: BlocConsumer<OrderDetailsViewmodel, OrderDetailsState>(
+          listener: (context, state) {
+            if (state is UpdateStateLoaded) {
+              viewModel.getOrderDetails();
+            }
+          },
           builder: (context, state) {
-            if (state is OrderDetailsLoading) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            } else if (state is OrderDetailsLoaded) {
+            if (state is UpdateStateLoading ||
+                state is GetOrderDetailsLoading) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (state is UpdateStateError ||
+                state is GetOrderDetailsError) {
+              return const Center(child: Text("Error"));
+            } else {
               return NotificationListener<ScrollNotification>(
                 onNotification: (scrollNotification) {
                   if (scrollNotification.metrics.pixels > 100 &&
@@ -63,42 +73,86 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                       children: [
                         const StatusRowWidget(),
                         verticalSpace(24),
-                        StatusInfoWidget(), // This will reflect the updated state
+                        StatusInfoWidget(
+                          status: viewModel.orderDetails.state ?? '',
+                          orderId: viewModel.orderDetails.id?.toString() ?? '',
+                          createdAt:
+                              viewModel.orderDetails.createdAt?.toString() ??
+                                  '',
+                        ),
                         verticalSpace(16),
                         _buildSectionTitle('Pickup Address'),
                         verticalSpace(16),
                         StoreInfoWidget(
-                          storeImage: state.order.storeOrderEntity?.image ?? '',
-                          storeName: state.order.storeOrderEntity?.name ?? '',
-                          storeAddress:
-                              state.order.storeOrderEntity?.address ?? '',
-                          onCall: () => orderDetailsViewmodel.openCallKeypad(
-                              state.order.storeOrderEntity?.phoneNumber ?? ''),
-                          onWhatsApp: () => orderDetailsViewmodel.openWhatsApp(
-                              state.order.storeOrderEntity?.phoneNumber ?? ''),
+                          storeImage:
+                              viewModel.orderDetails.storeOrderEntity?.image ??
+                                  '',
+                          storeName:
+                              viewModel.orderDetails.storeOrderEntity?.name ??
+                                  '',
+                          storeAddress: viewModel
+                                  .orderDetails.storeOrderEntity?.address
+                                  ?.toString() ??
+                              '',
+                          onCall: () {
+                            if (viewModel.orderDetails.storeOrderEntity
+                                    ?.phoneNumber !=
+                                null) {
+                              viewModel.openCallKeypad(viewModel
+                                  .orderDetails.storeOrderEntity!.phoneNumber
+                                  .toString());
+                            }
+                          },
+                          onWhatsApp: () {
+                            if (viewModel.orderDetails.storeOrderEntity
+                                    ?.phoneNumber !=
+                                null) {
+                              viewModel.openWhatsApp(viewModel
+                                  .orderDetails.storeOrderEntity!.phoneNumber
+                                  .toString());
+                            }
+                          },
                         ),
                         verticalSpace(24),
                         _buildSectionTitle('User Address'),
                         verticalSpace(16),
                         StoreInfoWidget(
-                          storeImage: state.order.userOrderEntity?.image ?? '',
-                          storeName:
-                              state.order.userOrderEntity?.firstName ?? '',
+                          storeImage:
+                              viewModel.orderDetails.userOrderEntity?.image ??
+                                  '',
+                          storeName: viewModel
+                                  .orderDetails.userOrderEntity?.firstName ??
+                              '',
                           storeAddress: 'sddsdssdsdsd',
-                          onCall: () => orderDetailsViewmodel.openCallKeypad(
-                              state.order.userOrderEntity?.phone ?? ''),
-                          onWhatsApp: () => orderDetailsViewmodel.openWhatsApp(
-                              state.order.userOrderEntity?.phone ?? ''),
+                          onCall: () {
+                            if (viewModel.orderDetails.userOrderEntity?.phone !=
+                                null) {
+                              viewModel.openCallKeypad(viewModel
+                                  .orderDetails.userOrderEntity!.phone
+                                  .toString());
+                            }
+                          },
+                          onWhatsApp: () {
+                            if (viewModel.orderDetails.userOrderEntity?.phone !=
+                                null) {
+                              viewModel.openWhatsApp(viewModel
+                                  .orderDetails.userOrderEntity!.phone
+                                  .toString());
+                            }
+                          },
                         ),
                         verticalSpace(24),
                         _buildSectionTitle('Order Details'),
                         verticalSpace(16),
                         ListView.builder(
+                          padding: EdgeInsets.zero,
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
-                          itemCount: state.order.orderItems?.length ?? 0,
+                          itemCount:
+                              viewModel.orderDetails.orderItems?.length ?? 0,
                           itemBuilder: (context, index) {
-                            final orderItem = state.order.orderItems?[index];
+                            final orderItem =
+                                viewModel.orderDetails.orderItems?[index];
                             return OrderItemWidget(
                               orderImage: orderItem?.product?.imgCover ?? '',
                               orderPrice:
@@ -110,76 +164,63 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                         ),
                         verticalSpace(24),
                         TextTypePriceWidget(
-                            title: 'Total Price',
-                            leading: 'Egp ${state.order.totalPrice}'),
+                          title: 'Total Price',
+                          leading:
+                              'Egp ${viewModel.orderDetails.totalPrice ?? ''}',
+                        ),
                         verticalSpace(24),
                         TextTypePriceWidget(
-                            title: 'Payment Type',
-                            leading: '${state.order.paymentType}'),
-                        verticalSpace(100), // To prevent bottom sheet overlap
+                          title: 'Payment Type',
+                          leading: viewModel.orderDetails.paymentType ?? '',
+                        ),
+                        verticalSpace(100),
                       ],
                     ),
                   ),
                 ),
               );
-            } else if (state is OrderDetailsError) {
-              return Center(
-                child: Text(state.message),
-              );
             }
-            return const SizedBox();
           },
         ),
         bottomSheet: _isBottomSheetVisible
-            ? BlocBuilder<OrderDetailsViewmodel, OrderDetailsState>(
-                buildWhen: (previous, current) => true,
-                builder: (context, state) {
-                  if (state is OrderDetailsLoaded) {
-                    return Container(
-                      width: double.infinity,
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 24, horizontal: 16),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.1),
-                            blurRadius: 10,
-                            spreadRadius: 2,
-                            offset: const Offset(2, 4),
-                          ),
-                        ],
-                      ),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(vertical: 16),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(40),
-                          ),
+            ? Container(
+                width: double.infinity,
+                padding:
+                    const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.1),
+                      blurRadius: 10,
+                      spreadRadius: 2,
+                      offset: const Offset(2, 4),
+                    ),
+                  ],
+                ),
+                child: BlocBuilder<OrderDetailsViewmodel, OrderDetailsState>(
+                  builder: (context, state) {
+                    return ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(40),
                         ),
-                        onPressed: () {
-                          print('counter: ${orderDetailsViewmodel.counter}');
-                          orderDetailsViewmodel.updateState(state.order);
-                          orderDetailsViewmodel.getOrderDetails();
-                        },
-                        child: Text(
-                          buttonsList[orderDetailsViewmodel.counter],
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontWeight: FontWeight.w500,
-                          ),
+                      ),
+                      onPressed: () {
+                        viewModel.updateState(viewModel.orderDetails);
+                      },
+                      child: Text(
+                        viewModel.btnTxt,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
                     );
-                  } else if (state is StateUpdated) {
-                    orderDetailsViewmodel.getOrderDetails();
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }
-                  return const SizedBox();
-                },
+                  },
+                ),
               )
             : null,
       ),
