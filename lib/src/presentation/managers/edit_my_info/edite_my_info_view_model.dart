@@ -56,7 +56,6 @@ class EditeMyInfoViewModel extends Cubit<EditeMyInfoStates> {
     setController(EditeMyInfoFormFields.phone, _appUserEntity.phone ?? "");
     selectedGender =
         _appUserEntity.gender!.length == 4 ? Gender.male : Gender.female;
-    driverImage = _appUserEntity.photo;
   }
 
   _LoadDriverInfo() async {
@@ -66,6 +65,7 @@ class EditeMyInfoViewModel extends Cubit<EditeMyInfoStates> {
       case Success<AppUserEntity>():
         _appUserEntity = result.data ?? AppUserEntity();
         _setUserData();
+        driverImage = _appUserEntity.photo;
         emit(LoadedDriverInfoState());
         break;
       case Failures<AppUserEntity>():
@@ -79,7 +79,6 @@ class EditeMyInfoViewModel extends Cubit<EditeMyInfoStates> {
     var result = await _uploadPhotoUseCase.uploadPhoto(image: image);
     switch (result) {
       case Success<UploadPhotoEntity>():
-        driverImage = image.path;
         emit(UploadPhotoSuccessState());
         break;
       case Failures<UploadPhotoEntity>():
@@ -106,6 +105,7 @@ class EditeMyInfoViewModel extends Cubit<EditeMyInfoStates> {
       case Success<AppUserEntity>():
         _appUserEntity = result.data ?? AppUserEntity();
         _setUserData();
+
         emit(UpdateUserInfoSuccessState());
         break;
       case Failures<AppUserEntity>():

@@ -1,7 +1,7 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:elegant_notification/elegant_notification.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tracking_app/core/extensions/extensions.dart';
@@ -11,7 +11,6 @@ import 'package:tracking_app/src/presentation/managers/edit_my_info/edit_my_info
 import 'package:tracking_app/src/presentation/managers/edit_my_info/edite_my_info_view_model.dart';
 
 import '../../../../core/common/common_imports.dart';
-import '../../managers/edit_my_info/edite_my_info_states.dart';
 import 'edit_my_info_screen_form.dart';
 
 class EditeMyProfileBody extends StatefulWidget {
@@ -25,8 +24,8 @@ class _EditeMyProfileBodyState extends State<EditeMyProfileBody> {
   @override
   Widget build(BuildContext context) {
     final _viewModel = context.watch<
-        EditeMyInfoViewModel>(); // Use `watch` to rebuild on changes
-    AppUserEntity appUser = _viewModel.appUserEntity;
+        EditeMyInfoViewModel>();
+    log("Image ${_viewModel.driverImage}");// Use `watch` to rebuild on changes
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
       child: SizedBox(
@@ -43,10 +42,10 @@ class _EditeMyProfileBodyState extends State<EditeMyProfileBody> {
                   _viewModel.doAction(UploadPhotoAction(image: newImage));
                 }
               },
-              child: appUser.photo != null
+              child: _viewModel.driverImage != null
                   ? Stack(
                 children: [
-                  _networkImage(appUser.photo),
+                  _networkImage(_viewModel.driverImage),
                   const Positioned(
                     right: 0,
                     bottom: 0,
@@ -64,15 +63,13 @@ class _EditeMyProfileBodyState extends State<EditeMyProfileBody> {
   }
 
   Widget _networkImage(String? photoUrl) {
-    return photoUrl == null
-        ? _defaultImage()
-        : ClipRRect(
+    return ClipRRect(
       borderRadius: BorderRadius.circular(100),
       child: SizedBox(
         width: 100.w,
         height: 100.h,
         child: CachedNetworkImage(
-          imageUrl: photoUrl,
+          imageUrl: photoUrl!,
         ),
       ),
     );

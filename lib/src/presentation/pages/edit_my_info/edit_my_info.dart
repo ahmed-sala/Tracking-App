@@ -46,7 +46,7 @@ class EditMyInfo extends StatelessWidget {
           if (state is LoadingDriverInfoState) {
             return const LoadingShimmer();
           }
-          if (state is LoadedDriverInfoState) {
+          if (state is LoadedDriverInfoState || state is UpdateUserInfoSuccessState) {
             return const EditeMyProfileBody();
           }
           if (state is ErrorDriverInfoState) {
