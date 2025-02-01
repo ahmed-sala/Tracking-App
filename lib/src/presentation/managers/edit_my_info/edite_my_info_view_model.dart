@@ -11,6 +11,7 @@ import 'package:tracking_app/src/domain/use_cases/upload_photo_use_case.dart';
 import 'package:tracking_app/src/presentation/managers/edit_my_info/edit_my_info_actions.dart';
 import 'package:tracking_app/src/presentation/managers/edit_my_info/edite_my_info_states.dart';
 
+import '../../../domain/use_cases/edite_my_profile/update_profile_use_case.dart';
 import '../../../domain/use_cases/get_profile_data_use_case.dart';
 import 'edite_my_info_controller_manager.dart';
 
@@ -21,7 +22,8 @@ class EditeMyInfoViewModel extends Cubit<EditeMyInfoStates>{
   final EditeMyInfoControllerManager _controllerManager;
   final GetProfileDataUseCase _getProfileDataUseCase;
   final UploadPhotoUseCase _uploadPhotoUseCase;
-  EditeMyInfoViewModel(this._controllerManager,this._getProfileDataUseCase,this._uploadPhotoUseCase) : super(EditeMyInfoScreenInitialState());
+  final UpdateProfileUseCase _updateProfileUseCase;
+  EditeMyInfoViewModel(this._controllerManager,this._getProfileDataUseCase,this._uploadPhotoUseCase,this._updateProfileUseCase) : super(EditeMyInfoScreenInitialState());
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   Gender selectedGender = Gender.male;
   AppUserEntity _appUserEntity = AppUserEntity();

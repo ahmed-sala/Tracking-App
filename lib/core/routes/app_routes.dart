@@ -35,7 +35,7 @@ class AppRoutes {
             widget: ApplyScreen(), settings: settings);
       case PageRoutesName.orderDetailsScreen:
         return _handelMaterialPageRoute(
-            widget: OrderDetailsScreen(), settings: settings);
+            widget: const OrderDetailsScreen(), settings: settings);
       case PageRoutesName.editeMyInfo:
         return _handelMaterialPageRoute(
             settings: settings, widget:  EditMyInfo());

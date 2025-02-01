@@ -60,6 +60,8 @@ import '../../src/domain/repositories/order/order_repository.dart' as _i176;
 import '../../src/domain/repositories/vehicles/vehciles_repo.dart' as _i557;
 import '../../src/domain/use_cases/change_password.dart' as _i982;
 import '../../src/domain/use_cases/country/country_use_case.dart' as _i176;
+import '../../src/domain/use_cases/edite_my_profile/update_profile_use_case.dart'
+    as _i360;
 import '../../src/domain/use_cases/forget_password/forget_password_use_cases.dart'
     as _i235;
 import '../../src/domain/use_cases/get_profile_data_use_case.dart' as _i986;
@@ -169,6 +171,8 @@ extension GetItInjectableX on _i174.GetIt {
         ));
     gh.factory<_i573.UploadPhotoUseCase>(
         () => _i573.UploadPhotoUseCase(gh<_i214.EditeMyInfoRepo>()));
+    gh.factory<_i360.UpdateProfileUseCase>(
+        () => _i360.UpdateProfileUseCase(gh<_i214.EditeMyInfoRepo>()));
     gh.factory<_i587.GetAllPendingOrderUseCase>(() =>
         _i587.GetAllPendingOrderUseCase(
             orderRepository: gh<_i176.OrderRepository>()));

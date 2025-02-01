@@ -5,7 +5,6 @@ class ApiEndPoints {
   static const String verifyResetCode = "verifyResetCode";
   static const String login = "drivers/signin";
   static const String profileData = "drivers/profile-data";
-
   static const String resetPassword = "drivers/resetPassword";
   static const String apply = "drivers/apply";
   static const String vehicles = "vehicles";
@@ -13,5 +12,6 @@ class ApiEndPoints {
   static const String changePassword = "drivers/change-password";
   static const String pendingOrder = "orders/pending-orders";
   static const String uploadPhoto = "drivers/upload-photo";
+  static const String editeProfile =  "drivers/editProfile";
 
 }
