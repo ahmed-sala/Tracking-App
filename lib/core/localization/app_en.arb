@@ -175,7 +175,7 @@
   "serviceUnavailable": "The service is temporarily unavailable. Please try again later.",
   "alreadyExists": "The resource already exists.",
   "requestTimeout": "The request timed out. Please try again.",
-  "requestCancelled": "The request was cancelled."
+  "requestCancelled": "The request was cancelled.",
   "floweryRider": "Flowery rider",
   "editeMyInfo": "Edit My Info",
   "change": "Change",

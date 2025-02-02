@@ -52,7 +52,7 @@ class EditMyInfo extends StatelessWidget {
           if (state is ErrorDriverInfoState) {
             String errorMessage = ErrorHandler.fromException(
                     state.exception!, AppLocalizations.of(context)!)
-                .errorMassage;
+                .errorMessage;
             return ErrorView(
               errorMessage: errorMessage,
               viewModel: viewModel,
@@ -76,8 +76,7 @@ class EditMyInfo extends StatelessWidget {
             IconSnackBar.show(
               context,
               label: ErrorHandler.fromException(
-                      state.exception!, AppLocalizations.of(context)!)
-                  .errorMassage,
+                      state.exception!, AppLocalizations.of(context)!).errorMessage,
               snackBarType: SnackBarType.fail,
             );
           }
@@ -93,7 +92,7 @@ class EditMyInfo extends StatelessWidget {
               context,
               label: ErrorHandler.fromException(
                       state.exception!, AppLocalizations.of(context)!)
-                  .errorMassage,
+                  .errorMessage,
               snackBarType: SnackBarType.fail,
             );
           }
