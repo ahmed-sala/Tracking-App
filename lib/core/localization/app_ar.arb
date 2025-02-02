@@ -131,7 +131,6 @@
   "thankYouMessage": "شكرًا على تقديم طلبك، سنقوم بمراجعة طلبك وسنعود إليك قريبًا.",
   "submittedMessage": "تم تقديم طلبك!",
   "languages": "اللعة ",
-
   "continues": "دخول",
   "resetPasswordInstruction": "كلمة السر يجب ان لا تكون فارغة ويجب ان تحتوي علي 6 احرف وحرف كبير ورقم واحد علي الاقل",
   "apply": "تطبيق",
@@ -157,13 +156,11 @@
   "continueKey": "متابعة",
   "welcomeTo": "مرحبا بك في",
   "floweryRiderApp": "تطبيق Flowery Rider",
-  "applyNow": "قدم الآن",
   "userAddress": "عنوان المستخدم",
   "pickupAddress": "عنوان الاستلام",
   "flowerOrder": "طلب الورد",
   "accept": "قبول",
   "reject": "رفض",
-  "floweryRider": "سائق Flowery",
   "orderDetails": "تفاصيل الطلب",
   "noOrderDetailsAvailable": "لا تتوفر تفاصيل الطلب",
   "storeAddress": "عنوان المتجر",
@@ -175,5 +172,11 @@
   "serviceUnavailable": "الخدمة غير متاحة, يرجي المحاولة مرة اخري",
   "alreadyExists": "مجود بالفعل",
   "requestTimeout": "انتهت مهلة الطلب. يرجى المحاولة مرة أخرى لاحقًا.",
-  "requestCancelled": "تم إلغاء الطلب. يرجى المحاولة مرة أخرى."
+  "requestCancelled": "تم إلغاء الطلب. يرجى المحاولة مرة أخرى.",
+  "floweryRider": "سائق Flowery",
+  "applyNow": "قدم الآن",
+  "editeMyInfo": "تعديل معلوماتي",
+  "change" : "تغيير",
+  "photoUploadSuccess": "تم تحميل الصورة بنجاح",
+  "updatedUserInfoSuccess": "تم تحديث معلوماتك بنجاح"
 }

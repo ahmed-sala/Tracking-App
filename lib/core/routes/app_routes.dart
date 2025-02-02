@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:tracking_app/core/routes/page_route_name.dart';
 import 'package:tracking_app/src/presentation/pages/Auth/apply/apply_screen.dart';
 import 'package:tracking_app/src/presentation/pages/Auth/forget_password/forget_password_screen.dart';
+import 'package:tracking_app/src/presentation/pages/change_password/change_password_screen.dart';
+import 'package:tracking_app/src/presentation/pages/edit_my_info/edit_my_info.dart';
 import 'package:tracking_app/src/presentation/pages/home/view/order_details_screen.dart';
 import 'package:tracking_app/src/presentation/pages/login/view/login_view.dart';
 import 'package:tracking_app/src/presentation/pages/profile/view/profile_view.dart';
@@ -33,7 +35,13 @@ class AppRoutes {
             widget: ApplyScreen(), settings: settings);
       case PageRoutesName.orderDetailsScreen:
         return _handelMaterialPageRoute(
-            widget: OrderDetailsScreen(), settings: settings);
+            widget: const OrderDetailsScreen(), settings: settings);
+      case PageRoutesName.editeMyInfo:
+        return _handelMaterialPageRoute(
+            settings: settings, widget:  EditMyInfo());
+      case PageRoutesName.changePassword:
+        return _handelMaterialPageRoute(
+            settings: settings, widget: ChangePasswordScreen());
       default:
         return _handelMaterialPageRoute(
             settings: settings, widget: const Scaffold());

@@ -111,9 +111,9 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<ApiResult<AppUserEntity>> getProfileData() {
     return executeApi<AppUserEntity>(
       apiCall: () async {
-        var token = await _authOfflineDataSource.getToken();
+        var token = await getToken();
         var appUserModel =
-            await _authOnlineDataSource.getProfileData(token: token!);
+            await _authOnlineDataSource.getProfileData(token: "Bearer $token" ?? "");
         return appUserModel.driver!.toDomain();
       },
     );

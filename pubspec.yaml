@@ -43,7 +43,7 @@ dependencies:
   dio:
   retrofit:
   logger:
-  json_annotation:
+  json_annotation: ^4.9.0
   get_it:
   injectable:
   hive_flutter:
@@ -65,7 +65,10 @@ dependencies:
 
 
 
+  json_serializable:
+  image_picker:
   flutter_icon_snackbar: ^1.2.1
+  elegant_notification:
   fluttertoast: ^8.2.10
 
 dev_dependencies:
@@ -100,6 +103,7 @@ flutter:
   #   - images/a_dot_ham.jpeg
   assets:
     - assets/images/
+    - lib/core/utilities/style/animations/
     - assets/icons/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
