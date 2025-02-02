@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tracking_app/core/utilities/style/images/cached_network_image%20_widget.dart';
 class CustomInfoCard extends StatelessWidget {
   final String title;
   final String subtitle;
@@ -26,22 +27,28 @@ class CustomInfoCard extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: backgroundColor,
-        boxShadow: const [
+        boxShadow:  [
           BoxShadow(
-            color: Color(0x53535340),
+            color: Color(0x53535340).withOpacity(0.2),
             spreadRadius: 0,
             blurRadius: 4,
-            offset: Offset(0, 0),
+            offset: const Offset(0, 0),
           ),
         ],
         borderRadius: BorderRadius.circular(10.r),
       ),
       child: ListTile(
-        contentPadding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
-        leading: CircleAvatar(
-          radius: 30.r,
-          backgroundImage: NetworkImage(imageUrl),
-        ),
+        contentPadding: EdgeInsets.symmetric(horizontal: 8.w,
+            vertical: 8.h),
+       leading: Container(
+         clipBehavior: Clip.antiAlias,
+         decoration: BoxDecoration(
+           borderRadius: BorderRadius.circular(50.r),
+         ),
+         child: CachedNetworkImageWidget(
+             fit: BoxFit.cover,
+             imageUrl: "https://flower.elevateegy.com/uploads/$imageUrl", width: 44, height: 44),
+       ),
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

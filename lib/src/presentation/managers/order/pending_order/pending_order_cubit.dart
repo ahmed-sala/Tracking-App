@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:meta/meta.dart';
 import 'package:tracking_app/src/presentation/managers/order/pending_order/pending_order_event.dart';
 
 import '../../../../../core/common/apis/api_result.dart';
@@ -17,9 +16,12 @@ class PendingOrderCubit extends Cubit<PendingOrderState> {
   List<PendingOrderEntity> _pendingOrder = [];
   List<PendingOrderEntity> get pendingOrder => _pendingOrder;
 
-  Future<void>doAction(PendingOrderEvent pendingOrderEvent)async{
+  Future<void> doAction(PendingOrderEvent pendingOrderEvent) async {
     switch (pendingOrderEvent) {
-      case GetAllPendingOrderEvent():return await _getAllPendingOrder();
+      case GetAllPendingOrderEvent():
+        return await _getAllPendingOrder();
+      case RejectOrderEvent():
+        return _rejectOrder(pendingOrderEvent.orderId);
     }
   }
 
@@ -34,6 +36,12 @@ class PendingOrderCubit extends Cubit<PendingOrderState> {
         emit(GetAllPendingOrderErrorState(exception: result.exception));
     }
   }
+
+  void _rejectOrder(String orderId) {
+    _pendingOrder.removeWhere((element) => element.id == orderId);
+    emit(RejectOrderSuccessState());
+  }
+
 
 
 }

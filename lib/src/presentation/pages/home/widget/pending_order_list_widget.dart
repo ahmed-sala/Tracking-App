@@ -10,15 +10,19 @@ class PendingOrderListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var pendingViewModel=context.read<PendingOrderCubit>();
-    return ListView.separated(
-      separatorBuilder: (context, index) => verticalSpace(24),
-      itemBuilder: (context, index) {
-        return PendingOrderItemWidget(
-          pendingOrderEntity: pendingViewModel.pendingOrder[index],
+    var pendingViewModel = context.read<PendingOrderCubit>();
+    return BlocBuilder<PendingOrderCubit, PendingOrderState>(
+      builder: (context, state) {
+        return ListView.separated(
+          separatorBuilder: (context, index) => verticalSpace(24),
+          itemBuilder: (context, index) {
+            return PendingOrderItemWidget(
+              pendingOrderEntity: pendingViewModel.pendingOrder[index],
+            );
+          },
+          itemCount: pendingViewModel.pendingOrder.length,
         );
       },
-      itemCount: pendingViewModel.pendingOrder.length,
     );
   }
 }

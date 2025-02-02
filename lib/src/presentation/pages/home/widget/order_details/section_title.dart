@@ -1,0 +1,17 @@
+import '../../../../../../core/common/common_imports.dart';
+
+class SectionTitle extends StatelessWidget {
+  const SectionTitle({super.key, required this.title});
+  final String title;
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      title,
+      style: TextStyle(
+        color: Colors.black,
+        fontSize: 18.sp,
+        fontWeight: FontWeight.w500,
+      ),
+    );
+  }
+}

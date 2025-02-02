@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tracking_app/src/data/data_sources/offline_data_source/order/order_offline_datasource.dart';
@@ -9,5 +11,16 @@ class OrderOfflineDatasourceImpl implements OrderOfflineDatasource {
   @override
   Future<String> getOrderId() async {
     return sharedPreferences.getString("orderId") ?? "";
+  }
+
+  @override
+  Future<void> setOrderId({ String  ? orderId}) async{
+    if(orderId !=null ||  orderId!.isNotEmpty){
+      await sharedPreferences.setString("orderId", orderId);
+      print("success Add Order Id");
+    }else{
+      return ;
+
+    }
   }
 }
