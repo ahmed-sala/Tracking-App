@@ -31,26 +31,47 @@ class OrderRepositoryImpl implements OrderRepository {
   }
 
   @override
-  Future<void> storeOrder(PendingOrderEntity pendingOrderEntity) async {
+  Future<ApiResult<bool>> storeOrder(
+    PendingOrderEntity pendingOrderEntity,
+  ) async {
     try {
       final model = pendingOrderEntity.toModel();
-      print('Storing order: $model');
+      model.state = "Accepted";
       await _orderOnlineDataSource.storeOrder(model);
+      return Success(data: true);
     } catch (e) {
-      print('Error storing order: $e');
-      throw Exception('Error storing order: $e');
+      return Failures(exception: Exception("Error Set Data "));
     }
   }
 
   @override
-  Future<PendingOrderEntity> getPendingOrderById() async {
-    try {
+  Future<ApiResult<PendingOrderEntity>> getPendingOrderById() async {
+    return await executeApi<PendingOrderEntity>(apiCall: () async {
       String id = await _orderOfflineDatasource.getOrderId();
-      Orders pendingOrdersResponseModel =
-          await _orderOnlineDataSource.getPendingOrderById('123');
-      return pendingOrdersResponseModel.toDomain();
-    } catch (e) {
-      throw Exception("Failed to fetch pending order: $e");
-    }
+      var order = await _orderOnlineDataSource.getPendingOrderById(id);
+      return order.toDomain();
+    });
+  }
+
+  @override
+  Future<ApiResult<void>> updateState(String id, String state) async {
+    return await executeApi<void>(
+      apiCall: () async {
+        String id = await _orderOfflineDatasource.getOrderId();
+        await _orderOnlineDataSource.updateState(id, state);
+      },
+    );
+  }
+
+  @override
+  Future<ApiResult<bool>> startOrder({required String orderId}) async {
+    return executeApi<bool>(
+      apiCall: () async {
+        var response =
+            await _orderOnlineDataSource.startOrder(orderId: orderId);
+        await _orderOfflineDatasource.setOrderId(orderId: orderId);
+        return true;
+      },
+    );
   }
 }

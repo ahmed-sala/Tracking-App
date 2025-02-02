@@ -28,7 +28,7 @@ class TrackingApp extends StatelessWidget {
               supportedLocales: L10n.all,
               debugShowCheckedModeBanner: false,
               navigatorKey: navKey,
-              initialRoute: PageRoutesName.editeMyInfo,
+              initialRoute: PageRoutesName.section,
               onGenerateRoute: AppRoutes.onGenerateRoute,
               themeMode: ThemeMode.dark,
               theme: AppTheme.defaultTheme,

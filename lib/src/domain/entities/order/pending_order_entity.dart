@@ -8,7 +8,7 @@ class PendingOrderEntity {
   final String? paymentType;
   final bool? isPaid;
   final bool? isDelivered;
-  final String? state;
+ final  String ?  state;
   final String? createdAt;
   final String? updatedAt;
   final String? orderNumber;
@@ -22,12 +22,18 @@ class PendingOrderEntity {
     this.paymentType,
     this.isPaid,
     this.isDelivered,
-    this.state,
+     this.state,
     this.createdAt,
     this.updatedAt,
     this.orderNumber,
     this.storeOrderEntity,
   });
+  PendingOrderEntity copyWith({String? id, String? state}) {
+    return PendingOrderEntity(
+      id: id ?? this.id,
+      state: state ?? this.state,
+    );
+  }
 
   Orders toModel() {
     return Orders(
