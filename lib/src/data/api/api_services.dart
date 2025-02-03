@@ -3,14 +3,9 @@ import 'dart:io';
 import 'package:dio/dio.dart' hide DioMediaType;
 import 'package:dio/dio.dart';
 import 'package:http_parser/http_parser.dart';
-import 'dart:io';
-
-import 'package:dio/dio.dart' hide DioMediaType;
-import 'package:http_parser/http_parser.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/error_logger.dart';
 import 'package:retrofit/http.dart';
-import 'package:tracking_app/src/data/api/core/api_request_models/Auth/apply/apply_request_model.dart';
 import 'package:tracking_app/src/data/api/core/api_request_models/Auth/forget_password_request_models/confirm_otp_request_model.dart';
 import 'package:tracking_app/src/data/api/core/api_request_models/Auth/forget_password_request_models/get_otp_request_model.dart';
 import 'package:tracking_app/src/data/api/core/api_request_models/Auth/forget_password_request_models/reset_password_request_model.dart';
@@ -96,20 +91,18 @@ abstract interface class ApiServices {
 
   @GET(ApiEndPoints.pendingOrder)
   Future<PendingOrdersResponseModel> getAllPendingOrders();
-  Future<PendingOrdersResponseModel>getAllPendingOrders();
-
 
   @PUT("${ApiEndPoints.startOrder}/{orderId}")
-  Future<StartOrderResponseModel>startOrder({@Path()  required String orderId});
-
+  Future<StartOrderResponseModel> startOrder({@Path() required String orderId});
 
   @PUT(ApiEndPoints.uploadPhoto)
   @MultiPart()
   Future<UploadPhotoResponseModel> uploadPhoto(
       @Header(ApiKey.authorization) String token,
-      @Part(name: "photo",contentType: "image/jpg") File photo);
-
+      @Part(name: "photo", contentType: "image/jpg") File photo);
 
   @PUT(ApiEndPoints.editeProfile)
-  Future<UpdatedUserResponseModel> updateUserInfo(@Header(ApiKey.authorization) String token, @Body() UpdatedUserRequestModel updatedUserRequestModel);
+  Future<UpdatedUserResponseModel> updateUserInfo(
+      @Header(ApiKey.authorization) String token,
+      @Body() UpdatedUserRequestModel updatedUserRequestModel);
 }

@@ -70,7 +70,7 @@ dependencies:
   flutter_icon_snackbar: ^1.2.1
   elegant_notification:
   fluttertoast: ^8.2.10
-
+  dropdown_button2: ^2.3.9
 dev_dependencies:
   flutter_test:
     sdk: flutter

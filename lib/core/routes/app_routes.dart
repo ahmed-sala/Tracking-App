@@ -4,7 +4,6 @@ import 'package:tracking_app/src/presentation/pages/Auth/apply/apply_screen.dart
 import 'package:tracking_app/src/presentation/pages/Auth/apply/success_auth_apply.dart';
 import 'package:tracking_app/src/presentation/pages/Auth/forget_password/forget_password_screen.dart';
 import 'package:tracking_app/src/presentation/pages/change_password/change_password_screen.dart';
-import 'package:tracking_app/src/presentation/pages/change_password/change_password_screen.dart';
 import 'package:tracking_app/src/presentation/pages/edit_my_info/edit_my_info.dart';
 import 'package:tracking_app/src/presentation/pages/home/view/order_details_screen.dart';
 import 'package:tracking_app/src/presentation/pages/login/view/login_view.dart';
@@ -47,17 +46,15 @@ class AppRoutes {
         return _handleMaterialPageRoute(
             widget: const SectionScreen(), settings: settings);
       case PageRoutesName.apply:
-        return _handelMaterialPageRoute(
+        return _handleMaterialPageRoute(
             widget: ApplyScreen(), settings: settings);
       case PageRoutesName.orderDetailsScreen:
-        return _handelMaterialPageRoute(
+        return _handleMaterialPageRoute(
             widget: const OrderDetailsScreen(), settings: settings);
       case PageRoutesName.editeMyInfo:
-        return _handelMaterialPageRoute(
-            settings: settings, widget:  EditMyInfo());
-      case PageRoutesName.changePassword:
-        return _handelMaterialPageRoute(
-            settings: settings, widget: ChangePasswordScreen());
+        return _handleMaterialPageRoute(
+            settings: settings, widget: EditMyInfo());
+
       default:
         return _handleMaterialPageRoute(
             settings: settings, widget: const Scaffold());

@@ -164,11 +164,10 @@
   "flowerOrder": "Flower Order",
   "accept": "Accept",
   "reject": "Reject",
-  "floweryRider": "Flowery rider",
 
 
   "applicationSuccess": "Your application has been submitted!",
-  "applicationSuccessMessage" : "Thank you for providing your application, we will review your application and will get back to you soon."
+  "applicationSuccessMessage" : "Thank you for providing your application, we will review your application and will get back to you soon.",
   "orderDetails": "Order Details",
   "noOrderDetailsAvailable": "No order details available",
   "storeAddress": "Store Address",
