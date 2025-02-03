@@ -41,10 +41,9 @@ dependencies:
   flutter_bloc: ^8.1.6
   awesome_dialog: ^3.2.1
   dio:
-  mime: ^1.0.2
   retrofit:
   logger:
-  json_annotation:
+  json_annotation: ^4.9.0
   get_it:
   injectable:
   hive_flutter:
@@ -60,15 +59,17 @@ dependencies:
   flutter_lints: ^3.0.0
   bloc: ^8.1.4
   lottie: ^3.2.0
+  flutter_svg: ^2.0.17
+  url_launcher: ^6.2.1
+  flutter_background: ^1.1.0
+
+
+
   json_serializable:
-
-
-
+  image_picker:
   flutter_icon_snackbar: ^1.2.1
-  dropdown_button2: ^2.3.9
-  image_picker: ^1.1.2
-  elegant_notification: ^2.4.1
-  flutter_svg:
+  elegant_notification:
+  fluttertoast: ^8.2.10
 
 dev_dependencies:
   flutter_test:
@@ -84,7 +85,6 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
 
-
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
@@ -98,12 +98,13 @@ flutter:
   generate: true
 
   # To add assets to your application, add an assets section, like this:
+  # assets:
+  #   - images/a_dot_burr.jpeg
+  #   - images/a_dot_ham.jpeg
   assets:
-    - lib/core/jsons/
-    - lib/core/utilities/style/images/
-
-
     - assets/images/
+    - lib/core/utilities/style/animations/
+    - assets/icons/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
 
