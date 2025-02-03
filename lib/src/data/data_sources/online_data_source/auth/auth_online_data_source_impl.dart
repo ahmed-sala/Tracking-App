@@ -2,11 +2,14 @@ import 'dart:io';
 
 import 'package:injectable/injectable.dart';
 import 'package:tracking_app/src/data/api/api_services.dart';
+import 'package:tracking_app/src/data/api/core/api_request_models/Auth/apply/apply_request_model.dart';
 import 'package:tracking_app/src/data/api/core/api_request_models/Auth/forget_password_request_models/confirm_otp_request_model.dart';
 import 'package:tracking_app/src/data/api/core/api_request_models/Auth/forget_password_request_models/get_otp_request_model.dart';
 import 'package:tracking_app/src/data/api/core/api_request_models/Auth/forget_password_request_models/reset_password_request_model.dart';
 import 'package:tracking_app/src/data/api/core/api_request_models/change_password/change_password_request_model.dart';
 import 'package:tracking_app/src/data/api/core/api_request_models/login_request/login_request.dart';
+import 'package:tracking_app/src/data/api/core/api_response_models/Auth/apply/apply_response_model.dart';
+import 'package:tracking_app/src/data/api/core/api_response_models/Auth/forget_password/confirm_otp_response_model.dart';
 import 'package:tracking_app/src/data/api/core/api_response_models/Auth/forget_password/get_otp_response_model.dart';
 import 'package:tracking_app/src/data/api/core/api_response_models/Auth/forget_password/reset_password_response_model.dart';
 import 'package:tracking_app/src/data/api/core/api_response_models/Auth/logout_response_model.dart';
@@ -20,16 +23,13 @@ import '../../../api/core/api_response_models/app_user_response/app_user_respons
 @Injectable(as: AuthOnlineDataSource)
 class AuthOnlineDataSourceImpl implements AuthOnlineDataSource {
   final ApiServices _apiServices;
+
   AuthOnlineDataSourceImpl(this._apiServices);
+
   @override
   Future<GetOtpResponseModel> getOtp(
       GetOtpRequestModel getOtpRequestModel) async {
     return await _apiServices.getOtp(getOtpRequestModel);
-  }
-
-  @override
-  confirmOtp(ConfirmOtpRequestModel confirmOtpRequestModel) async {
-    return await _apiServices.confirmOtp(confirmOtpRequestModel);
   }
 
   @override
@@ -39,8 +39,8 @@ class AuthOnlineDataSourceImpl implements AuthOnlineDataSource {
   }
 
   @override
-  Future<LoginResponseModel> login({required LoginRequest loginRequest}) {
-    return _apiServices.login(loginRequest);
+  Future<LoginResponseModel> login({required LoginRequest loginRequest}) async {
+    return await _apiServices.login(loginRequest);
   }
 
   @override
@@ -49,16 +49,43 @@ class AuthOnlineDataSourceImpl implements AuthOnlineDataSource {
   }
 
   @override
-  Future<ChangePasswordResponesModel> changePassword(
-      {required String token,
-      required ChangePasswordRequestModel changePasswordRequestModel}) async {
+  Future<ChangePasswordResponesModel> changePassword({
+    required String token,
+    required ChangePasswordRequestModel changePasswordRequestModel,
+  }) async {
     return await _apiServices.changePassword(
         "Bearer $token", changePasswordRequestModel);
   }
 
   @override
-  Future<AppUserResponseModel> getProfileData({required String token}) {
-    return _apiServices.profileData(token: token);
+  Future<ApplyResponseModel> apply(
+      {required ApplyRequestModel applyRequestModel}) async {
+    return await _apiServices.apply(
+      applyRequestModel.country!,
+      applyRequestModel.firstName!,
+      applyRequestModel.lastName!,
+      applyRequestModel.vehicleType!,
+      applyRequestModel.vehicleNumber!,
+      applyRequestModel.vehicleLicenseImage!,
+      applyRequestModel.NID!,
+      applyRequestModel.idImage!,
+      applyRequestModel.email!,
+      applyRequestModel.password!,
+      applyRequestModel.rePassword!,
+      applyRequestModel.gender!,
+      applyRequestModel.phone!,
+    );
+  }
+
+  @override
+  Future<AppUserResponseModel> getProfileData({required String token}) async {
+    return await _apiServices.profileData(token: token);
+  }
+
+  @override
+  Future<ConfirmOtpResponseModel> confirmOtp(
+      ConfirmOtpRequestModel confirmOtpRequestModel) async {
+    return await _apiServices.confirmOtp(confirmOtpRequestModel);
   }
 
 

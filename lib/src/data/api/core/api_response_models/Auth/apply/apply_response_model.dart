@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:tracking_app/src/domain/entities/auth/apply_response_entity.dart';
 
 part 'apply_response_model.g.dart';
 
@@ -11,7 +12,7 @@ class ApplyResponseModel {
   @JsonKey(name: "token")
   final String? token;
 
-  ApplyResponseModel ({
+  ApplyResponseModel({
     this.message,
     this.driver,
     this.token,
@@ -23,6 +24,13 @@ class ApplyResponseModel {
 
   Map<String, dynamic> toJson() {
     return _$ApplyResponseModelToJson(this);
+  }
+
+  ApplyResponseEntity toDomainDto() {
+    return ApplyResponseEntity(
+      message: message,
+      driver: driver?.toDomain(),
+    );
   }
 }
 
@@ -57,7 +65,7 @@ class Driver {
   @JsonKey(name: "createdAt")
   final String? createdAt;
 
-  Driver ({
+  Driver({
     this.country,
     this.firstName,
     this.lastName,
@@ -81,6 +89,16 @@ class Driver {
   Map<String, dynamic> toJson() {
     return _$DriverToJson(this);
   }
+
+  DriveEntity toDomain() {
+    return DriveEntity(
+      country: country,
+      firstName: firstName,
+      lastName: lastName,
+      vehicleType: vehicleType,
+      vehicleNumber: vehicleNumber,
+      NID: NID,
+      email: email,
+    );
+  }
 }
-
-

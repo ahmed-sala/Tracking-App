@@ -9,27 +9,26 @@ class LoadingDialog {
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
-       return  Center(
-         child: Lottie.asset(
-           AppImages.loading,
-           width: 150.w,
-           height: 150.h,
-           fit: BoxFit.cover,
-         ),
-       );
+        return Center(
+          child: Lottie.asset(
+            AppImages.loading,
+            width: 150.w,
+            height: 150.h,
+            fit: BoxFit.cover,
+          ),
+        );
       },
     );
   }
+
   static void hide(BuildContext context) {
-    if(Navigator.canPop(context)){
+    if (Navigator.canPop(context)) {
       Navigator.pop(context);
     }
   }
 
-
   static Widget buildLoadingWidget(BuildContext context) {
     return Center(
-        child: Lottie.asset(
-            height: 200.h, width: 100.w, AppImages.loading));
+        child: Lottie.asset(height: 200.h, width: 100.w, AppImages.loading));
   }
 }

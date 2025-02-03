@@ -1,13 +1,7 @@
-import 'package:json_annotation/json_annotation.dart';
-
-
-
-
 class CountryEntity {
-
   final String? isoCode;
 
-  final String? name;
+  late final String? name;
 
   final String? phoneCode;
 
@@ -21,7 +15,7 @@ class CountryEntity {
 
   final List<TimezonesEntity>? timezones;
 
-  CountryEntity ({
+  CountryEntity({
     this.isoCode,
     this.name,
     this.phoneCode,
@@ -31,13 +25,9 @@ class CountryEntity {
     this.longitude,
     this.timezones,
   });
-
-
 }
 
-
 class TimezonesEntity {
-
   final String? zoneName;
 
   final int? gmtOffset;
@@ -48,7 +38,7 @@ class TimezonesEntity {
 
   final String? tzName;
 
-  TimezonesEntity ({
+  TimezonesEntity({
     this.zoneName,
     this.gmtOffset,
     this.gmtOffsetName,
@@ -56,5 +46,3 @@ class TimezonesEntity {
     this.tzName,
   });
 }
-
-

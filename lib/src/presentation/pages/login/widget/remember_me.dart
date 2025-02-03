@@ -24,7 +24,7 @@ class RememberMeWidget extends StatelessWidget {
           ),
           Text(
             context.localizations.rememberMe,
-            style: AppFonts.font13BlackWeight400Font,
+            style: AppFonts.font12BlackWeight400Font,
           ),
         ],
       );
