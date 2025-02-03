@@ -163,11 +163,10 @@ class _ApiServices implements ApiServices {
   }
 
   @override
-  Future<AppUserResponseModel> profileData({required String token}) async {
+  Future<AppUserResponseModel> profileData() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Authorization': token};
-    _headers.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<AppUserResponseModel>(Options(
       method: 'GET',
@@ -264,11 +263,10 @@ class _ApiServices implements ApiServices {
   }
 
   @override
-  Future<LogOutResponseModel> logout(String token) async {
+  Future<LogOutResponseModel> logout() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Authorization': token};
-    _headers.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<LogOutResponseModel>(Options(
       method: 'GET',

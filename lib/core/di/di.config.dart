@@ -124,8 +124,6 @@ extension GetItInjectableX on _i174.GetIt {
       () => sharedPrefModule.sharedPreferences,
       preResolve: true,
     );
-    gh.factory<_i265.SectionScreenViewmodel>(
-        () => _i265.SectionScreenViewmodel());
     gh.factory<_i94.ControllerManager>(() => _i94.ControllerManager());
     gh.factory<_i195.ValidatorManager>(() => _i195.ValidatorManager());
     gh.factory<_i408.EditeMyInfoControllerManager>(
@@ -133,10 +131,12 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i409.EditeMyInfoValidatorManager>(
         () => _i409.EditeMyInfoValidatorManager());
     gh.factory<_i850.OnBoardingViewModel>(() => _i850.OnBoardingViewModel());
-    gh.lazySingleton<_i558.FlutterSecureStorage>(
-        () => sharedPrefModule.secureStorage);
+    gh.factory<_i265.SectionScreenViewmodel>(
+        () => _i265.SectionScreenViewmodel());
     gh.lazySingleton<_i974.FirebaseFirestore>(
         () => firebaseModule.firebaseFirestore);
+    gh.lazySingleton<_i558.FlutterSecureStorage>(
+        () => sharedPrefModule.secureStorage);
     gh.lazySingleton<_i361.Dio>(() => dioProvider.dioProvider());
     gh.lazySingleton<_i528.PrettyDioLogger>(() => dioProvider.providePretty());
     gh.factory<_i252.AuthOfflineDataSource>(
@@ -177,29 +177,29 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i351.OrderOnlineDataSource>(),
           gh<_i839.OrderOfflineDatasource>(),
         ));
-    gh.factory<_i573.UploadPhotoUseCase>(
-        () => _i573.UploadPhotoUseCase(gh<_i214.EditeMyInfoRepo>()));
     gh.factory<_i360.UpdateProfileUseCase>(
         () => _i360.UpdateProfileUseCase(gh<_i214.EditeMyInfoRepo>()));
+    gh.factory<_i573.UploadPhotoUseCase>(
+        () => _i573.UploadPhotoUseCase(gh<_i214.EditeMyInfoRepo>()));
     gh.factory<_i587.GetAllPendingOrderUseCase>(() =>
         _i587.GetAllPendingOrderUseCase(
             orderRepository: gh<_i176.OrderRepository>()));
-    gh.factory<_i235.AuthUseCases>(
-        () => _i235.AuthUseCases(gh<_i701.AuthRepository>()));
-    gh.factory<_i333.LogOutUseCase>(
-        () => _i333.LogOutUseCase(gh<_i701.AuthRepository>()));
-    gh.factory<_i379.LoginUseCase>(
-        () => _i379.LoginUseCase(gh<_i701.AuthRepository>()));
     gh.factory<_i982.ChangePasswordUseCase>(
         () => _i982.ChangePasswordUseCase(gh<_i701.AuthRepository>()));
+    gh.factory<_i235.AuthUseCases>(
+        () => _i235.AuthUseCases(gh<_i701.AuthRepository>()));
+    gh.factory<_i379.LoginUseCase>(
+        () => _i379.LoginUseCase(gh<_i701.AuthRepository>()));
+    gh.factory<_i333.LogOutUseCase>(
+        () => _i333.LogOutUseCase(gh<_i701.AuthRepository>()));
     gh.factory<_i986.GetProfileDataUseCase>(() => _i986.GetProfileDataUseCase(
         authRepository: gh<_i701.AuthRepository>()));
     gh.factory<_i684.VehiclesUseCases>(
         () => _i684.VehiclesUseCases(gh<_i557.VehiclesRepo>()));
-    gh.factory<_i844.StartOrderUseCase>(
-        () => _i844.StartOrderUseCase(gh<_i176.OrderRepository>()));
     gh.factory<_i150.OrderDetailsUsecase>(
         () => _i150.OrderDetailsUsecase(gh<_i176.OrderRepository>()));
+    gh.factory<_i844.StartOrderUseCase>(
+        () => _i844.StartOrderUseCase(gh<_i176.OrderRepository>()));
     gh.factory<_i353.StoreOrderUseCase>(
         () => _i353.StoreOrderUseCase(gh<_i176.OrderRepository>()));
     gh.factory<_i762.ForgetPasswordScreenViewModel>(
