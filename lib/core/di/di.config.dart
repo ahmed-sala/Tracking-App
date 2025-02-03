@@ -67,6 +67,8 @@ import '../../src/domain/use_cases/forget_password/forget_password_use_cases.dar
 import '../../src/domain/use_cases/get_profile_data_use_case.dart' as _i986;
 import '../../src/domain/use_cases/log_out_use_case.dart' as _i333;
 import '../../src/domain/use_cases/login_use_case.dart' as _i379;
+import '../../src/domain/use_cases/order/all_driver_orders_usecase.dart'
+    as _i691;
 import '../../src/domain/use_cases/order/get_all_pending_order_use_case.dart'
     as _i587;
 import '../../src/domain/use_cases/order/order_details_usecase.dart' as _i150;
@@ -93,6 +95,8 @@ import '../../src/presentation/managers/edit_my_info/validator_manager.dart'
 import '../../src/presentation/managers/login/login_cubit.dart' as _i84;
 import '../../src/presentation/managers/on_boarding/on_boarding_view_model.dart'
     as _i850;
+import '../../src/presentation/managers/order/all_driver_orders/all_driver_orders_viewmodel.dart'
+    as _i1059;
 import '../../src/presentation/managers/order/order_details/order_details_viewmodel.dart'
     as _i274;
 import '../../src/presentation/managers/order/pending_order/pending_order_cubit.dart'
@@ -124,8 +128,6 @@ extension GetItInjectableX on _i174.GetIt {
       () => sharedPrefModule.sharedPreferences,
       preResolve: true,
     );
-    gh.factory<_i265.SectionScreenViewmodel>(
-        () => _i265.SectionScreenViewmodel());
     gh.factory<_i94.ControllerManager>(() => _i94.ControllerManager());
     gh.factory<_i195.ValidatorManager>(() => _i195.ValidatorManager());
     gh.factory<_i408.EditeMyInfoControllerManager>(
@@ -133,10 +135,12 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i409.EditeMyInfoValidatorManager>(
         () => _i409.EditeMyInfoValidatorManager());
     gh.factory<_i850.OnBoardingViewModel>(() => _i850.OnBoardingViewModel());
-    gh.lazySingleton<_i558.FlutterSecureStorage>(
-        () => sharedPrefModule.secureStorage);
+    gh.factory<_i265.SectionScreenViewmodel>(
+        () => _i265.SectionScreenViewmodel());
     gh.lazySingleton<_i974.FirebaseFirestore>(
         () => firebaseModule.firebaseFirestore);
+    gh.lazySingleton<_i558.FlutterSecureStorage>(
+        () => sharedPrefModule.secureStorage);
     gh.lazySingleton<_i361.Dio>(() => dioProvider.dioProvider());
     gh.lazySingleton<_i528.PrettyDioLogger>(() => dioProvider.providePretty());
     gh.factory<_i252.AuthOfflineDataSource>(
@@ -177,35 +181,40 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i351.OrderOnlineDataSource>(),
           gh<_i839.OrderOfflineDatasource>(),
         ));
-    gh.factory<_i573.UploadPhotoUseCase>(
-        () => _i573.UploadPhotoUseCase(gh<_i214.EditeMyInfoRepo>()));
     gh.factory<_i360.UpdateProfileUseCase>(
         () => _i360.UpdateProfileUseCase(gh<_i214.EditeMyInfoRepo>()));
+    gh.factory<_i573.UploadPhotoUseCase>(
+        () => _i573.UploadPhotoUseCase(gh<_i214.EditeMyInfoRepo>()));
     gh.factory<_i587.GetAllPendingOrderUseCase>(() =>
         _i587.GetAllPendingOrderUseCase(
             orderRepository: gh<_i176.OrderRepository>()));
-    gh.factory<_i235.AuthUseCases>(
-        () => _i235.AuthUseCases(gh<_i701.AuthRepository>()));
-    gh.factory<_i333.LogOutUseCase>(
-        () => _i333.LogOutUseCase(gh<_i701.AuthRepository>()));
-    gh.factory<_i379.LoginUseCase>(
-        () => _i379.LoginUseCase(gh<_i701.AuthRepository>()));
     gh.factory<_i982.ChangePasswordUseCase>(
         () => _i982.ChangePasswordUseCase(gh<_i701.AuthRepository>()));
+    gh.factory<_i235.AuthUseCases>(
+        () => _i235.AuthUseCases(gh<_i701.AuthRepository>()));
+    gh.factory<_i379.LoginUseCase>(
+        () => _i379.LoginUseCase(gh<_i701.AuthRepository>()));
+    gh.factory<_i333.LogOutUseCase>(
+        () => _i333.LogOutUseCase(gh<_i701.AuthRepository>()));
     gh.factory<_i986.GetProfileDataUseCase>(() => _i986.GetProfileDataUseCase(
         authRepository: gh<_i701.AuthRepository>()));
     gh.factory<_i684.VehiclesUseCases>(
         () => _i684.VehiclesUseCases(gh<_i557.VehiclesRepo>()));
-    gh.factory<_i844.StartOrderUseCase>(
-        () => _i844.StartOrderUseCase(gh<_i176.OrderRepository>()));
     gh.factory<_i150.OrderDetailsUsecase>(
         () => _i150.OrderDetailsUsecase(gh<_i176.OrderRepository>()));
+    gh.factory<_i844.StartOrderUseCase>(
+        () => _i844.StartOrderUseCase(gh<_i176.OrderRepository>()));
     gh.factory<_i353.StoreOrderUseCase>(
         () => _i353.StoreOrderUseCase(gh<_i176.OrderRepository>()));
+    gh.factory<_i691.AllDriverOrdersUsecase>(
+        () => _i691.AllDriverOrdersUsecase(gh<_i176.OrderRepository>()));
     gh.factory<_i762.ForgetPasswordScreenViewModel>(
         () => _i762.ForgetPasswordScreenViewModel(gh<_i235.AuthUseCases>()));
     gh.factory<_i908.PendingOrderCubit>(
         () => _i908.PendingOrderCubit(gh<_i587.GetAllPendingOrderUseCase>()));
+    gh.factory<_i1059.AllDriverOrdersViewmodelCubit>(() =>
+        _i1059.AllDriverOrdersViewmodelCubit(
+            gh<_i691.AllDriverOrdersUsecase>()));
     gh.factory<_i274.OrderDetailsViewmodel>(
         () => _i274.OrderDetailsViewmodel(gh<_i150.OrderDetailsUsecase>()));
     gh.factory<_i641.StartOrderCubit>(() => _i641.StartOrderCubit(

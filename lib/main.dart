@@ -28,7 +28,6 @@ void main() async {
       await getIt<FlutterSecureStorage>().read(key: SharedPrefKeys.tokeKey);
   print(token);
   if (token != null) {
-    token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkcml2ZXIiOiI2Nzc5NGUyYjlmMzg4NGIzNDA1YzRlNjAiLCJpYXQiOjE3MzgxMTM5MjN9.IYA0NPhUiMADLxLtWLcpPGU_QPzMGPepMuqk-yjvZbc";
     getIt<Dio>().options.headers['Authorization'] = 'Bearer $token';
   }
   Bloc.observer = MyBlocObserver();

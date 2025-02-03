@@ -180,5 +180,8 @@
   "editeMyInfo": "Edit My Info",
   "change": "Change",
   "photoUploadSuccess": "Photo uploaded successfully",
-  "updatedUserInfoSuccess": "Updated user info successfully"
+  "updatedUserInfoSuccess": "Updated user info successfully",
+  "canceled": "Canceled",
+  "completed": "Completed",
+  "recentOrders": "Recent Orders"
 }

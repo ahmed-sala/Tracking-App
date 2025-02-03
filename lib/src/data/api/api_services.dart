@@ -19,6 +19,7 @@ import 'package:tracking_app/src/data/api/core/api_response_models/app_user_resp
 import 'package:tracking_app/src/data/api/core/api_response_models/change_password/change_password_response_model.dart';
 import 'package:tracking_app/src/data/api/core/api_response_models/edite_my_info/updated_user_response_model.dart';
 import 'package:tracking_app/src/data/api/core/api_response_models/login_response_model/login_response_model.dart';
+import 'package:tracking_app/src/data/api/core/api_response_models/order/all_driver_order/all_driver_oder_response.dart';
 import 'package:tracking_app/src/data/api/core/api_response_models/upload_photo_response_model.dart';
 import 'package:tracking_app/src/data/api/core/api_response_models/vehicles/vehicles_response_model.dart';
 import 'package:tracking_app/src/data/api/core/constants/api_end_points.dart';
@@ -75,20 +76,20 @@ abstract interface class ApiServices {
       @Body() ChangePasswordRequestModel changePasswordRequestModel);
 
   @GET(ApiEndPoints.pendingOrder)
-  Future<PendingOrdersResponseModel>getAllPendingOrders();
-
+  Future<PendingOrdersResponseModel> getAllPendingOrders();
 
   @PUT("${ApiEndPoints.startOrder}/{orderId}")
-  Future<StartOrderResponseModel>startOrder({@Path()  required String orderId});
-
+  Future<StartOrderResponseModel> startOrder({@Path() required String orderId});
 
   @PUT(ApiEndPoints.uploadPhoto)
   @MultiPart()
   Future<UploadPhotoResponseModel> uploadPhoto(
       @Header(ApiKey.authorization) String token,
-      @Part(name: "photo",contentType: "image/jpg") File photo);
-
+      @Part(name: "photo", contentType: "image/jpg") File photo);
 
   @PUT(ApiEndPoints.editeProfile)
-  Future<UpdatedUserResponseModel> updateUserInfo(@Header(ApiKey.authorization) String token, @Body() UpdatedUserRequestModel updatedUserRequestModel);
+  Future<UpdatedUserResponseModel> updateUserInfo(
+      @Body() UpdatedUserRequestModel updatedUserRequestModel);
+  @GET(ApiEndPoints.driverOrder)
+  Future<AllDriverOderResponse> getAllDriverOrders();
 }
