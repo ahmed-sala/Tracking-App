@@ -2,6 +2,7 @@ class ApiEndPoints {
   ApiEndPoints._();
 
   static const String login = "drivers/signin";
+  static const String profileData = "drivers/profile-data";
   static const String forgetPassword = "drivers/forgotPassword";
   static const String verifyResetCode = "drivers/verifyResetCode";
   static const String resetPassword = "drivers/resetPassword";
@@ -13,4 +14,8 @@ class ApiEndPoints {
   static const String profileData = "drivers/profile-data";
 
   static const String pendingOrder = "orders/pending-orders";
+  static const String startOrder = "orders/start";
+  static const String uploadPhoto = "drivers/upload-photo";
+  static const String editeProfile =  "drivers/editProfile";
+
 }

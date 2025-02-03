@@ -89,7 +89,7 @@ class Driver {
       email: email,
       phone: phone,
       gender: gender,
-      photo: phone
+      photo: photo
     );
   }
 }

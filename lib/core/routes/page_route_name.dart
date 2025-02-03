@@ -13,4 +13,6 @@ class PageRoutesName {
   static const String section = 'section';
 
   static const String applicationApprovedView = 'ApplicationApprovedView';
+  static const String orderDetailsScreen = 'OrderDetailsScreen';
+  static const String editeMyInfo = "editeMyInfo";
 }

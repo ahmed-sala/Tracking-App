@@ -52,7 +52,7 @@ class _LoginViewState extends State<LoginView> {
       showAwesomeDialog(
         context,
         title: "Error",
-        desc: errorMassage.errorMassage,
+        desc: errorMassage.errorMessage,
         onOk: () {},
         dialogType: DialogType.error,
       );

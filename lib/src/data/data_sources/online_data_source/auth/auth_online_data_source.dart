@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:tracking_app/src/data/api/core/api_request_models/Auth/forget_password_request_models/confirm_otp_request_model.dart';
 import 'package:tracking_app/src/data/api/core/api_request_models/Auth/forget_password_request_models/get_otp_request_model.dart';
 import 'package:tracking_app/src/data/api/core/api_request_models/Auth/forget_password_request_models/reset_password_request_model.dart';
@@ -9,6 +11,7 @@ import 'package:tracking_app/src/data/api/core/api_response_models/Auth/forget_p
 import 'package:tracking_app/src/data/api/core/api_response_models/Auth/logout_response_model.dart';
 import 'package:tracking_app/src/data/api/core/api_response_models/change_password/change_password_response_model.dart';
 import 'package:tracking_app/src/data/api/core/api_response_models/login_response_model/login_response_model.dart';
+import 'package:tracking_app/src/data/api/core/api_response_models/upload_photo_response_model.dart';
 
 import '../../../api/core/api_request_models/Auth/apply/apply_request_model.dart';
 import '../../../api/core/api_request_models/change_password/change_password_request_model.dart';
@@ -31,4 +34,6 @@ abstract interface class AuthOnlineDataSource {
       required ChangePasswordRequestModel changePasswordRequestModel});
 
   Future<AppUserResponseModel> getProfileData({required String token});
+
+
 }
