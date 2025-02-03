@@ -1,0 +1,103 @@
+import 'dart:math';
+
+import 'package:elegant_notification/elegant_notification.dart';
+import 'package:elegant_notification/resources/arrays.dart';
+import 'package:elegant_notification/resources/stacked_options.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_icon_snackbar/flutter_icon_snackbar.dart';
+import 'package:tracking_app/core/di/di.dart';
+import 'package:tracking_app/core/extensions/extensions.dart';
+import 'package:tracking_app/core/routes/page_route_name.dart';
+import 'package:tracking_app/core/utilities/style/app_text_styles.dart';
+import 'package:tracking_app/src/data/api/core/errors/error_handler.dart';
+import 'package:tracking_app/src/presentation/managers/edit_my_info/edit_my_info_actions.dart';
+import 'package:tracking_app/src/presentation/managers/edit_my_info/edite_my_info_states.dart';
+import 'package:tracking_app/src/presentation/managers/edit_my_info/edite_my_info_view_model.dart';
+import 'package:tracking_app/src/presentation/pages/edit_my_info/edite_my_profile_body.dart';
+import 'package:tracking_app/src/presentation/shared_widgets/error_view.dart';
+import 'package:tracking_app/src/presentation/pages/edit_my_info/loading_shimmer.dart';
+import 'package:tracking_app/src/tracking_app.dart';
+
+import '../../../../core/common/common_imports.dart';
+
+class EditMyInfo extends StatelessWidget {
+  EditMyInfo({super.key});
+
+  final viewModel = getIt<EditeMyInfoViewModel>();
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (_) {
+        viewModel.doAction(LoadDriverInfoAction());
+        return viewModel;
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          leading: IconButton(
+              onPressed: () {}, icon: const Icon(Icons.arrow_back_ios_new)),
+          title: Text(
+            context.localization.editProfile,
+            style: AppTextStyles.font20Medium,
+          ),
+        ),
+        body: BlocConsumer<EditeMyInfoViewModel, EditeMyInfoStates>(
+            builder: (context, state) {
+          if (state is LoadingDriverInfoState) {
+            return const LoadingShimmer();
+          }
+          if (state is LoadedDriverInfoState || state is UpdateUserInfoSuccessState) {
+            return const EditeMyProfileBody();
+          }
+          if (state is ErrorDriverInfoState) {
+            String errorMessage = ErrorHandler.fromException(
+                    state.exception!, AppLocalizations.of(context)!)
+                .errorMessage;
+            return ErrorView(
+              errorMessage: errorMessage,
+              viewModel: viewModel,
+              action: LoadDriverInfoAction(),
+            );
+          }
+          return const EditeMyProfileBody();
+        }, listener: (context, state) {
+          if (state is ChangePasswordState) {
+            navKey.currentState!.pushNamed(PageRoutesName.changePassword);
+          }
+          if (state is UploadPhotoSuccessState) {
+            IconSnackBar.show(
+              context,
+              label: context.localization.photoUploadSuccess,
+              snackBarType: SnackBarType.success,
+            );
+            viewModel.doAction(LoadDriverInfoAction());
+          }
+          if (state is UploadPhotoErrorState) {
+            IconSnackBar.show(
+              context,
+              label: ErrorHandler.fromException(
+                      state.exception!, AppLocalizations.of(context)!).errorMessage,
+              snackBarType: SnackBarType.fail,
+            );
+          }
+          if (state is UpdateUserInfoSuccessState) {
+            IconSnackBar.show(
+              context,
+              label: context.localization.updatedUserInfoSuccess,
+              snackBarType: SnackBarType.success,
+            );
+          }
+          if(state is UpdatedUserInfoFailedState){
+            IconSnackBar.show(
+              context,
+              label: ErrorHandler.fromException(
+                      state.exception!, AppLocalizations.of(context)!)
+                  .errorMessage,
+              snackBarType: SnackBarType.fail,
+            );
+          }
+        }),
+      ),
+    );
+  }
+}
