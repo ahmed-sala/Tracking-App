@@ -5,7 +5,6 @@ import 'package:tracking_app/core/utilities/style/app_colors.dart';
 import 'package:tracking_app/src/presentation/managers/order/pick_up_location/pick_up_location_action.dart';
 import '../../../../../core/common/common_imports.dart';
 import '../../../../../core/utilities/dialogs/toast_dialoge.dart';
-import '../../../../data/api/core/errors/error_handler.dart';
 import '../../../managers/order/pick_up_location/pick_up_location_cubit.dart';
 import '../../../managers/order/pick_up_location/pick_up_location_state.dart';
 import '../widget/pick_up_location_widget/map_body_widget/no_location_permission_widget.dart';

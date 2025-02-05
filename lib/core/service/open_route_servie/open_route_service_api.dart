@@ -1,7 +1,4 @@
-import 'package:dio/dio.dart';
-import 'package:injectable/injectable.dart';
 import 'package:latlong2/latlong.dart';
-
 import '../../common/apis/api_result.dart';
 
 abstract class OpenRouteServiceApi {
