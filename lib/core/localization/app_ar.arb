@@ -1,3 +1,4 @@
+
 {
   "connectionTimeout": "انتهت مهلة الاتصال. يرجى التحقق من اتصال الإنترنت والمحاولة مرة أخرى.",
   "sendTimeout": "انتهت مهلة إرسال البيانات. يرجى المحاولة مرة أخرى لاحقًا.",
@@ -178,5 +179,14 @@
   "editeMyInfo": "تعديل معلوماتي",
   "change" : "تغيير",
   "photoUploadSuccess": "تم تحميل الصورة بنجاح",
-  "updatedUserInfoSuccess": "تم تحديث معلوماتك بنجاح"
+  "updatedUserInfoSuccess": "تم تحديث معلوماتك بنجاح",
+  "backToPreviousPage": "الرجوع إلى الصفحة السابقة",
+  "requestLocationPermission": "طلب صلاحية الموقع",
+  "locationPermissionMessage": "تحتاج هذه الخدمة إلى صلاحية الوصول لموقعك الحالي للحصول على تجربة أفضل",
+  "enableLocationPermission": "تفعيل صلاحية الموقع",
+  "yourLocation": "موقعك",
+  "flowery": "فلوري",
+  "largeDistanceWarning": "لم يتم رسم الخط لأن المسافة كبيرة ولم تستطع توصيل الطلب",
+  "pickUpAddress": "عنوان الاستلام"
+
 }
