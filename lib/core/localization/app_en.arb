@@ -188,6 +188,8 @@
   "yourLocation": "Your Location",
   "flowery": "Flowery",
   "largeDistanceWarning": "The line was not drawn because the distance is too large, and the request could not be delivered",
-  "pickUpAddress": "Pick Up Address"
-
+  "pickUpAddress": "Pick Up Address",
+  "theOrderWasDeliveredSuccessfully": "The order was delivered successfully",
+   "done": "Done",
+   "thankYou": "Thank you!"
 }

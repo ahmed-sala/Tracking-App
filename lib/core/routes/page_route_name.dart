@@ -13,4 +13,5 @@ class PageRoutesName {
   static const String orderDetailsScreen = 'OrderDetailsScreen';
   static const String editeMyInfo = "editeMyInfo";
   static const String pickUpLocation="PickUpLocationScreen";
+  static const String successOrder="successOrder";
 }

@@ -170,7 +170,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                   verticalSpace(24),
                   ButtonOrderDetails(
                       updateState: viewModel.orderDetails.state == "Delivered"
-                          ? null
+                          ? ()=> _goNextSuccessOrderScreen()
                           : () => viewModel.updateState(orderDetails),
                       btnTxt: viewModel.btnTxt),
                   verticalSpace(100),
@@ -186,6 +186,11 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
   void goNextPockUpLocationScreen({required ArgumentPickUpRoutesScreen argumentPickUpRoutes}){
     Navigator.pushNamed(context,
         PageRoutesName.pickUpLocation,arguments:argumentPickUpRoutes  );
+  }
+
+  void _goNextSuccessOrderScreen(){
+    Navigator.pushNamedAndRemoveUntil(context,
+        PageRoutesName.successOrder,(route) => false, );
   }
 
 
