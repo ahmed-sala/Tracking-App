@@ -10,6 +10,7 @@ import 'package:tracking_app/src/presentation/pages/login/view/login_view.dart';
 import 'package:tracking_app/src/presentation/pages/profile/view/profile_view.dart';
 import 'package:tracking_app/src/presentation/pages/section_app/section_screen.dart';
 
+import '../../src/presentation/pages/home/view/success_order_screen.dart';
 import '../../src/presentation/splash_screen.dart';
 
 class AppRoutes {
@@ -43,6 +44,9 @@ class AppRoutes {
       case PageRoutesName.changePassword:
         return _handelMaterialPageRoute(
             settings: settings, widget: ChangePasswordScreen());
+      case PageRoutesName.successOrder:
+        return _handelMaterialPageRoute(
+            settings: settings, widget: const SuccessOrderScreen());
       case PageRoutesName.pickUpLocation:
         return _handelMaterialPageRoute(
             settings: settings, widget: const PickUpLocationScreen());

@@ -9,9 +9,6 @@ class OpenRouteServiceApiImpl implements OpenRouteServiceApi {
   final String _url = 'https://api.openrouteservice.org/v2/directions/';
   final String _apiKey = '5b3ce3597851110001cf624860747fc7ae224b24a75d0bd0e8fea12a';
   final String _pathParam = 'driving-car';
-
-
-
   @override
   Future<ApiResult<List<LatLng>>> getRouteMaps({
     required double startLat,

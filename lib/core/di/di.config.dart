@@ -72,6 +72,8 @@ import '../../src/domain/use_cases/order/all_driver_orders_usecase.dart'
 import '../../src/domain/use_cases/order/get_all_pending_order_use_case.dart'
     as _i587;
 import '../../src/domain/use_cases/order/order_details_usecase.dart' as _i150;
+import '../../src/domain/use_cases/order/remove_order_id_use_case.dart'
+    as _i502;
 import '../../src/domain/use_cases/order/start_order_use_case.dart' as _i844;
 import '../../src/domain/use_cases/order/store_order_use_case.dart' as _i353;
 import '../../src/domain/use_cases/upload_photo_use_case.dart' as _i573;
@@ -105,6 +107,8 @@ import '../../src/presentation/managers/order/pick_up_location/pick_up_location_
     as _i121;
 import '../../src/presentation/managers/order/start_order/start_order_cubit.dart'
     as _i641;
+import '../../src/presentation/managers/order/success_order/success_order_cubit.dart'
+    as _i456;
 import '../../src/presentation/managers/profile/profile_cubit.dart' as _i34;
 import '../../src/presentation/managers/section/section_screen_viewmodel.dart'
     as _i265;
@@ -201,6 +205,10 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i587.GetAllPendingOrderUseCase>(() =>
         _i587.GetAllPendingOrderUseCase(
             orderRepository: gh<_i176.OrderRepository>()));
+    gh.factory<_i502.RemoveOrderIdUseCase>(() => _i502.RemoveOrderIdUseCase(
+        orderRepository: gh<_i176.OrderRepository>()));
+    gh.factory<_i456.SuccessOrderCubit>(
+        () => _i456.SuccessOrderCubit(gh<_i502.RemoveOrderIdUseCase>()));
     gh.factory<_i982.ChangePasswordUseCase>(
         () => _i982.ChangePasswordUseCase(gh<_i701.AuthRepository>()));
     gh.factory<_i235.AuthUseCases>(

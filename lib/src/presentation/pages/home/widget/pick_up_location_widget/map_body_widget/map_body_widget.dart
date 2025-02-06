@@ -77,14 +77,13 @@ class _MapBodyWidgetState extends State<MapBodyWidget> {
           },
           child:  const Padding(
             padding: EdgeInsets.all(20.0),
-            child: Positioned(
-                child: CircleAvatar(
-                  radius: 25,
-                  backgroundColor: AppColors.mainColor,
-                  child: Icon(Icons.arrow_back_ios_new,color: AppColors.kWhiteBase,
-                    size: 24,),
+            child: CircleAvatar(
+              radius: 25,
+              backgroundColor: AppColors.mainColor,
+              child: Icon(Icons.arrow_back_ios_new,color: AppColors.kWhiteBase,
+                size: 24,),
 
-                )),
+            ),
           ),
         ),
       ],

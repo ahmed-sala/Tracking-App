@@ -47,12 +47,7 @@ class CustomInfoCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(50.r),
           ),
           child: CachedNetworkImageWidget(
-              fit: BoxFit.cover,
-              imageUrl: isUser
-                  ? "https://flower.elevateegy.com/uploads/$imageUrl"
-                  : imageUrl,
-              width: 44,
-              height: 44),
+              fit: BoxFit.cover, imageUrl: imageUrl, width: 44, height: 44),
         ),
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

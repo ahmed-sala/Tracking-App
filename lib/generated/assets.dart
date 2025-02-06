@@ -139,6 +139,7 @@ class Assets {
   static const String iconsCancelIcon = 'assets/icons/cancel_icon.svg';
   static const String iconsCompletedIcon = 'assets/icons/completed_icon.svg';
   static const String iconsFlower = 'assets/icons/Flower.svg';
+  static const String iconsSuccess = 'assets/icons/success.svg';
   static const String iconsUser1 = 'assets/icons/user1.svg';
   static const String iconsWhatsapp = 'assets/icons/whatsapp.svg';
   static const String imagesCachedNetworkImage Widget = 'lib/core/utilities/style/images/cached_network_image _widget.dart';
@@ -199,6 +200,7 @@ class Assets {
   static const String orderPendingOrderEntity = 'lib/src/domain/entities/order/pending_order_entity.dart';
   static const String orderPendingOrdersResponseModel = 'lib/src/data/api/core/api_response_models/order/pending_orders_response_model.dart';
   static const String orderPendingOrdersResponseModel.g = 'lib/src/data/api/core/api_response_models/order/pending_orders_response_model.g.dart';
+  static const String orderRemoveOrderIdUseCase = 'lib/src/domain/use_cases/order/remove_order_id_use_case.dart';
   static const String orderStartOrderUseCase = 'lib/src/domain/use_cases/order/start_order_use_case.dart';
   static const String orderStoreOrderUseCase = 'lib/src/domain/use_cases/order/store_order_use_case.dart';
   static const String pagesPages = 'lib/src/presentation/pages/pages.dart';
@@ -217,6 +219,7 @@ class Assets {
   static const String rediusAppRadius = 'lib/core/helpers/redius/app_radius.dart';
   static const String repositoriesRepo = 'lib/src/data/repositories/repo.dart';
   static const String routesAppRoutes = 'lib/core/routes/app_routes.dart';
+  static const String routesInitialPageRoute = 'lib/core/routes/initial_page_route.dart';
   static const String routesPageRouteName = 'lib/core/routes/page_route_name.dart';
   static const String sectionAppSectionScreen = 'lib/src/presentation/pages/section_app/section_screen.dart';
   static const String sectionSectionScreenState = 'lib/src/presentation/managers/section/section_screen_state.dart';
@@ -243,6 +246,9 @@ class Assets {
   static const String styleAppImages = 'lib/core/utilities/style/app_images.dart';
   static const String styleAppTextStyles = 'lib/core/utilities/style/app_text_styles.dart';
   static const String styleSpacing = 'lib/core/utilities/style/spacing.dart';
+  static const String successOrderSuccessOrderAction = 'lib/src/presentation/managers/order/success_order/success_order_action.dart';
+  static const String successOrderSuccessOrderCubit = 'lib/src/presentation/managers/order/success_order/success_order_cubit.dart';
+  static const String successOrderSuccessOrderState = 'lib/src/presentation/managers/order/success_order/success_order_state.dart';
   static const String themeAppTheme = 'lib/core/theme/app_theme.dart';
   static const String urlLancherPackegeOpenApplication = 'lib/core/service/url_lancher_packege/open_application.dart';
   static const String urlLancherPackegeOpenApplicationFactory = 'lib/core/service/url_lancher_packege/open_application_factory.dart';
@@ -268,6 +274,7 @@ class Assets {
   static const String viewOrderDetailsScreen = 'lib/src/presentation/pages/home/view/order_details_screen.dart';
   static const String viewPick upLocationScreen = 'lib/src/presentation/pages/home/view/pick_ up_location_screen.dart';
   static const String viewProfileView = 'lib/src/presentation/pages/profile/view/profile_view.dart';
+  static const String viewSuccessOrderScreen = 'lib/src/presentation/pages/home/view/success_order_screen.dart';
   static const String widgetAcceptOrderButtonWidget = 'lib/src/presentation/pages/home/widget/accept_order_button_widget.dart';
   static const String widgetActionButtonWidget = 'lib/src/presentation/pages/home/widget/action_button_widget.dart';
   static const String widgetCustomInfoCardWidget = 'lib/src/presentation/pages/home/widget/custom_info_card_widget.dart';

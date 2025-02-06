@@ -186,6 +186,9 @@
   "yourLocation": "موقعك",
   "flowery": "فلوري",
   "largeDistanceWarning": "لم يتم رسم الخط لأن المسافة كبيرة ولم تستطع توصيل الطلب",
+  "theOrderWasDeliveredSuccessfully": "تم تسليم الطلب بنجاح",
+  "done": "تم",
+  "thankYou": "شكراً لك!",
   "pickUpAddress": "عنوان الاستلام",
 
   "updatedUserInfoSuccess": "تم تحديث معلوماتك بنجاح",

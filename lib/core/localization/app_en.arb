@@ -187,10 +187,14 @@
   "yourLocation": "Your Location",
   "flowery": "Flowery",
   "largeDistanceWarning": "The line was not drawn because the distance is too large, and the request could not be delivered",
+  "theOrderWasDeliveredSuccessfully": "The order was delivered successfully",
+   "done": "Done",
+   "thankYou": "Thank you!",
   "pickUpAddress": "Pick Up Address",
 
   "updatedUserInfoSuccess": "Updated user info successfully",
   "canceled": "Canceled",
   "completed": "Completed",
   "recentOrders": "Recent Orders"
+
 }

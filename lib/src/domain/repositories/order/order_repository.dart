@@ -9,5 +9,6 @@ abstract class OrderRepository {
   Future<ApiResult<bool>> startOrder({required String orderId});
   Future<ApiResult<PendingOrderEntity>> getPendingOrderById();
   Future<ApiResult<void>> updateState(String id, String state);
+  Future<ApiResult<bool>> removeOrderId({required String orderId});
   Future<ApiResult<AllDriverOrdersEntity>> getAllDriverOrders();
 }

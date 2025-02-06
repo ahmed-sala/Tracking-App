@@ -70,4 +70,14 @@ class AppFonts {
       fontSize: 18.sp,
       fontWeight: FontWeight.w600,
       color: AppColors.kBlackBase);
+
+
+  static TextStyle font24GreenWeightW500Font=TextStyle(
+      fontSize: 24.sp,
+      color: AppColors.kSuccess,
+      fontWeight: FontWeight.w500);
+  static TextStyle font24KBlackWeightW500Font=TextStyle(
+      fontSize: 24.sp,
+      color: AppColors.kBlackBase,
+      fontWeight: FontWeight.w500);
 }

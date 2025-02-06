@@ -77,6 +77,16 @@ class OrderRepositoryImpl implements OrderRepository {
   }
 
   @override
+  Future<ApiResult<bool>> removeOrderId({required String orderId}) {
+    return executeApi<bool>(
+      apiCall: () async {
+        await _orderOfflineDatasource.removeOrderId(orderId: orderId);
+        return true;
+      },
+    );
+  }
+
+  @override
   Future<ApiResult<AllDriverOrdersEntity>> getAllDriverOrders() async {
     return await executeApi<AllDriverOrdersEntity>(
       apiCall: () async {
