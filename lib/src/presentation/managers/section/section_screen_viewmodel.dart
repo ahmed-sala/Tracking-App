@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:tracking_app/src/presentation/pages/order/order_screen.dart';
 import 'package:tracking_app/src/presentation/pages/profile/view/profile_view.dart';
+
 import '../../pages/home/view/home_screen.dart';
 import 'section_screen_state.dart';
 
@@ -24,7 +25,7 @@ class SectionScreenViewmodel extends Cubit<SectionScreenState> {
 
   final List<Widget> _screens = [
     const HomeScreen(),
-    const OrderScreen(),
+    OrderScreen(),
     const ProfileView(),
   ];
 

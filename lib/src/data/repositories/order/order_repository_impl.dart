@@ -1,5 +1,6 @@
 import 'package:injectable/injectable.dart';
 import 'package:tracking_app/src/data/data_sources/offline_data_source/order/order_offline_datasource.dart';
+import 'package:tracking_app/src/domain/entities/order/all_driver_orders_entity.dart';
 
 import '../../../../core/common/apis/api_executer.dart';
 import '../../../../core/common/apis/api_result.dart';
@@ -84,4 +85,15 @@ class OrderRepositoryImpl implements OrderRepository {
   }
 
 
+
+  @override
+  Future<ApiResult<AllDriverOrdersEntity>> getAllDriverOrders() async {
+    return await executeApi<AllDriverOrdersEntity>(
+      apiCall: () async {
+        var response = await _orderOnlineDataSource.getAllDriverOrders();
+        var result = response.toDto();
+        return result.toDomain();
+      },
+    );
+  }
 }

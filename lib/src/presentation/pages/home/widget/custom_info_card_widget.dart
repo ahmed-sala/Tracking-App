@@ -1,7 +1,7 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tracking_app/core/utilities/style/images/cached_network_image%20_widget.dart';
+
 class CustomInfoCard extends StatelessWidget {
   final String title;
   final String subtitle;
@@ -10,6 +10,7 @@ class CustomInfoCard extends StatelessWidget {
   final Color backgroundColor;
   final Color titleColor;
   final Color subtitleColor;
+  final bool isUser;
 
   const CustomInfoCard({
     super.key,
@@ -20,6 +21,7 @@ class CustomInfoCard extends StatelessWidget {
     this.backgroundColor = Colors.white,
     this.titleColor = Colors.black,
     this.subtitleColor = Colors.grey,
+    this.isUser = false,
   });
 
   @override
@@ -27,7 +29,7 @@ class CustomInfoCard extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: backgroundColor,
-        boxShadow:  [
+        boxShadow: [
           BoxShadow(
             color: Color(0x53535340).withOpacity(0.2),
             spreadRadius: 0,

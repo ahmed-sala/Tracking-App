@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:injectable/injectable.dart';
 import 'package:tracking_app/src/data/api/api_services.dart';
 import 'package:tracking_app/src/data/api/core/api_request_models/Auth/forget_password_request_models/confirm_otp_request_model.dart';
@@ -12,7 +10,6 @@ import 'package:tracking_app/src/data/api/core/api_response_models/Auth/forget_p
 import 'package:tracking_app/src/data/api/core/api_response_models/Auth/logout_response_model.dart';
 import 'package:tracking_app/src/data/api/core/api_response_models/change_password/change_password_response_model.dart';
 import 'package:tracking_app/src/data/api/core/api_response_models/login_response_model/login_response_model.dart';
-import 'package:tracking_app/src/data/api/core/api_response_models/upload_photo_response_model.dart';
 import 'package:tracking_app/src/data/data_sources/online_data_source/auth/auth_online_data_source.dart';
 
 import '../../../api/core/api_response_models/app_user_response/app_user_response_model.dart';
@@ -45,7 +42,7 @@ class AuthOnlineDataSourceImpl implements AuthOnlineDataSource {
 
   @override
   Future<LogOutResponseModel> logOut({required String token}) async {
-    return await _apiServices.logout("Bearer $token");
+    return await _apiServices.logout();
   }
 
   @override
@@ -58,8 +55,6 @@ class AuthOnlineDataSourceImpl implements AuthOnlineDataSource {
 
   @override
   Future<AppUserResponseModel> getProfileData({required String token}) {
-    return _apiServices.profileData(token: token);
+    return _apiServices.profileData();
   }
-
-
 }

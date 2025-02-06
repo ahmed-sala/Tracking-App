@@ -7,8 +7,6 @@ import 'package:tracking_app/core/routes/app_routes.dart';
 import 'package:tracking_app/core/routes/page_route_name.dart';
 import 'package:tracking_app/core/theme/app_theme.dart';
 
-import '../core/routes/initial_page_route.dart';
-
 final GlobalKey<NavigatorState> navKey = GlobalKey<NavigatorState>();
 
 class TrackingApp extends StatelessWidget {
@@ -30,7 +28,8 @@ class TrackingApp extends StatelessWidget {
               supportedLocales: L10n.all,
               debugShowCheckedModeBanner: false,
               navigatorKey: navKey,
-              initialRoute: InitialPageRoute.getInstance().getInitialPageRouteName(),
+              initialRoute:
+                  InitialPageRoute.getInstance().getInitialPageRouteName(),
               onGenerateRoute: AppRoutes.onGenerateRoute,
               themeMode: ThemeMode.dark,
               theme: AppTheme.defaultTheme,

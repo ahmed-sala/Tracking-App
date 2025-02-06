@@ -191,5 +191,10 @@
   "theOrderWasDeliveredSuccessfully": "تم تسليم الطلب بنجاح",
   "done": "تم",
   "thankYou": "شكراً لك!"
+  "pickUpAddress": "عنوان الاستلام",
 
+  "updatedUserInfoSuccess": "تم تحديث معلوماتك بنجاح",
+  "cancel": "إلغاء",
+  "completed": "منجز",
+  "recentOrders": "الطلبيات الأخيرة"
 }

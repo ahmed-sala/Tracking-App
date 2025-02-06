@@ -180,7 +180,6 @@
   "editeMyInfo": "Edit My Info",
   "change": "Change",
   "photoUploadSuccess": "Photo uploaded successfully",
-  "updatedUserInfoSuccess": "Updated user info successfully",
   "backToPreviousPage": "Back to the previous page",
   "requestLocationPermission": "Request location permission",
   "locationPermissionMessage": "This service requires location access for a better experience",
@@ -192,4 +191,10 @@
   "theOrderWasDeliveredSuccessfully": "The order was delivered successfully",
    "done": "Done",
    "thankYou": "Thank you!"
+  "pickUpAddress": "Pick Up Address",
+
+  "updatedUserInfoSuccess": "Updated user info successfully",
+  "canceled": "Canceled",
+  "completed": "Completed",
+  "recentOrders": "Recent Orders"
 }
