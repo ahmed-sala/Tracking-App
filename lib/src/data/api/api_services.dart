@@ -84,10 +84,6 @@ abstract interface class ApiServices {
       @Header(ApiKey.authorization) String token,
       @Part(name: "photo", contentType: "image/jpg") File photo);
 
-  @PUT(ApiEndPoints.editeProfile)
-  Future<UpdatedUserResponseModel> updateUserInfo(
-      @Header(ApiKey.authorization) String token,
-      @Body() UpdatedUserRequestModel updatedUserRequestModel);
   Future<UpdatedUserResponseModel> updateUserInfo(
       @Body() UpdatedUserRequestModel updatedUserRequestModel);
   @GET(ApiEndPoints.driverOrder)
