@@ -4,8 +4,9 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tracking_app/core/localization/l10n.dart';
 import 'package:tracking_app/core/routes/app_routes.dart';
-import 'package:tracking_app/core/routes/page_route_name.dart';
 import 'package:tracking_app/core/theme/app_theme.dart';
+
+import '../core/routes/initial_page_route.dart';
 
 final GlobalKey<NavigatorState> navKey = GlobalKey<NavigatorState>();
 

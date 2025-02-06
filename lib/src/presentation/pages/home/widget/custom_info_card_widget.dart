@@ -40,17 +40,15 @@ class CustomInfoCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(10.r),
       ),
       child: ListTile(
-        contentPadding: EdgeInsets.symmetric(horizontal: 8.w,
-            vertical: 8.h),
-       leading: Container(
-         clipBehavior: Clip.antiAlias,
-         decoration: BoxDecoration(
-           borderRadius: BorderRadius.circular(50.r),
-         ),
-         child: CachedNetworkImageWidget(
-             fit: BoxFit.cover,
-             imageUrl: imageUrl, width: 44, height: 44),
-       ),
+        contentPadding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
+        leading: Container(
+          clipBehavior: Clip.antiAlias,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(50.r),
+          ),
+          child: CachedNetworkImageWidget(
+              fit: BoxFit.cover, imageUrl: imageUrl, width: 44, height: 44),
+        ),
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

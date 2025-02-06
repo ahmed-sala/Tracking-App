@@ -8,6 +8,7 @@ import 'package:tracking_app/src/tracking_app.dart';
 
 import 'core/di/di.dart';
 import 'core/helpers/shared_pref/shared_pref_keys.dart';
+import 'core/routes/initial_page_route.dart';
 import 'core/utilities/bloc_observer/my_bloc_observer.dart';
 import 'firebase_options.dart';
 

@@ -179,7 +179,6 @@
   "editeMyInfo": "تعديل معلوماتي",
   "change" : "تغيير",
   "photoUploadSuccess": "تم تحميل الصورة بنجاح",
-  "updatedUserInfoSuccess": "تم تحديث معلوماتك بنجاح",
   "backToPreviousPage": "الرجوع إلى الصفحة السابقة",
   "requestLocationPermission": "طلب صلاحية الموقع",
   "locationPermissionMessage": "تحتاج هذه الخدمة إلى صلاحية الوصول لموقعك الحالي للحصول على تجربة أفضل",
@@ -187,10 +186,9 @@
   "yourLocation": "موقعك",
   "flowery": "فلوري",
   "largeDistanceWarning": "لم يتم رسم الخط لأن المسافة كبيرة ولم تستطع توصيل الطلب",
-  "pickUpAddress": "عنوان الاستلام",
   "theOrderWasDeliveredSuccessfully": "تم تسليم الطلب بنجاح",
   "done": "تم",
-  "thankYou": "شكراً لك!"
+  "thankYou": "شكراً لك!",
   "pickUpAddress": "عنوان الاستلام",
 
   "updatedUserInfoSuccess": "تم تحديث معلوماتك بنجاح",
