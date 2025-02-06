@@ -23,6 +23,6 @@ class EditeMyInfoOnlineDataSourceImpl implements EditeMyInfoOnlineDataSource {
   Future<UpdatedUserResponseModel> updateUserInfo(
       {required String token,
       required UpdatedUserRequestModel updatedUserRequestModel}) async {
-    return await _apiServices.updateUserInfo(token, updatedUserRequestModel);
+    return await _apiServices.updateUserInfo(updatedUserRequestModel);
   }
 }

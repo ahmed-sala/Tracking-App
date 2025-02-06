@@ -67,6 +67,8 @@ import '../../src/domain/use_cases/forget_password/forget_password_use_cases.dar
 import '../../src/domain/use_cases/get_profile_data_use_case.dart' as _i986;
 import '../../src/domain/use_cases/log_out_use_case.dart' as _i333;
 import '../../src/domain/use_cases/login_use_case.dart' as _i379;
+import '../../src/domain/use_cases/order/all_driver_orders_usecase.dart'
+    as _i691;
 import '../../src/domain/use_cases/order/get_all_pending_order_use_case.dart'
     as _i587;
 import '../../src/domain/use_cases/order/order_details_usecase.dart' as _i150;
@@ -93,6 +95,8 @@ import '../../src/presentation/managers/edit_my_info/validator_manager.dart'
 import '../../src/presentation/managers/login/login_cubit.dart' as _i84;
 import '../../src/presentation/managers/on_boarding/on_boarding_view_model.dart'
     as _i850;
+import '../../src/presentation/managers/order/all_driver_orders/all_driver_orders_viewmodel.dart'
+    as _i1059;
 import '../../src/presentation/managers/order/order_details/order_details_viewmodel.dart'
     as _i274;
 import '../../src/presentation/managers/order/pending_order/pending_order_cubit.dart'
@@ -202,10 +206,15 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i844.StartOrderUseCase(gh<_i176.OrderRepository>()));
     gh.factory<_i353.StoreOrderUseCase>(
         () => _i353.StoreOrderUseCase(gh<_i176.OrderRepository>()));
+    gh.factory<_i691.AllDriverOrdersUsecase>(
+        () => _i691.AllDriverOrdersUsecase(gh<_i176.OrderRepository>()));
     gh.factory<_i762.ForgetPasswordScreenViewModel>(
         () => _i762.ForgetPasswordScreenViewModel(gh<_i235.AuthUseCases>()));
     gh.factory<_i908.PendingOrderCubit>(
         () => _i908.PendingOrderCubit(gh<_i587.GetAllPendingOrderUseCase>()));
+    gh.factory<_i1059.AllDriverOrdersViewmodelCubit>(() =>
+        _i1059.AllDriverOrdersViewmodelCubit(
+            gh<_i691.AllDriverOrdersUsecase>()));
     gh.factory<_i274.OrderDetailsViewmodel>(
         () => _i274.OrderDetailsViewmodel(gh<_i150.OrderDetailsUsecase>()));
     gh.factory<_i641.StartOrderCubit>(() => _i641.StartOrderCubit(
