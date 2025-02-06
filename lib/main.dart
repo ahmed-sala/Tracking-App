@@ -28,7 +28,7 @@ void main() async {
       await getIt<FlutterSecureStorage>().read(key: SharedPrefKeys.tokeKey);
   print(token);
   if (token != null) {
-    getIt<Dio>().options.headers['Authorization'] = 'Bearer $token';
+    getIt<Dio>().options.headers['Authorization'] = '$token';
   }
   Bloc.observer = MyBlocObserver();
   runApp(const TrackingApp());

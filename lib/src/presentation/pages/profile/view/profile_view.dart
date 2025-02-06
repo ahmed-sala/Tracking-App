@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tracking_app/core/di/di.dart';
 import 'package:tracking_app/core/extensions/extensions.dart';
+import 'package:tracking_app/core/routes/page_route_name.dart';
 import 'package:tracking_app/core/utilities/dialogs/error_dialog.dart';
 import 'package:tracking_app/core/utilities/dialogs/loading_dialog.dart';
 import 'package:tracking_app/core/utilities/style/spacing.dart';
 import 'package:tracking_app/src/data/api/core/errors/error_handler.dart';
 import 'package:tracking_app/src/presentation/managers/profile/profile_action.dart';
 import 'package:tracking_app/src/presentation/managers/profile/profile_cubit.dart';
+import 'package:tracking_app/src/tracking_app.dart';
 
 import '../../../../../core/utilities/dialogs/awesome_dialoge.dart';
 import '../widget/delivery_switch_widget.dart';
@@ -30,42 +32,59 @@ class _ProfileViewState extends State<ProfileView> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>    profileViewModel..doAction(GetProfileDataAction())
-      ,
+      create: (context) => profileViewModel..doAction(GetProfileDataAction()),
       child: Scaffold(
         appBar: AppBar(
           title: Text(context.localizations.profile),
         ),
-        body: BlocBuilder<ProfileCubit, ProfileState>(
+        body: BlocConsumer<ProfileCubit, ProfileState>(
+          listener: (context, state) {
+            if (state is LogOutSuccessState) {
+              showAwesomeDialog(context,
+                  title: 'Warning',
+                  desc: 'Are you sure you want to log out?',
+                  dialogType: DialogType.warning, onOk: () {
+                navKey.currentState!.pushNamedAndRemoveUntil(
+                    PageRoutesName.login, (route) => false);
+              }, onCancel: () {});
+            }
+            if (state is LogOutFailuresState) {
+              final ErrorHandler errorHandler = ErrorHandler.fromException(
+                  state.exception, context.localizations);
+              ErrorDialog.buildErrorWidget(
+                  context: context, errorHandler: errorHandler);
+            }
+          },
           builder: (context, state) {
-           if(state is GetProfileDataLoadingState){
-             return LoadingDialog.buildLoadingWidget(context);
-           }else if(state is GetProfileDataFailuresState){
-             final ErrorHandler  errorHandler=ErrorHandler.fromException(state.exception,
-                 context.localizations);
-            return ErrorDialog.buildErrorWidget(context: context,
-                 errorHandler: errorHandler);
-           }else {
-             return SingleChildScrollView(
-               child: Padding(
-                 padding: const EdgeInsets.all(16.0),
-                 child: Column(
-                   crossAxisAlignment: CrossAxisAlignment.start,
-                   children: [
-                     const DeliverySwitchWidget(),
-                     verticalSpace(24),
-                     const UserCardWidget(),
-                     verticalSpace(8),
-                     const VehicleInfoCardWidget(),
-                     verticalSpace(8),
-                     const LanguageButtonWidget(),
-                     const LogoutButtonWidget(),
-                   ],
-                 ),
-               ),
-             );
-
-           }
+            if (state is GetProfileDataLoadingState) {
+              return LoadingDialog.buildLoadingWidget(context);
+            } else if (state is GetProfileDataFailuresState) {
+              final ErrorHandler errorHandler = ErrorHandler.fromException(
+                  state.exception, context.localizations);
+              return ErrorDialog.buildErrorWidget(
+                  context: context, errorHandler: errorHandler);
+            } else {
+              return SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const DeliverySwitchWidget(),
+                      verticalSpace(24),
+                      const UserCardWidget(),
+                      verticalSpace(8),
+                      const VehicleInfoCardWidget(),
+                      verticalSpace(8),
+                      const LanguageButtonWidget(),
+                      LogoutButtonWidget(
+                        onPressed: profileViewModel.logOut,
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            }
           },
         ),
       ),
