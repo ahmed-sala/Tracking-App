@@ -2,6 +2,10 @@
 class Assets {
   Assets._();
 
+  static const String addressDetailsSelectionWidgetAddressDetailsSelectionWidget = 'lib/src/presentation/pages/home/widget/pick_up_location_widget/address_details_selection_widget/address_details_selection_widget.dart';
+  static const String addressDetailsSelectionWidgetCustomInfoAddressCardWidget = 'lib/src/presentation/pages/home/widget/pick_up_location_widget/address_details_selection_widget/custom_info_address_card_widget.dart';
+  static const String addressDetailsSelectionWidgetPickUpAddressCartWidget = 'lib/src/presentation/pages/home/widget/pick_up_location_widget/address_details_selection_widget/pick_up_address_cart_widget.dart';
+  static const String addressDetailsSelectionWidgetUserAddressCartWidget = 'lib/src/presentation/pages/home/widget/pick_up_location_widget/address_details_selection_widget/user_address_cart_widget.dart';
   static const String allDriverOrderAllDriverOderResponse = 'lib/src/data/api/core/api_response_models/order/all_driver_order/all_driver_oder_response.dart';
   static const String allDriverOrderAllDriverOderResponse.g = 'lib/src/data/api/core/api_response_models/order/all_driver_order/all_driver_oder_response.g.dart';
   static const String allDriverOrdersAllDriverOrdersState = 'lib/src/presentation/managers/order/all_driver_orders/all_driver_orders_state.dart';
@@ -134,6 +138,8 @@ class Assets {
   static const String iconsCall = 'assets/icons/Call.svg';
   static const String iconsCancelIcon = 'assets/icons/cancel_icon.svg';
   static const String iconsCompletedIcon = 'assets/icons/completed_icon.svg';
+  static const String iconsFlower = 'assets/icons/Flower.svg';
+  static const String iconsUser1 = 'assets/icons/user1.svg';
   static const String iconsWhatsapp = 'assets/icons/whatsapp.svg';
   static const String imagesCachedNetworkImage Widget = 'lib/core/utilities/style/images/cached_network_image _widget.dart';
   static const String imagesCheckCircle = 'assets/images/check_circle.svg';
@@ -146,6 +152,8 @@ class Assets {
   static const String localizationAppAr = 'lib/core/localization/app_ar.arb';
   static const String localizationAppEn = 'lib/core/localization/app_en.arb';
   static const String localizationL10n = 'lib/core/localization/l10n.dart';
+  static const String locationMangerLocationManger = 'lib/core/service/location_manger/location_manger.dart';
+  static const String locationMangerLocationMangerImpl = 'lib/core/service/location_manger/location_manger_impl.dart';
   static const String loginLoginAction = 'lib/src/presentation/managers/login/login_action.dart';
   static const String loginLoginCubit = 'lib/src/presentation/managers/login/login_cubit.dart';
   static const String loginLoginState = 'lib/src/presentation/managers/login/login_state.dart';
@@ -154,6 +162,9 @@ class Assets {
   static const String loginResponseModelLoginResponseModel = 'lib/src/data/api/core/api_response_models/login_response_model/login_response_model.dart';
   static const String loginResponseModelLoginResponseModel.g = 'lib/src/data/api/core/api_response_models/login_response_model/login_response_model.g.dart';
   static const String managersManagers = 'lib/src/presentation/managers/managers.dart';
+  static const String mapBodyWidgetMapBodyWidget = 'lib/src/presentation/pages/home/widget/pick_up_location_widget/map_body_widget/map_body_widget.dart';
+  static const String mapBodyWidgetMarkWidget = 'lib/src/presentation/pages/home/widget/pick_up_location_widget/map_body_widget/mark_widget.dart';
+  static const String mapBodyWidgetNoLocationPermissionWidget = 'lib/src/presentation/pages/home/widget/pick_up_location_widget/map_body_widget/no_location_permission_widget.dart';
   static const String modelsAllDriverOrderDto = 'lib/src/data/models/all_driver_order_dto.dart';
   static const String modelsCountryModel = 'lib/src/data/models/country_model.dart';
   static const String offlineDataSourceOffline = 'lib/src/data/data_sources/offline_data_source/offline.dart';
@@ -163,6 +174,8 @@ class Assets {
   static const String onBoardingOnBoardingStates = 'lib/src/presentation/managers/on_boarding/on_boarding_states.dart';
   static const String onBoardingOnBoardingViewModel = 'lib/src/presentation/managers/on_boarding/on_boarding_view_model.dart';
   static const String onlineDataSourceOnline = 'lib/src/data/data_sources/online_data_source/online.dart';
+  static const String openRouteServieOpenRouteServiceApi = 'lib/core/service/open_route_servie/open_route_service_api.dart';
+  static const String openRouteServieOpenRouteServiceApiImpl = 'lib/core/service/open_route_servie/open_route_service_api_impl.dart';
   static const String orderAllDriverOrdersEntity = 'lib/src/domain/entities/order/all_driver_orders_entity.dart';
   static const String orderAllDriverOrdersUsecase = 'lib/src/domain/use_cases/order/all_driver_orders_usecase.dart';
   static const String orderDetailsButtonOrderDetails = 'lib/src/presentation/pages/home/widget/order_details/button_order_details.dart';
@@ -192,6 +205,10 @@ class Assets {
   static const String pendingOrderPendingOrderCubit = 'lib/src/presentation/managers/order/pending_order/pending_order_cubit.dart';
   static const String pendingOrderPendingOrderEvent = 'lib/src/presentation/managers/order/pending_order/pending_order_event.dart';
   static const String pendingOrderPendingOrderState = 'lib/src/presentation/managers/order/pending_order/pending_order_state.dart';
+  static const String pickUpLocationPickUpLocationAction = 'lib/src/presentation/managers/order/pick_up_location/pick_up_location_action.dart';
+  static const String pickUpLocationPickUpLocationCubit = 'lib/src/presentation/managers/order/pick_up_location/pick_up_location_cubit.dart';
+  static const String pickUpLocationPickUpLocationState = 'lib/src/presentation/managers/order/pick_up_location/pick_up_location_state.dart';
+  static const String pickUpLocationWidgetPickUpLocationBodyWidget = 'lib/src/presentation/pages/home/widget/pick_up_location_widget/pick_up_location_body_widget.dart';
   static const String presentationSplashScreen = 'lib/src/presentation/splash_screen.dart';
   static const String profileProfileAction = 'lib/src/presentation/managers/profile/profile_action.dart';
   static const String profileProfileCubit = 'lib/src/presentation/managers/profile/profile_cubit.dart';
@@ -227,6 +244,8 @@ class Assets {
   static const String styleAppTextStyles = 'lib/core/utilities/style/app_text_styles.dart';
   static const String styleSpacing = 'lib/core/utilities/style/spacing.dart';
   static const String themeAppTheme = 'lib/core/theme/app_theme.dart';
+  static const String urlLancherPackegeOpenApplication = 'lib/core/service/url_lancher_packege/open_application.dart';
+  static const String urlLancherPackegeOpenApplicationFactory = 'lib/core/service/url_lancher_packege/open_application_factory.dart';
   static const String useCasesChangePassword = 'lib/src/domain/use_cases/change_password.dart';
   static const String useCasesGetProfileDataUseCase = 'lib/src/domain/use_cases/get_profile_data_use_case.dart';
   static const String useCasesLogOutUseCase = 'lib/src/domain/use_cases/log_out_use_case.dart';
@@ -247,6 +266,7 @@ class Assets {
   static const String viewHomeScreen = 'lib/src/presentation/pages/home/view/home_screen.dart';
   static const String viewLoginView = 'lib/src/presentation/pages/login/view/login_view.dart';
   static const String viewOrderDetailsScreen = 'lib/src/presentation/pages/home/view/order_details_screen.dart';
+  static const String viewPick upLocationScreen = 'lib/src/presentation/pages/home/view/pick_ up_location_screen.dart';
   static const String viewProfileView = 'lib/src/presentation/pages/profile/view/profile_view.dart';
   static const String widgetAcceptOrderButtonWidget = 'lib/src/presentation/pages/home/widget/accept_order_button_widget.dart';
   static const String widgetActionButtonWidget = 'lib/src/presentation/pages/home/widget/action_button_widget.dart';

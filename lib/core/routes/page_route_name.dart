@@ -12,4 +12,5 @@ class PageRoutesName {
   static const String applicationApprovedView = 'ApplicationApprovedView';
   static const String orderDetailsScreen = 'OrderDetailsScreen';
   static const String editeMyInfo = "editeMyInfo";
+  static const String pickUpLocation="PickUpLocationScreen";
 }

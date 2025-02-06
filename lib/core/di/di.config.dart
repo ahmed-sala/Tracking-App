@@ -101,6 +101,8 @@ import '../../src/presentation/managers/order/order_details/order_details_viewmo
     as _i274;
 import '../../src/presentation/managers/order/pending_order/pending_order_cubit.dart'
     as _i908;
+import '../../src/presentation/managers/order/pick_up_location/pick_up_location_cubit.dart'
+    as _i121;
 import '../../src/presentation/managers/order/start_order/start_order_cubit.dart'
     as _i641;
 import '../../src/presentation/managers/profile/profile_cubit.dart' as _i34;
@@ -109,6 +111,10 @@ import '../../src/presentation/managers/section/section_screen_viewmodel.dart'
 import '../helpers/firestore/firebase_module.dart' as _i991;
 import '../helpers/firestore/firestore_services.dart' as _i769;
 import '../helpers/shared_pref/shared_pref_moduel.dart' as _i802;
+import '../service/location_manger/location_manger.dart' as _i861;
+import '../service/location_manger/location_manger_impl.dart' as _i877;
+import '../service/open_route_servie/open_route_service_api.dart' as _i938;
+import '../service/open_route_servie/open_route_service_api_impl.dart' as _i107;
 
 extension GetItInjectableX on _i174.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -143,15 +149,22 @@ extension GetItInjectableX on _i174.GetIt {
         () => sharedPrefModule.secureStorage);
     gh.lazySingleton<_i361.Dio>(() => dioProvider.dioProvider());
     gh.lazySingleton<_i528.PrettyDioLogger>(() => dioProvider.providePretty());
+    gh.factory<_i861.LocationManger>(() => _i877.LocationMangerImpl());
     gh.factory<_i252.AuthOfflineDataSource>(
         () => _i523.AuthOfflineDataSourceImpl());
     gh.singleton<_i318.ApiServices>(() => _i318.ApiServices(gh<_i361.Dio>()));
+    gh.factory<_i938.OpenRouteServiceApi>(
+        () => _i107.OpenRouteServiceApiImpl());
     gh.factory<_i472.CountryOfflineDataSource>(
         () => _i532.CountryOfflineDataSourceImpl());
     gh.factory<_i839.OrderOfflineDatasource>(
         () => _i130.OrderOfflineDatasourceImpl(gh<_i460.SharedPreferences>()));
     gh.factory<_i769.FirestoreService>(
         () => _i769.FirestoreService(gh<_i974.FirebaseFirestore>()));
+    gh.factory<_i121.PickUpLocationCubit>(() => _i121.PickUpLocationCubit(
+          gh<_i861.LocationManger>(),
+          gh<_i938.OpenRouteServiceApi>(),
+        ));
     gh.factory<_i633.VehiclesOnlineDataSource>(
         () => _i523.VehiclesOnlineDataSourceImpl(gh<_i318.ApiServices>()));
     gh.factory<_i597.CountryRepo>(

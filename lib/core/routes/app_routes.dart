@@ -5,6 +5,7 @@ import 'package:tracking_app/src/presentation/pages/Auth/forget_password/forget_
 import 'package:tracking_app/src/presentation/pages/change_password/change_password_screen.dart';
 import 'package:tracking_app/src/presentation/pages/edit_my_info/edit_my_info.dart';
 import 'package:tracking_app/src/presentation/pages/home/view/order_details_screen.dart';
+import 'package:tracking_app/src/presentation/pages/home/view/pick_%20up_location_screen.dart';
 import 'package:tracking_app/src/presentation/pages/login/view/login_view.dart';
 import 'package:tracking_app/src/presentation/pages/profile/view/profile_view.dart';
 import 'package:tracking_app/src/presentation/pages/section_app/section_screen.dart';
@@ -42,6 +43,9 @@ class AppRoutes {
       case PageRoutesName.changePassword:
         return _handelMaterialPageRoute(
             settings: settings, widget: ChangePasswordScreen());
+      case PageRoutesName.pickUpLocation:
+        return _handelMaterialPageRoute(
+            settings: settings, widget: const PickUpLocationScreen());
       default:
         return _handelMaterialPageRoute(
             settings: settings, widget: const Scaffold());

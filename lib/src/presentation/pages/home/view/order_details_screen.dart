@@ -1,6 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tracking_app/core/extensions/extensions.dart';
+import 'package:tracking_app/core/routes/page_route_name.dart';
 import 'package:tracking_app/src/data/api/core/errors/error_handler.dart';
+import 'package:tracking_app/src/domain/entities/order/pending_order_entity.dart';
 import 'package:tracking_app/src/presentation/managers/order/order_details/order_details_state.dart';
 import 'package:tracking_app/src/presentation/pages/home/widget/order_details/button_order_details.dart';
 import 'package:tracking_app/src/presentation/pages/home/widget/order_details/section_title.dart';
@@ -80,42 +82,60 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                   verticalSpace(16),
                   SectionTitle(title: context.localization.storeAddress),
                   verticalSpace(16),
-                  InfoWidget(
-                    image: orderDetails.storeOrderEntity?.image ?? '',
-                    name: orderDetails.storeOrderEntity?.name ?? '',
-                    address: orderDetails.storeOrderEntity?.address ?? '',
-                    onCall: () {
-                      final phone = orderDetails.storeOrderEntity?.phoneNumber;
-                      if (phone != null) {
-                        viewModel.openCallKeypad(phone);
-                      }
-                    },
-                    onWhatsApp: () {
-                      final phone = orderDetails.storeOrderEntity?.phoneNumber;
-                      if (phone != null) {
-                        viewModel.openWhatsApp(phone);
-                      }
-                    },
+                  InkWell(
+                   onTap: () {
+                     goNextPockUpLocationScreen(argumentPickUpRoutes: ArgumentPickUpRoutesScreen(
+                         userOrderEntity: orderDetails.userOrderEntity ?? UserOrderEntity(),
+                         storeOrderEntity: orderDetails.storeOrderEntity ?? StoreOrderEntity(),
+                     isClickUserOrder: true
+                     ));
+                   },
+                    child: InfoWidget(
+                      image: orderDetails.storeOrderEntity?.image ?? '',
+                      name: orderDetails.storeOrderEntity?.name ?? '',
+                      address: orderDetails.storeOrderEntity?.address ?? '',
+                      onCall: () {
+                        final phone = orderDetails.storeOrderEntity?.phoneNumber;
+                        if (phone != null) {
+                          viewModel.openCallKeypad(phone);
+                        }
+                      },
+                      onWhatsApp: () {
+                        final phone = orderDetails.storeOrderEntity?.phoneNumber;
+                        if (phone != null) {
+                          viewModel.openWhatsApp(phone);
+                        }
+                      },
+                    ),
                   ),
                   verticalSpace(24),
                   SectionTitle(title: context.localization.userAddress),
                   verticalSpace(16),
-                  InfoWidget(
-                    image: orderDetails.userOrderEntity?.image ?? '',
-                    name: orderDetails.userOrderEntity?.firstName ?? '',
-                    address: 'ahmed',
-                    onCall: () {
-                      final phone = orderDetails.userOrderEntity?.phone;
-                      if (phone != null) {
-                        viewModel.openCallKeypad(phone);
-                      }
+                  InkWell(
+                    onTap: () {
+                      goNextPockUpLocationScreen(argumentPickUpRoutes: ArgumentPickUpRoutesScreen(
+                          userOrderEntity: orderDetails.userOrderEntity ?? UserOrderEntity(),
+                          storeOrderEntity: orderDetails.storeOrderEntity ?? StoreOrderEntity(),
+                          isClickUserOrder: false
+                      ));
                     },
-                    onWhatsApp: () {
-                      final phone = orderDetails.userOrderEntity?.phone;
-                      if (phone != null) {
-                        viewModel.openWhatsApp(phone);
-                      }
-                    },
+                    child: InfoWidget(
+                      image: orderDetails.userOrderEntity?.image ?? '',
+                      name: orderDetails.userOrderEntity?.firstName ?? '',
+                      address: 'ahmed',
+                      onCall: () {
+                        final phone = orderDetails.userOrderEntity?.phone;
+                        if (phone != null) {
+                          viewModel.openCallKeypad(phone);
+                        }
+                      },
+                      onWhatsApp: () {
+                        final phone = orderDetails.userOrderEntity?.phone;
+                        if (phone != null) {
+                          viewModel.openWhatsApp(phone);
+                        }
+                      },
+                    ),
                   ),
                   verticalSpace(24),
                   SectionTitle(title: context.localization.orderDetails),
@@ -162,4 +182,22 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
       ),
     );
   }
+
+  void goNextPockUpLocationScreen({required ArgumentPickUpRoutesScreen argumentPickUpRoutes}){
+    Navigator.pushNamed(context,
+        PageRoutesName.pickUpLocation,arguments:argumentPickUpRoutes  );
+  }
+
+
+
+
+}
+
+class ArgumentPickUpRoutesScreen{
+  final  UserOrderEntity userOrderEntity;
+  final  StoreOrderEntity storeOrderEntity;
+  final bool isClickUserOrder;
+
+  ArgumentPickUpRoutesScreen({required this.userOrderEntity,
+    required this.storeOrderEntity,this.isClickUserOrder=false});
 }

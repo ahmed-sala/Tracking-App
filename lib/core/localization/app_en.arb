@@ -181,6 +181,16 @@
   "change": "Change",
   "photoUploadSuccess": "Photo uploaded successfully",
   "updatedUserInfoSuccess": "Updated user info successfully",
+  "backToPreviousPage": "Back to the previous page",
+  "requestLocationPermission": "Request location permission",
+  "locationPermissionMessage": "This service requires location access for a better experience",
+  "enableLocationPermission": "Enable location permission",
+  "yourLocation": "Your Location",
+  "flowery": "Flowery",
+  "largeDistanceWarning": "The line was not drawn because the distance is too large, and the request could not be delivered",
+  "pickUpAddress": "Pick Up Address"
+
+  "updatedUserInfoSuccess": "Updated user info successfully",
   "canceled": "Canceled",
   "completed": "Completed",
   "recentOrders": "Recent Orders"
