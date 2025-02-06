@@ -1,4 +1,5 @@
 import 'package:injectable/injectable.dart';
+import 'package:tracking_app/src/data/api/core/api_response_models/order/all_driver_order/all_driver_oder_response.dart';
 
 import '../../../../../core/helpers/firestore/firestore_services.dart';
 import '../../../api/api_services.dart';
@@ -65,5 +66,10 @@ class OrderOnlineDataSourceImpl implements OrderOnlineDataSource {
   Future<start_order_response_model.StartOrderResponseModel> startOrder(
       {required String orderId}) async {
     return await _apiServices.startOrder(orderId: orderId);
+  }
+
+  @override
+  Future<AllDriverOderResponse> getAllDriverOrders() async {
+    return await _apiServices.getAllDriverOrders();
   }
 }

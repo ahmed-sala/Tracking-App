@@ -189,4 +189,8 @@
   "largeDistanceWarning": "لم يتم رسم الخط لأن المسافة كبيرة ولم تستطع توصيل الطلب",
   "pickUpAddress": "عنوان الاستلام"
 
+  "updatedUserInfoSuccess": "تم تحديث معلوماتك بنجاح",
+  "cancel": "إلغاء",
+  "completed": "منجز",
+  "recentOrders": "الطلبيات الأخيرة"
 }

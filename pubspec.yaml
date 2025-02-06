@@ -75,6 +75,7 @@ dependencies:
   elegant_notification:
   fluttertoast: ^8.2.10
 
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
