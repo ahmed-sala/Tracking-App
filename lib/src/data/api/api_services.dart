@@ -65,7 +65,8 @@ abstract interface class ApiServices {
   Future<VehiclesResponseModel> getAllVehicles();
 
   @GET(ApiEndPoints.logout)
-  Future<LogOutResponseModel> logout();
+  Future<LogOutResponseModel> logout(
+      @Header(ApiKey.authorization) String token);
 
   @PATCH(ApiEndPoints.changePassword)
   Future<ChangePasswordResponesModel> changePassword(
@@ -83,7 +84,7 @@ abstract interface class ApiServices {
   Future<UploadPhotoResponseModel> uploadPhoto(
       @Header(ApiKey.authorization) String token,
       @Part(name: "photo", contentType: "image/jpg") File photo);
-
+  @PUT(ApiEndPoints.editeProfile)
   Future<UpdatedUserResponseModel> updateUserInfo(
       @Body() UpdatedUserRequestModel updatedUserRequestModel);
   @GET(ApiEndPoints.driverOrder)

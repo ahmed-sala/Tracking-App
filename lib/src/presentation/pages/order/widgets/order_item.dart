@@ -71,7 +71,7 @@ class OrderItem extends StatelessWidget {
               storeEntity: pendingOrderEntity,
             ),
             verticalSpace(16),
-            UserAddressCardWidget(userEntity: userEntity),
+            UserAddressCardWidget(userEntity: userEntity, isUser: true),
             verticalSpace(16),
           ],
         ),

@@ -12,11 +12,13 @@ import 'custom_info_card_widget.dart';
 class UserAddressCardWidget extends StatelessWidget {
   final UserOrderEntity? userOrderEntity;
   final UserEntity? userEntity;
+  final bool isUser;
   const UserAddressCardWidget(
-      {super.key, this.userOrderEntity, this.userEntity});
+      {super.key, this.userOrderEntity, this.userEntity, this.isUser = false});
 
   @override
   Widget build(BuildContext context) {
+    print('https://flower.elevateegy.com/uploads/${userEntity?.photo}');
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -33,9 +35,11 @@ class UserAddressCardWidget extends StatelessWidget {
           title: userOrderEntity == null
               ? userEntity?.firstName ?? ""
               : userOrderEntity?.firstName ?? "",
-          imageUrl: userOrderEntity == null
-              ? userEntity?.photo ?? ""
-              : userOrderEntity?.image ?? "",
+          imageUrl: isUser
+              ? 'https://flower.elevateegy.com/uploads/${userEntity?.photo}' ??
+                  ""
+              : 'https://flower.elevateegy.com/uploads/${userOrderEntity?.photo}' ??
+                  "",
           backgroundColor: AppColors.kWhiteBase,
           subtitleColor: AppColors.kBlackBase,
           titleColor: AppColors.kGray,

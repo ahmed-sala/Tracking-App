@@ -153,6 +153,7 @@ extension GetItInjectableX on _i174.GetIt {
         () => sharedPrefModule.secureStorage);
     gh.lazySingleton<_i361.Dio>(() => dioProvider.dioProvider());
     gh.lazySingleton<_i528.PrettyDioLogger>(() => dioProvider.providePretty());
+    gh.lazySingleton<_i801.AppInterceptors>(() => _i801.AppInterceptors());
     gh.factory<_i861.LocationManger>(() => _i877.LocationMangerImpl());
     gh.factory<_i252.AuthOfflineDataSource>(
         () => _i523.AuthOfflineDataSourceImpl());
@@ -221,14 +222,14 @@ extension GetItInjectableX on _i174.GetIt {
         authRepository: gh<_i701.AuthRepository>()));
     gh.factory<_i684.VehiclesUseCases>(
         () => _i684.VehiclesUseCases(gh<_i557.VehiclesRepo>()));
+    gh.factory<_i691.AllDriverOrdersUsecase>(
+        () => _i691.AllDriverOrdersUsecase(gh<_i176.OrderRepository>()));
     gh.factory<_i150.OrderDetailsUsecase>(
         () => _i150.OrderDetailsUsecase(gh<_i176.OrderRepository>()));
     gh.factory<_i844.StartOrderUseCase>(
         () => _i844.StartOrderUseCase(gh<_i176.OrderRepository>()));
     gh.factory<_i353.StoreOrderUseCase>(
         () => _i353.StoreOrderUseCase(gh<_i176.OrderRepository>()));
-    gh.factory<_i691.AllDriverOrdersUsecase>(
-        () => _i691.AllDriverOrdersUsecase(gh<_i176.OrderRepository>()));
     gh.factory<_i762.ForgetPasswordScreenViewModel>(
         () => _i762.ForgetPasswordScreenViewModel(gh<_i235.AuthUseCases>()));
     gh.factory<_i908.PendingOrderCubit>(

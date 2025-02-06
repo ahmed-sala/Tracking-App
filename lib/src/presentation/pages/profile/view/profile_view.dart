@@ -40,13 +40,8 @@ class _ProfileViewState extends State<ProfileView> {
         body: BlocConsumer<ProfileCubit, ProfileState>(
           listener: (context, state) {
             if (state is LogOutSuccessState) {
-              showAwesomeDialog(context,
-                  title: 'Warning',
-                  desc: 'Are you sure you want to log out?',
-                  dialogType: DialogType.warning, onOk: () {
-                navKey.currentState!.pushNamedAndRemoveUntil(
-                    PageRoutesName.login, (route) => false);
-              }, onCancel: () {});
+              navKey.currentState!.pushNamedAndRemoveUntil(
+                  PageRoutesName.login, (route) => false);
             }
             if (state is LogOutFailuresState) {
               final ErrorHandler errorHandler = ErrorHandler.fromException(
@@ -78,7 +73,14 @@ class _ProfileViewState extends State<ProfileView> {
                       verticalSpace(8),
                       const LanguageButtonWidget(),
                       LogoutButtonWidget(
-                        onPressed: profileViewModel.logOut,
+                        onPressed: () {
+                          showAwesomeDialog(context,
+                              title: 'Warning',
+                              desc: 'Are you sure you want to log out?',
+                              dialogType: DialogType.warning, onOk: () {
+                            profileViewModel.logOut();
+                          }, onCancel: () {});
+                        },
                       ),
                     ],
                   ),

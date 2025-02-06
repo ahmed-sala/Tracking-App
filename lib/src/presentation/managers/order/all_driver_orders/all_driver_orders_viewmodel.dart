@@ -13,8 +13,8 @@ class AllDriverOrdersViewmodelCubit extends Cubit<AllDriverOrdersState> {
   AllDriverOrdersViewmodelCubit(this._allDriverOrdersUsecase)
       : super(AllDriverOrdersInitial());
   AllDriverOrdersEntity allDriverOrdersEntity = AllDriverOrdersEntity();
-  int numberOfCompletedOrders = 10;
-  int numberOfCanceledOrders = 10;
+  int numberOfCompletedOrders = 0;
+  int numberOfCanceledOrders = 0;
 
   void getAllDriverOrders() async {
     emit(AllDriverOrdersLoading());
@@ -24,9 +24,10 @@ class AllDriverOrdersViewmodelCubit extends Cubit<AllDriverOrdersState> {
         numberOfCanceledOrders = (result.data?.orders ?? [])
             .where((element) => element.order?.state == "Canceled")
             .length;
-        numberOfCanceledOrders = (result.data?.orders ?? [])
-            .where((element) => element.order?.state == "Completed")
+        numberOfCompletedOrders = (result.data?.orders ?? [])
+            .where((element) => element.order?.state == "inProgress")
             .length;
+
         allDriverOrdersEntity = result.data!;
         emit(AllDriverOrdersLoaded(result.data));
       case Failures<AllDriverOrdersEntity>():

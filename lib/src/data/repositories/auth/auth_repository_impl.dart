@@ -61,10 +61,10 @@ class AuthRepositoryImpl implements AuthRepository {
       apiCall: () async {
         var loginResponseModel =
             await _authOnlineDataSource.login(loginRequest: loginRequest);
-        if (isRememberMe) {
-          await _authOfflineDataSource.saveToken(
-              token: loginResponseModel.token!);
-        }
+
+        await _authOfflineDataSource.saveToken(
+            token: loginResponseModel.token!);
+
         return loginResponseModel.toDomainDto();
       },
     );
@@ -112,8 +112,8 @@ class AuthRepositoryImpl implements AuthRepository {
     return executeApi<AppUserEntity>(
       apiCall: () async {
         var token = await getToken();
-        var appUserModel =
-            await _authOnlineDataSource.getProfileData(token: "Bearer $token" ?? "");
+        var appUserModel = await _authOnlineDataSource.getProfileData(
+            token: "Bearer $token" ?? "");
         return appUserModel.driver!.toDomain();
       },
     );
